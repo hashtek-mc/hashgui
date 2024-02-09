@@ -15,9 +15,7 @@ Cette librairie est constituée de deux classes principales :
 **Création d'un item personnalisé :**
 
 ```java
-HashItem item = new HashItem()
-  .setType(Material.ENDER_PEARL)
-  .setAmount(10)
+HashItem item = new HashItem(Material.ENDER_PEARL, 10)
   .setTitle("Bonjour")
   .setLore(Arrays.asList(
     "Ligne 1",
@@ -29,14 +27,19 @@ HashItem item = new HashItem()
     ItemFlag.HIDE_ENCHANTS,
   ))
   .addFlag(ItemFlag.HIDE_UNBREAKABLE)
+  .addEnchant(Enchantment.DURABILITY, 3)
   .setUnbreakable(true)
   .build();
 
 Inventory#addItem(item.getItemStack());
 ```
 
-`⚠️` Ne pas oublier de `build()` l'item avant de l'utiliser !\
+`⚠️` Ne pas oublier de `build()` l'item avant de l'utiliser !
+
 `⚠️` Importez toujours depuis le package `org.bukkit`
+
+`ℹ️` Renseignez-vous sur les enums `Material`, `ItemFlag`, `Enchantment`
+(du package `org.bukkit`).
 
 ### Fonctionnalités
 
@@ -50,11 +53,14 @@ Inventory#addItem(item.getItemStack());
 * `setFlags()` : Remplace les flags de l'item
 * `addFlag()` : Ajoute un flag aux flags de l'item
 * `setUnbreakable()` : Rend l'item incassable
+* `addEnchant()` : Ajoute un enchantement à l'item
+* `removeEnchant()` : Retire un enchantement à l'item
 * `build()` : Construit l'item pour qu'il soit utilisable.
 
-### Click Handler
+### 🖱️ Click handler
 
-Il est possible de définir l'action exécutée lors d'un clic sur l'item.
+Il est possible de définir l'action exécutée lors d'un clic sur l'item dans un
+inventaire.
 
 **Exemple :**
 ```java
@@ -66,8 +72,56 @@ ClickHandler clickHandler = new ClickHandler()
 
 HashItem item = new HashItem(Material.COMPASS)
     .addClickHandler(clickHandler);
-    .build();
+    .build(guiManager);
 ```
+
+`⚠️` `guiManager` (dans la fonction `build()`) doit être une instance de
+`HashGUIManager`, qui doit être stocké à la racine de votre plugin.
+Cette instance s'occupe de détecter les clics et d'exécuter ce qu'il faut en
+fonction de l'item.
+
+`⚠️` Le ciblage de l'item se fait à partir de son `displayName`, donc faites
+bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
+qu'ils exécutent la même chose.
+Si deux items doivent avoir le même nom mais
+un click handler différent, alors jouez avec les codes couleurs pour que ça ne
+soit pas visible du point de vue du joueur 😉
+(`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
+
+`ℹ️` Renseignez-vous sur l'enum `ClickType` (du package `org.bukkit`).
+
+### 🫱 Interaction handler
+
+Il est possible de définir l'action exécutée lors d'une interaction avec l'item.
+
+**Exemple :**
+```java
+InteractionHandler interactionHandler = new InteractionHandler()
+    .addInteractionType(Action.RIGHT_CLICK_AIR)
+    .setClickAction((Player player, ItemStack clickedItem, int clickedSlot) -> {
+        // Actions à faire lors de l'interaction.
+    });
+    
+HashItem item = new HashItem(Material.COMPASS)
+    .addInteractionHandler(interactionHandler)
+    .build(guiManager);
+```
+
+`⚠️` Tout comme pour les Click Handlers, `guiManager`
+(dans la fonction `build()`) doit être une instance de `HashGUIManager`,
+qui doit être stocké à la racine de votre plugin.
+Cette instance s'occupe de détecter les intéractions et d'exécuter ce qu'il
+faut en fonction de l'item.
+
+`⚠️` Le ciblage de l'item se fait à partir de son `displayName`, donc faites
+bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
+qu'ils exécutent la même chose.
+Si deux items doivent avoir le même nom mais
+un click handler différent, alors jouez avec les codes couleurs pour que ça ne
+soit pas visible du point de vue du joueur 😉
+(`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
+
+`ℹ️` Renseignez-vous sur l'enum `Action` (du package `org.bukkit`).
 
 ## HashGUI
 
@@ -75,8 +129,7 @@ HashItem item = new HashItem(Material.COMPASS)
 
 **Création d'un menu personnalisé :**
 ```java
-HashItem item = new HashItem()
-  .setType(Material.SIGN)
+HashItem item = new HashItem(Material.SIGN)
   .setTitle("Paramètres")
   .addLore("Cliquez pour accéder aux paramètres")
   .build();
@@ -87,9 +140,16 @@ HashGUI gui = new HashGUI("Menu", 5)
 gui.open(player);
 ```
 
+### Fonctionnalités
+
+* `open()` : Ouvre une GUI à un joueur
+* `close()` : Ferme la GUI d'un joueur
+* `updateInventory()` : Rafraîchit la GUI d'un joueur
+* `setItem()` : Place un item dans la GUI
+
 ### Masks
 
-Les masques (Mask) sont utilisés pour créer un agencement d'items dans une GUI.
+Les masques (`Mask`) sont utilisés pour créer un agencement d'items dans une GUI.
 
 Par exemple, si vous voulez faire une bordure comme ceci :
 
@@ -115,7 +175,7 @@ menu.setItem(15, bookshelf);
 ```
 
 Pas dingue, n'est-ce pas ? Et c'est là qu'interviennent les masques. Le code
-ci-dessus deviendrait :
+ci-dessus devient alors :
 
 ```java
 ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE);
@@ -131,6 +191,7 @@ mask.setItem('s', glass);
     .setItem('l', glowstone);
     .setItem('b', bookshelf);
     
+/*            ⬇️ Doit faire 9 caractères de long obligatoirement (taille d'une ligne). */
 mask.pattern("sssssssss")
     .pattern("s g l b s")
     .pattern("sssssssss");
@@ -140,16 +201,11 @@ mask.apply();
 
 Bien plus propre n'est-ce pas ?
 
-Si une lettre n'a pas de bloc assigné, cet item sera placé :
+Si une lettre n'a pas d'item assigné, celui-ci sera placé :
 
 ![](https://cdn.discordapp.com/attachments/1201670734095859812/1204886714057752636/image.png?ex=65d65d32&is=65c3e832&hm=f396f4b9e3373d56fe0bd5c34b2f4d21429b7bbe04653fcfc44040f88412114a&)
 
 `⚠️` Le caractère espace (` `) ne peut pas être assigné à un item, étant donné qu'il
 sert de vide.
-
-## Mises à jour à venir
-
-* Gestion des enchantements
-* Clics hors d'une GUI (avec la main)
 
 ## Fait avec 💜 par [Lysandre B.](https://github.com/Shuvlyy) ・ [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021) + [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474)
