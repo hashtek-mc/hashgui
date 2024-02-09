@@ -9,7 +9,9 @@ public class InteractHandler {
 	private ArrayList<Action> interactTypes;
 	private InteractAction interactAction;
 	
+	
 	public InteractHandler() {}
+	
 	
 	/**
 	 * Adds an interact type to the handler.
@@ -55,11 +57,21 @@ public class InteractHandler {
 	}
 	
 	
+	/**
+	 * Returns every assigned interact types of this handler.
+	 * 
+	 * @return	Interact types
+	 */
 	public ArrayList<Action> getInteractTypes()
 	{
 		return this.interactTypes;
 	}
 	
+	/**
+	 * Returns the action assigned to this handler.
+	 * 
+	 * @return	Action
+	 */
 	public InteractAction getInteractAction()
 	{
 		return this.interactAction;

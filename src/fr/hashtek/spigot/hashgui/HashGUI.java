@@ -121,21 +121,41 @@ public class HashGUI implements InventoryHolder {
 	}
 	
 
+	/**
+	 * Returns the Inventory in this GUI.
+	 * 
+	 * @return	Inventory
+	 */
 	@Override
 	public Inventory getInventory() {
 		return this.gui;
 	}
 	
+	/**
+	 * Returns the number of lines in this GUI.
+	 * 
+	 * @return	Number of lines
+	 */
 	public int getSize()
 	{
 		return this.size;
 	}
 	
+	/**
+	 * Returns the number of slots in this GUI (1 line is 9 slots).
+	 * 
+	 * @return	Number of slots
+	 */
 	public int getTotalSize()
 	{
 		return this.size * 9;
 	}
 	
+	/**
+	 * Returns the title of this GUI.
+	 * 
+	 * @return	Title
+	 */
 	public String getTitle()
 	{
 		return this.title;

@@ -14,7 +14,7 @@ public class HashGUIClick {
 	
 	
 	/**
-	 * Creates a HashGUIClick instance.
+	 * Creates a new instance of HashGUIClick.
 	 */
 	public HashGUIClick()
 	{

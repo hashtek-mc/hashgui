@@ -13,12 +13,22 @@ public class HashGUIInteraction {
 	private HashMap<String, ArrayList<InteractHandler>> interactHandlers;
 	
 	
+	/**
+	 * Creates a new instance of HashGUIInteraction.
+	 */
 	public HashGUIInteraction()
 	{
 		this.interactHandlers = new HashMap<String, ArrayList<InteractHandler>>();
 	}
 	
 	
+	/**
+	 * Adds an interact handler for a certain title.
+	 * 
+	 * @param	title	Title
+	 * @param	handler	Interaction handler
+	 * @return	Returns itself.
+	 */
 	private HashGUIInteraction addInteractHandler(String title, InteractHandler handler)
 	{
 		if (this.interactHandlers.get(title) == null)
@@ -28,6 +38,12 @@ public class HashGUIInteraction {
 		return this;
 	}
 	
+	/**
+	 * Adds every interaction handler from an item.
+	 * 
+	 * @param	item	Item
+	 * @return	Returns itself.
+	 */
 	public HashGUIInteraction addInteractHandler(HashItem item)
 	{
 		List<InteractHandler> interactHandler = item.getInteractHandlers();
@@ -45,6 +61,11 @@ public class HashGUIInteraction {
 	}
 	
 	
+	/**
+	 * Returns every registered interact handler.
+	 * 
+	 * @return	Interact handlers
+	 */
 	public HashMap<String, ArrayList<InteractHandler>> getInteractHandlers()
 	{
 		return this.interactHandlers;

@@ -63,7 +63,7 @@ public class HashGUIManager {
 	/**
 	 * Returns the interaction manager
 	 * 
-	 * @return
+	 * @return	Interaction manager
 	 */
 	public HashGUIInteraction getInteractionManager()
 	{

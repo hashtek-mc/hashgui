@@ -32,6 +32,7 @@ public class HashGUIClickListener implements Listener {
 		this.clickManager = clickManager;
 	}
 	
+	
 	/**
 	 * Click handling
 	 */
