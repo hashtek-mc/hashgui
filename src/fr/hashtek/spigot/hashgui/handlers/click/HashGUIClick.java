@@ -48,7 +48,7 @@ public class HashGUIClick {
 	{
 		List<ClickHandler> clickHandlers = item.getClickHandlers();
 		
-		if (clickHandlers.isEmpty())
+		if (clickHandlers == null || clickHandlers.isEmpty())
 			return this;
 		
 		ItemMeta meta = item.getItemStack().getItemMeta();

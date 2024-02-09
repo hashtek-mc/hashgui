@@ -32,7 +32,7 @@ public class HashGUIInteraction {
 	{
 		List<InteractHandler> interactHandler = item.getInteractHandlers();
 		
-		if (interactHandler.isEmpty())
+		if (interactHandler == null || interactHandler.isEmpty())
 			return this;
 		
 		ItemMeta meta = item.getItemStack().getItemMeta();
