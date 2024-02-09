@@ -38,7 +38,7 @@ Inventory#addItem(item.getItemStack());
 
 `⚠️` Importez toujours depuis le package `org.bukkit`
 
-`ℹ️` Renseignez-vous sur les enums `Material`, `ItemFlag`, `Enchantment`
+`ℹ️` Renseignez-vous sur les enums [Material](https://helpch.at/docs/1.8/org/bukkit/Material.html), [ItemFlag](https://helpch.at/docs/1.8/index.html?org/bukkit/inventory/ItemFlag.html) et [Enchantment](https://helpch.at/docs/1.8/index.html?org/bukkit/enchantments/Enchantment.html)
 (du package `org.bukkit`).
 
 ### Fonctionnalités
@@ -76,7 +76,7 @@ HashItem item = new HashItem(Material.COMPASS)
 ```
 
 `⚠️` `guiManager` (dans la fonction `build()`) doit être une instance de
-`HashGUIManager`, qui doit être stocké à la racine de votre plugin.
+[HashGUIManager](#hashguimanager), qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les clics et d'exécuter ce qu'il faut en
 fonction de l'item.
 
@@ -88,7 +88,7 @@ un click handler différent, alors jouez avec les codes couleurs pour que ça ne
 soit pas visible du point de vue du joueur 😉
 (`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
 
-`ℹ️` Renseignez-vous sur l'enum `ClickType` (du package `org.bukkit`).
+`ℹ️` Renseignez-vous sur l'enum [ClickType](https://helpch.at/docs/1.8/org/bukkit/event/inventory/ClickType.html) (du package `org.bukkit`).
 
 ### 🫱 Interaction handler
 
@@ -108,7 +108,7 @@ HashItem item = new HashItem(Material.COMPASS)
 ```
 
 `⚠️` Tout comme pour les Click Handlers, `guiManager`
-(dans la fonction `build()`) doit être une instance de `HashGUIManager`,
+(dans la fonction `build()`) doit être une instance de [HashGUIManager](#hashguimanager),
 qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les intéractions et d'exécuter ce qu'il
 faut en fonction de l'item.
@@ -121,7 +121,51 @@ un click handler différent, alors jouez avec les codes couleurs pour que ça ne
 soit pas visible du point de vue du joueur 😉
 (`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
 
-`ℹ️` Renseignez-vous sur l'enum `Action` (du package `org.bukkit`).
+`ℹ️` Renseignez-vous sur l'enum [Action](https://helpch.at/docs/1.8/index.html?org/bukkit/event/block/Action.html) (du package `org.bukkit`).
+
+### HashGUIManager
+
+Pour que les `ClickHandler` et les `InteractionHandler` fonctionnent,
+vous devez créer une instance de `HashGUIManager` à la racine de votre plugin
+et donner cette instance lors du build de votre item personnalisé.
+
+**Exemple :**
+```java
+public class Test extends JavaPlugin {
+    
+    private PluginManager pluginManager;
+    private HashGUIManager guiManager;
+    
+    
+    /* Initialisation des variables au lancement du serveur */
+    @Override
+    public void onEnable()
+    {
+        this.pluginManager = this.getServer().getPluginManager();
+        this.setupGUIManager();
+        
+        // Reste de votre code
+    }
+    
+    /* Initialisation et configuration du manager */
+    private void setupGUIManager()
+    {
+        this.guiManager = new HashGUIManager(this, this.pluginManager);
+        this.guiManager.setup();
+    }
+    
+    
+    /* Getter du manager */
+    public HashGUIManager getGUIManager()
+    {
+        return this.guiManager;
+    }
+    
+}
+```
+
+`⚠️` Il est très fortement recommandé de n'avoir qu'une seule instance de
+HashGUIManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs)
 
 ## HashGUI
 
@@ -144,7 +188,7 @@ gui.open(player);
 
 * `open()` : Ouvre une GUI à un joueur
 * `close()` : Ferme la GUI d'un joueur
-* `updateInventory()` : Rafraîchit la GUI d'un joueur
+* `update()` : Rafraîchit la GUI d'un joueur
 * `setItem()` : Place un item dans la GUI
 
 ### Masks

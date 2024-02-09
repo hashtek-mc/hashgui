@@ -114,7 +114,7 @@ public class HashGUI implements InventoryHolder {
 	 * @param	player	Player
 	 * @return	Returns itself.
 	 */
-	public HashGUI updateInventory(Player player)
+	public HashGUI update(Player player)
 	{
 		player.updateInventory();
 		return this;
