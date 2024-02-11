@@ -10,8 +10,8 @@ import fr.hashtek.spigot.hashgui.listeners.HashGUIInteractListener;
 
 public class HashGUIManager {
 	
-	private JavaPlugin plugin;
-	private PluginManager pluginManager;
+	private final JavaPlugin plugin;
+	private final PluginManager pluginManager;
 	
 	private HashGUIClick clickManager;
 	private HashGUIInteraction interactionManager;

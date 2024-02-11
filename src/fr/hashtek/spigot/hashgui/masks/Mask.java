@@ -11,9 +11,9 @@ import fr.hashtek.spigot.hashitem.HashItem;
 
 public class Mask {
 
-	private HashGUI gui;
-	private HashMap<Character, HashItem> items;
-	private ArrayList<String> pattern;
+	private final HashGUI gui;
+	private final HashMap<Character, HashItem> items;
+	private final ArrayList<String> pattern;
 	
 	
 	/**

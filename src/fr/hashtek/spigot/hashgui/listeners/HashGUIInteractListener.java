@@ -15,7 +15,7 @@ import fr.hashtek.spigot.hashgui.handlers.interact.InteractHandler;
 
 public class HashGUIInteractListener implements Listener {
 	
-	private HashGUIInteraction interactManager;
+	private final HashGUIInteraction interactManager;
 	
 	
 	/**

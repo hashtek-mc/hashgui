@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashgui.listeners;
 
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +19,7 @@ import fr.hashtek.spigot.hashgui.handlers.click.HashGUIClick;
 
 public class HashGUIClickListener implements Listener {
 	
-	private HashGUIClick clickManager;
+	private final HashGUIClick clickManager;
 	
 	
 	/**
@@ -41,12 +42,13 @@ public class HashGUIClickListener implements Listener {
 	{
 		Inventory inventory = event.getClickedInventory();
 		InventoryHolder holder = inventory.getHolder();
-		
-		if (!(event.getWhoClicked() instanceof Player))
+
+		if (!(event.getWhoClicked() instanceof Player) ||
+			event.getCurrentItem().getType() == Material.AIR)
 			return;
 
 		event.setCancelled(true);
-		
+
 		Player player = (Player) event.getWhoClicked();
 		ClickType clickType = event.getClick();
 		ItemStack item = event.getCurrentItem();

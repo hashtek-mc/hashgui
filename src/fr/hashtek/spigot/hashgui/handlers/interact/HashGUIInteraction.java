@@ -10,7 +10,7 @@ import fr.hashtek.spigot.hashitem.HashItem;
 
 public class HashGUIInteraction {
 	
-	private HashMap<String, ArrayList<InteractHandler>> interactHandlers;
+	private final HashMap<String, ArrayList<InteractHandler>> interactHandlers;
 	
 	
 	/**
@@ -31,9 +31,7 @@ public class HashGUIInteraction {
 	 */
 	private HashGUIInteraction addInteractHandler(String title, InteractHandler handler)
 	{
-		if (this.interactHandlers.get(title) == null)
-			this.interactHandlers.put(title, new ArrayList<InteractHandler>());
-		
+        this.interactHandlers.computeIfAbsent(title, k -> new ArrayList<InteractHandler>());
 		this.interactHandlers.get(title).add(handler);
 		return this;
 	}

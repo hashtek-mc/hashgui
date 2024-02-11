@@ -10,10 +10,10 @@ import fr.hashtek.spigot.hashitem.HashItem;
 
 public class HashGUI implements InventoryHolder {
 
-	private Inventory gui;
+	private final Inventory gui;
 	
-	private int size;
-	private String title;
+	private final int size;
+	private final String title;
 	
 	
 	/**

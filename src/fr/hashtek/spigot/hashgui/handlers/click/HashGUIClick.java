@@ -10,7 +10,7 @@ import fr.hashtek.spigot.hashitem.HashItem;
 
 public class HashGUIClick {
 	
-	private HashMap<String, ArrayList<ClickHandler>> clickHandlers;
+	private final HashMap<String, ArrayList<ClickHandler>> clickHandlers;
 	
 	
 	/**
@@ -31,9 +31,7 @@ public class HashGUIClick {
 	 */
 	private HashGUIClick addClickHandler(String title, ClickHandler handler)
 	{
-		if (this.clickHandlers.get(title) == null)
-			this.clickHandlers.put(title, new ArrayList<ClickHandler>());
-		
+        this.clickHandlers.computeIfAbsent(title, k -> new ArrayList<ClickHandler>());
 		this.clickHandlers.get(title).add(handler);
 		return this;
 	}

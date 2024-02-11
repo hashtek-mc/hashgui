@@ -12,10 +12,10 @@ public interface InteractAction {
 	 * @param	item	Interacted item
 	 * @param	slot	Interacted slot
 	 */
-	public boolean execute(
+    boolean execute(
 		Player player,
 		ItemStack item,
 		int slot
-	);
+    );
 	
 }

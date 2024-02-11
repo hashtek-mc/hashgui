@@ -16,8 +16,8 @@ import fr.hashtek.spigot.hashgui.handlers.interact.InteractHandler;
 
 public class HashItem {
 	
-	private ItemStack itemStack;
-	private ItemMeta itemMeta;
+	private final ItemStack itemStack;
+	private final ItemMeta itemMeta;
 	
 	private List<ClickHandler> clickHandlers;
 	private List<InteractHandler> interactHandlers;
@@ -225,7 +225,7 @@ public class HashItem {
 	{
 		this.itemMeta.getItemFlags().clear();
 		
-		flags.forEach(flag -> this.itemMeta.addItemFlags(flag));
+		flags.forEach(this.itemMeta::addItemFlags);
 		return this;
 	}
 	
@@ -302,7 +302,6 @@ public class HashItem {
 			this.clickHandlers = new ArrayList<ClickHandler>();
 					
 		this.clickHandlers.add(clickHandler);
-		
 		return this;
 	}
 	
@@ -320,7 +319,6 @@ public class HashItem {
 			this.interactHandlers = new ArrayList<InteractHandler>();
 					
 		this.interactHandlers.add(interactHandler);
-		
 		return this;
 	}
 	

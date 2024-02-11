@@ -15,7 +15,7 @@ public interface ClickAction {
 	 * @param	item	Clicked item
 	 * @param	slot	Clicked slot
 	 */
-	public void execute(
+	void execute(
 		Player player,
 		HashGUI gui,
 		ItemStack item,
