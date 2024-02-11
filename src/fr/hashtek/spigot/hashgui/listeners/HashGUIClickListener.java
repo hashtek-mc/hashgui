@@ -40,12 +40,13 @@ public class HashGUIClickListener implements Listener {
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event)
 	{
-		Inventory inventory = event.getClickedInventory();
-		InventoryHolder holder = inventory.getHolder();
-
 		if (!(event.getWhoClicked() instanceof Player) ||
+			event.getClickedInventory() == null ||
 			event.getCurrentItem().getType() == Material.AIR)
 			return;
+
+		Inventory inventory = event.getClickedInventory();
+		InventoryHolder holder = inventory.getHolder();
 
 		event.setCancelled(true);
 
