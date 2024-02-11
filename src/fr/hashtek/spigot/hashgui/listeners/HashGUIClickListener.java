@@ -32,8 +32,33 @@ public class HashGUIClickListener implements Listener {
 	{
 		this.clickManager = clickManager;
 	}
-	
-	
+
+
+	/**
+	 * Executes the click actions linked to the clicked item.
+	 *
+	 * @param	player		Player
+	 * @param	clickType	Click type
+	 * @param	gui			GUI
+	 * @param	item		Item
+	 * @param	slot		Slot
+	 */
+	private void processClick(Player player, ClickType clickType, HashGUI gui, ItemStack item, int slot)
+	{
+		ItemMeta meta = item.getItemMeta();
+		String itemDisplayName = meta.getDisplayName();
+		List<ClickHandler> handlers = this.clickManager.getClickHandlers().get(itemDisplayName);
+
+		if (handlers == null)
+			return;
+
+		handlers.stream()
+			.filter((ClickHandler handler) ->
+				handler.getClickTypes().contains(clickType))
+			.forEach((ClickHandler handler) ->
+				handler.getClickAction().execute(player, gui, item, slot));
+	}
+
 	/**
 	 * Click handling
 	 */
@@ -48,28 +73,18 @@ public class HashGUIClickListener implements Listener {
 		Inventory inventory = event.getClickedInventory();
 		InventoryHolder holder = inventory.getHolder();
 
-		event.setCancelled(true);
-
 		Player player = (Player) event.getWhoClicked();
 		ClickType clickType = event.getClick();
 		ItemStack item = event.getCurrentItem();
-		ItemMeta meta = item.getItemMeta();
-		String itemDisplayName = meta.getDisplayName();
 		int slot = event.getSlot();
-		List<ClickHandler> handlers = this.clickManager.getClickHandlers().get(itemDisplayName);
-		
-		if (handlers == null)
-			return;
 
-		HashGUI gui = holder instanceof HashGUI 
-			? (HashGUI) holder
-			: new HashGUI(inventory);
-		
-		handlers.stream()
-	        .filter((ClickHandler handler) ->
-	        	handler.getClickTypes().contains(clickType))
-	        .forEach((ClickHandler handler) ->
-	        	handler.getClickAction().execute(player, gui, item, slot));
+		HashGUI gui = holder instanceof HashGUI
+				? (HashGUI) holder
+				: new HashGUI(inventory);
+
+		event.setCancelled(true);
+
+		this.processClick(player, clickType, gui, item, slot);
 	}
 	
 }
