@@ -46,6 +46,17 @@ public class ClickHandler {
 		
 		return this;
 	}
+
+	/**
+	 * Adds every click types possible : Left, right and middle click, shifting or not.
+	 *
+	 * @return	Returns itself.
+	 */
+	public ClickHandler addAllClickTypes()
+	{
+		return this.addClickTypes(
+			ClickType.LEFT, ClickType.RIGHT, ClickType.SHIFT_LEFT, ClickType.SHIFT_RIGHT, ClickType.MIDDLE);
+	}
 	
 	/**
 	 * Sets handler's click action. (on click, then do...)

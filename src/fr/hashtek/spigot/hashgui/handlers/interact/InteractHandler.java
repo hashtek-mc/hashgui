@@ -43,6 +43,17 @@ public class InteractHandler {
 		
 		return this;
 	}
+
+	/**
+	 * Adds every interact types possible : Left and right click, on block & air.
+	 *
+	 * @return	Returns itself.
+	 */
+	public InteractHandler addAllInteractTypes()
+	{
+		return this.addInteractTypes(
+			Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK, Action.LEFT_CLICK_AIR, Action.LEFT_CLICK_BLOCK);
+	}
 	
 	/**
 	 * Sets handler's interact action. (on interact, then do...)

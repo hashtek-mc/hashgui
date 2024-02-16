@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashgui.listeners;
 
 import java.util.ArrayList;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -81,6 +82,9 @@ public class HashGUIInteractListener implements Listener {
 	@EventHandler
 	public void onBlockHit(PlayerAnimationEvent event)
 	{
+		if (event.getPlayer().getItemInHand().getType() == Material.AIR)
+			return;
+
 		Player player = event.getPlayer();
 		ItemStack item = event.getPlayer().getItemInHand();
 
