@@ -1,6 +1,7 @@
 package fr.hashtek.spigot.hashgui.listeners;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -82,11 +83,12 @@ public class HashGUIInteractListener implements Listener {
 	@EventHandler
 	public void onBlockHit(PlayerAnimationEvent event)
 	{
-		if (event.getPlayer().getItemInHand().getType() == Material.AIR)
-			return;
-
 		Player player = event.getPlayer();
 		ItemStack item = event.getPlayer().getItemInHand();
+
+		if (item.getType() == Material.AIR ||
+			player.getTargetBlock((Set<Material>) null, 3).getType() == Material.AIR)
+			return;
 
 		this.processInteraction(player, Action.LEFT_CLICK_BLOCK, item);
 	}
