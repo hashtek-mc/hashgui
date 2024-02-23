@@ -69,9 +69,7 @@ public class InteractHandler {
 	
 	
 	/**
-	 * Returns every assigned interact types of this handler.
-	 * 
-	 * @return	Interact types
+	 * @return	Assigned interact types
 	 */
 	public ArrayList<Action> getInteractTypes()
 	{
@@ -79,9 +77,7 @@ public class InteractHandler {
 	}
 	
 	/**
-	 * Returns the action assigned to this handler.
-	 * 
-	 * @return	Action
+	 * @return	Assigned action
 	 */
 	public InteractAction getInteractAction()
 	{

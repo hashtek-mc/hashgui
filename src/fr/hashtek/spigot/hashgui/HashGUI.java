@@ -122,9 +122,7 @@ public class HashGUI implements InventoryHolder {
 	
 
 	/**
-	 * Returns the Inventory in this GUI.
-	 * 
-	 * @return	Inventory
+	 * @return	GUI's inventory
 	 */
 	@Override
 	public Inventory getInventory() {
@@ -132,9 +130,7 @@ public class HashGUI implements InventoryHolder {
 	}
 	
 	/**
-	 * Returns the number of lines in this GUI.
-	 * 
-	 * @return	Number of lines
+	 * @return	GUI's number of lines
 	 */
 	public int getSize()
 	{
@@ -142,9 +138,8 @@ public class HashGUI implements InventoryHolder {
 	}
 	
 	/**
-	 * Returns the number of slots in this GUI (1 line is 9 slots).
-	 * 
-	 * @return	Number of slots
+	 * @return	GUI's number of slots
+	 * @apiNote	One line is 9 slots.
 	 */
 	public int getTotalSize()
 	{
@@ -152,9 +147,7 @@ public class HashGUI implements InventoryHolder {
 	}
 	
 	/**
-	 * Returns the title of this GUI.
-	 * 
-	 * @return	Title
+	 * @return	GUI's title
 	 */
 	public String getTitle()
 	{

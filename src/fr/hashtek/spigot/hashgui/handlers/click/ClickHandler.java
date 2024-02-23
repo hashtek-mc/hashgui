@@ -57,7 +57,7 @@ public class ClickHandler {
 		return this.addClickTypes(
 			ClickType.LEFT, ClickType.RIGHT, ClickType.SHIFT_LEFT, ClickType.SHIFT_RIGHT, ClickType.MIDDLE);
 	}
-	
+
 	/**
 	 * Sets handler's click action. (on click, then do...)
 	 * 
@@ -72,9 +72,7 @@ public class ClickHandler {
 	
 	
 	/**
-	 * Returns every assigned click types of this handler.
-	 * 
-	 * @return	Click types
+	 * @return	Assigned click types
 	 */
 	public ArrayList<ClickType> getClickTypes()
 	{
@@ -82,9 +80,7 @@ public class ClickHandler {
 	}
 	
 	/**
-	 * Returns the action assigned to this handler.
-	 * 
-	 * @return	Action
+	 * @return	Assigned action
 	 */
 	public ClickAction getClickAction()
 	{

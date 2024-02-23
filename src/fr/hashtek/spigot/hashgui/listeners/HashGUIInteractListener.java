@@ -79,6 +79,7 @@ public class HashGUIInteractListener implements Listener {
 	 * This event is used because in adventure mode,
 	 * the client doesn't send a packet to the server
 	 * when tapping a block.
+	 * TODO: Verify getTargetBlock range (maybe 5 instead of 3).
 	 */
 	@EventHandler
 	public void onBlockHit(PlayerAnimationEvent event)

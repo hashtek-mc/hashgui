@@ -60,9 +60,7 @@ public class HashGUIClick {
 	
 	
 	/**
-	 * Returns every registered click handler.
-	 * 
-	 * @return	Click handlers
+	 * @return	Every registered click handler
 	 */
 	public HashMap<String, ArrayList<ClickHandler>> getClickHandlers()
 	{

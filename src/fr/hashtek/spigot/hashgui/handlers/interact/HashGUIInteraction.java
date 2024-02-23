@@ -60,9 +60,7 @@ public class HashGUIInteraction {
 	
 	
 	/**
-	 * Returns every registered interact handler.
-	 * 
-	 * @return	Interact handlers
+	 * @return	Registered interact handlers
 	 */
 	public HashMap<String, ArrayList<InteractHandler>> getInteractHandlers()
 	{

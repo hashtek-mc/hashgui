@@ -17,7 +17,7 @@ public class Mask {
 	
 	
 	/**
-	 * Creates a mask from a GUI, for a GUI.
+	 * Creates a mask for a GUI, from a GUI.
 	 * 
 	 * @param	gui	HashGUI.
 	 */

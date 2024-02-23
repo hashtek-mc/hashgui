@@ -51,8 +51,6 @@ public class HashGUIManager {
 	
 	
 	/**
-	 * Returns the click manager.
-	 * 
 	 * @return	Click manager
 	 */
 	public HashGUIClick getClickManager()
@@ -61,8 +59,6 @@ public class HashGUIManager {
 	}
 	
 	/**
-	 * Returns the interaction manager
-	 * 
 	 * @return	Interaction manager
 	 */
 	public HashGUIInteraction getInteractionManager()

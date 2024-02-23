@@ -107,14 +107,11 @@ public class HashItem {
 	public HashItem build() throws IllegalArgumentException
 	{
 		this.itemStack.setItemMeta(this.itemMeta);
-		
 		return this;
 	}
 	
 	/**
-	 * Returns the built ItemStack.
-	 * 
-	 * @return	Item's ItemStack
+	 * @return	Built item's ItemStack
 	 */
 	public ItemStack getItemStack()
 	{
@@ -163,10 +160,10 @@ public class HashItem {
 	 * @param	data	Item data.
 	 * @return	Returns itself.
 	 * @deprecated
+	 * TODO: Finish this function ASAP.
 	 */
 	public HashItem setData(Byte data)
 	{
-		// TODO: Finish this.
 		return this;
 	}
 	
@@ -254,8 +251,6 @@ public class HashItem {
 	}
 	
 	/**
-	 * Returns if item is unbreakable
-	 * 
 	 * @return	Is item unbreakable ?
 	 */
 	public boolean isUnbreakable()
@@ -323,8 +318,6 @@ public class HashItem {
 	}
 	
 	/**
-	 * Returns item's click handlers
-	 * 
 	 * @return	Item's click handlers.
 	 */
 	public List<ClickHandler> getClickHandlers()
@@ -333,8 +326,6 @@ public class HashItem {
 	}
 	
 	/**
-	 * Returns item's interact handlers
-	 * 
 	 * @return	Item's interact handlers.
 	 */
 	public List<InteractHandler> getInteractHandlers()
