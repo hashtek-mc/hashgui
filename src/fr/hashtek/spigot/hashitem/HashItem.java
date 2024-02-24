@@ -17,7 +17,7 @@ import fr.hashtek.spigot.hashgui.handlers.interact.InteractHandler;
 public class HashItem {
 	
 	private final ItemStack itemStack;
-	private final ItemMeta itemMeta;
+	private ItemMeta itemMeta;
 	
 	private List<ClickHandler> clickHandlers;
 	private List<InteractHandler> interactHandlers;
@@ -64,11 +64,7 @@ public class HashItem {
 	 */
 	public HashItem(Material type, int amount, Byte data)
 	{
-		if (data == null)
-			this.itemStack = new ItemStack(type, amount);
-		else
-			this.itemStack = new ItemStack(type, amount, data);
-		
+		this.itemStack = new ItemStack(type, amount, data == null ? (byte) 0 : data);
 		this.itemMeta = this.itemStack.getItemMeta();
 	}
 	
@@ -82,8 +78,8 @@ public class HashItem {
 		this.itemStack = item;
 		this.itemMeta = this.itemStack.getItemMeta();
 	}
-	
-	
+
+
 	/**
 	 * Builds the item and registers its handlers.
 	 * 
@@ -108,6 +104,29 @@ public class HashItem {
 	{
 		this.itemStack.setItemMeta(this.itemMeta);
 		return this;
+	}
+
+	/**
+	 * Overrides the set ItemMeta.
+	 * Mainly used in {@link HashSkull}.
+	 *
+	 * @param	itemMeta	Item meta
+	 * @return	Returns itself.
+	 * @apiNote	Must not be used outside of this library.
+	 */
+	public HashItem setItemMeta(ItemMeta itemMeta)
+	{
+		this.itemMeta = itemMeta;
+		return this;
+	}
+
+	/**
+	 * @return	Item's meta
+	 * @apiNote	Must not be used outside of this library.
+	 */
+	public ItemMeta getItemMeta()
+	{
+		return this.itemMeta;
 	}
 	
 	/**
