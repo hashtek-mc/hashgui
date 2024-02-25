@@ -33,6 +33,18 @@ public class HashSkull extends HashItem {
         super.setItemMeta((SkullMeta) super.getItemMeta());
     }
 
+    public HashSkull(HashItem item, SkullType skullType)
+    {
+        this(skullType, item.getItemStack().getAmount());
+        super.setItemMeta((SkullMeta) item.getItemMeta());
+    }
+
+    public HashSkull(HashItem item)
+    {
+        this(item.getItemStack().getAmount());
+        super.setItemMeta((SkullMeta) item.getItemMeta());
+    }
+
     public SkullMeta getSkullMeta()
     {
         return (SkullMeta) super.getItemMeta();
