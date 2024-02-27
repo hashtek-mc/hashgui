@@ -75,7 +75,7 @@ public class HashSkull extends HashItem {
         super.setItemMeta((SkullMeta) item.getItemMeta());
     }
 
-    
+
     /**
      * @return  Item's meta as {@link SkullMeta}.
      */

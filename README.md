@@ -19,12 +19,12 @@ HashItem item = new HashItem(Material.ENDER_PEARL, 10)
   .setTitle("Bonjour")
   .setLore(Arrays.asList(
     "Ligne 1",
-    "Ligne 2",
+    "Ligne 2"
   ))
   .addLore("Ligne 3")
   .setFlags(Arrays.asList(
     ItemFlag.HIDE_ATTRIBUTES,
-    ItemFlag.HIDE_ENCHANTS,
+    ItemFlag.HIDE_ENCHANTS
   ))
   .addFlag(ItemFlag.HIDE_UNBREAKABLE)
   .addEnchant(Enchantment.DURABILITY, 3)
@@ -166,6 +166,36 @@ public class Test extends JavaPlugin {
 
 `⚠️` Il est très fortement recommandé de n'avoir qu'une seule instance de
 HashGUIManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs)
+
+### HashSkull
+
+**Création de la tête d'un joueur :**
+```java
+HashItem playerSkull = new HashSkull()
+    .setOwner("Shuvly") // HashSkull
+    .setTitle("Tête de Shuvly") // HashItem
+    .build();
+```
+
+`⚠️` Exécutez d'abord toutes les modifications relatives à `HashSkull` avant d'exécuter
+les modifications relatives à `HashItem`.
+
+**Création d'une tête personnalisée :**
+```java
+HashItem customSkull = new HashSkull()
+    .setTexture("...") // Votre texture
+    .setTitle("Tête personnalisée")
+    .build();
+```
+
+Exemple de texture (en `base64`) : `eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWY0OGMxOTU1NTUwZWFlZGU1NzEzYTdiY2NjOWE0YWUyZTZlMTcxZTI5YWMxYzcxYzBlM2QxYWJiNzI5MGNjYSJ9fX0=`
+
+`⚠️` Exécutez d'abord toutes les modifications relatives à `HashSkull` avant d'exécuter
+les modifications relatives à `HashItem`.
+
+`ℹ️` Vous pouvez trouver des têtes personnalisées sur [Minecraft Heads](https://minecraft-heads.com/).\
+Quand vous êtes sur la page d'une tête, descendez jusqu'à la section "For developers" pour trouver la valeur
+de la texture en `base64`.
 
 ## HashGUI
 
