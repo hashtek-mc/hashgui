@@ -187,14 +187,14 @@ public class HashItem {
 	}
 	
 	/**
-	 * Sets item's title.
+	 * Sets item's name.
 	 * 
-	 * @param	title	Item title.
+	 * @param	name	Item name.
 	 * @return	Returns itself.
 	 */
-	public HashItem setTitle(String title)
+	public HashItem setName(String name)
 	{
-		this.itemMeta.setDisplayName(ChatColor.RESET + title);
+		this.itemMeta.setDisplayName(ChatColor.RESET + name);
 		return this;
 	}
 	

@@ -16,7 +16,7 @@ Cette librairie est constituée de deux classes principales :
 
 ```java
 HashItem item = new HashItem(Material.ENDER_PEARL, 10)
-  .setTitle("Bonjour")
+  .setName("Bonjour")
   .setLore(Arrays.asList(
     "Ligne 1",
     "Ligne 2"
@@ -47,7 +47,7 @@ Inventory#addItem(item.getItemStack());
 * `setAmount()` : Nombre d'items
 * `setDurability()` : Durabilité de l'item
 * `setData()` : Données (byte) de l'item
-* `setTitle()` : Titre de l'item
+* `setName()` : Nom de l'item
 * `setLore()` : Remplace la description de l'item
 * `addLore()` : Ajoute une ligne à la description de l'item
 * `setFlags()` : Remplace les flags de l'item
@@ -173,7 +173,7 @@ HashGUIManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs)
 ```java
 HashItem playerSkull = new HashSkull()
     .setOwner("Shuvly") // HashSkull
-    .setTitle("Tête de Shuvly") // HashItem
+    .setName("Tête de Shuvly") // HashItem
     .build();
 ```
 
@@ -184,7 +184,7 @@ les modifications relatives à `HashItem`.
 ```java
 HashItem customSkull = new HashSkull()
     .setTexture("...") // Votre texture
-    .setTitle("Tête personnalisée")
+    .setName("Tête personnalisée")
     .build();
 ```
 
@@ -204,7 +204,7 @@ de la texture en `base64`.
 **Création d'un menu personnalisé :**
 ```java
 HashItem item = new HashItem(Material.SIGN)
-  .setTitle("Paramètres")
+  .setName("Paramètres")
   .addLore("Cliquez pour accéder aux paramètres")
   .build();
 

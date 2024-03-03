@@ -115,7 +115,7 @@ public class Mask {
 	public Mask apply()
 	{
 	    HashItem placeholderItem = new HashItem(Material.BARRIER)
-            .setTitle("§cItem not found.")
+            .setName("§cItem not found.")
             .addLore("§7§oI am a poor dev that can't do his work properly.")
             .build();
 
