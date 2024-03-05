@@ -6,6 +6,7 @@ This library has two main classes:
 * **HashItem:** Item builder
 * **HashGUI:** GUI builder
 
+[🇫🇷 Egalement disponible en Français !](https://github.com/hashtek-mc/hashgui/blob/main/README.md)
 
 ## HashItem
 

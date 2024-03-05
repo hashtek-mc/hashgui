@@ -7,6 +7,7 @@ Cette librairie est constituée de deux classes principales :
 * **HashItem :** Constructeur d'item
 * **HashGUI :** Constructeur de GUI
 
+[🇬🇧 Also available in English!](https://github.com/hashtek-mc/hashgui/blob/main/README-en.md)
 
 ## HashItem
 
