@@ -36,7 +36,7 @@ Inventory#addItem(item.getItemStack());
 
 `⚠️` Ne pas oublier de `build()` l'item avant de l'utiliser !
 
-`⚠️` Importez toujours depuis le package `org.bukkit`
+`⚠️` Importez toujours depuis le package `org.bukkit`.
 
 `ℹ️` Renseignez-vous sur les enums [Material](https://helpch.at/docs/1.8/org/bukkit/Material.html), [ItemFlag](https://helpch.at/docs/1.8/index.html?org/bukkit/inventory/ItemFlag.html) et [Enchantment](https://helpch.at/docs/1.8/index.html?org/bukkit/enchantments/Enchantment.html)
 (du package `org.bukkit`).
@@ -55,7 +55,7 @@ Inventory#addItem(item.getItemStack());
 * `setUnbreakable()` : Rend l'item incassable
 * `addEnchant()` : Ajoute un enchantement à l'item
 * `removeEnchant()` : Retire un enchantement à l'item
-* `build()` : Construit l'item pour qu'il soit utilisable.
+* `build()` : Construit l'item pour qu'il soit utilisable
 
 ### 🖱️ Click handler
 
@@ -165,7 +165,7 @@ public class Test extends JavaPlugin {
 ```
 
 `⚠️` Il est très fortement recommandé de n'avoir qu'une seule instance de
-HashGUIManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs)
+HashGUIManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs).
 
 ### HashSkull
 
