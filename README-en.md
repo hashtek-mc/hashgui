@@ -180,7 +180,7 @@ Texture example (in `base64`): `eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90
 
 `⚠️` Make all changes to `HashSkull` first before making changes to `HashItem`.
 
-`ℹ️` You can find custom head on [Minecraft Heads](https://minecraft-heads.com/).\
+`ℹ️` You can find custom skulls on [Minecraft Heads](https://minecraft-heads.com/).\
 When you're on the head page, scroll down to the "For developers" section to find the texture value in `base64`.
 
 ## HashGUI
