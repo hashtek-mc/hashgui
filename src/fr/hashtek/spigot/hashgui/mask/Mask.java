@@ -1,4 +1,4 @@
-package fr.hashtek.spigot.hashgui.masks;
+package fr.hashtek.spigot.hashgui.mask;
 
 import java.util.ArrayList;
 import java.util.HashMap;

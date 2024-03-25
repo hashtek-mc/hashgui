@@ -1,4 +1,4 @@
-package fr.hashtek.spigot.hashgui.handlers.interact;
+package fr.hashtek.spigot.hashgui.handler.interact;
 
 import java.util.ArrayList;
 

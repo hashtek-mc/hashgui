@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashgui.HashGUIManager;
-import fr.hashtek.spigot.hashgui.handlers.click.ClickHandler;
-import fr.hashtek.spigot.hashgui.handlers.interact.InteractHandler;
+import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
+import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
 
 public class HashItem {
 	

@@ -1,4 +1,4 @@
-package fr.hashtek.spigot.hashgui.listeners;
+package fr.hashtek.spigot.hashgui.listener;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashgui.HashGUI;
-import fr.hashtek.spigot.hashgui.handlers.click.ClickHandler;
-import fr.hashtek.spigot.hashgui.handlers.click.HashGUIClick;
+import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
+import fr.hashtek.spigot.hashgui.handler.click.HashGUIClick;
 
 public class HashGUIClickListener implements Listener {
 	

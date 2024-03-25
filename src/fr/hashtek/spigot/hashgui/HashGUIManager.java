@@ -3,10 +3,10 @@ package fr.hashtek.spigot.hashgui;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.hashtek.spigot.hashgui.handlers.click.HashGUIClick;
-import fr.hashtek.spigot.hashgui.handlers.interact.HashGUIInteraction;
-import fr.hashtek.spigot.hashgui.listeners.HashGUIClickListener;
-import fr.hashtek.spigot.hashgui.listeners.HashGUIInteractListener;
+import fr.hashtek.spigot.hashgui.handler.click.HashGUIClick;
+import fr.hashtek.spigot.hashgui.handler.interact.HashGUIInteraction;
+import fr.hashtek.spigot.hashgui.listener.HashGUIClickListener;
+import fr.hashtek.spigot.hashgui.listener.HashGUIInteractListener;
 
 public class HashGUIManager {
 	

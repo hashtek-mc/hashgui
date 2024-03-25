@@ -1,4 +1,4 @@
-package fr.hashtek.spigot.hashgui.handlers.interact;
+package fr.hashtek.spigot.hashgui.handler.interact;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
