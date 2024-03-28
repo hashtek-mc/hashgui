@@ -6,12 +6,13 @@ import java.util.HashMap;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import fr.hashtek.spigot.hashgui.HashGUI;
+import fr.hashtek.spigot.hashgui.HashGui;
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class Mask {
+public class Mask
+{
 
-	private final HashGUI gui;
+	private final HashGui gui;
 	private final HashMap<Character, HashItem> items;
 	private final ArrayList<String> pattern;
 	
@@ -21,7 +22,7 @@ public class Mask {
 	 * 
 	 * @param	gui	HashGUI.
 	 */
-	public Mask(HashGUI gui) {
+	public Mask(HashGui gui) {
 		this.gui = gui;
 		this.items = new HashMap<Character, HashItem>();
 		this.pattern = new ArrayList<String>();

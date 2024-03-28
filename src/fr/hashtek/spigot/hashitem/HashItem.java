@@ -10,11 +10,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.hashtek.spigot.hashgui.HashGUIManager;
+import fr.hashtek.spigot.hashgui.HashGuiManager;
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
 
-public class HashItem {
+public class HashItem
+{
 	
 	private final ItemStack itemStack;
 	private ItemMeta itemMeta;
@@ -85,7 +86,7 @@ public class HashItem {
 	 * 
 	 * @return	Returns itself.
 	 */
-	public HashItem build(HashGUIManager guiManager) throws IllegalArgumentException
+	public HashItem build(HashGuiManager guiManager) throws IllegalArgumentException
 	{
 		this.itemStack.setItemMeta(this.itemMeta);
 		

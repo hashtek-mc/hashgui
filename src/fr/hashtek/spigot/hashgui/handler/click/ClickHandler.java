@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import org.bukkit.event.inventory.ClickType;
 
-public class ClickHandler {
+public class ClickHandler
+{
 	
 	private ArrayList<ClickType> clickTypes;
 	private ClickAction clickAction;

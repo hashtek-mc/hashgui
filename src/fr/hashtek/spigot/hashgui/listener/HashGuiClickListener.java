@@ -13,13 +13,14 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.hashtek.spigot.hashgui.HashGUI;
+import fr.hashtek.spigot.hashgui.HashGui;
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
-import fr.hashtek.spigot.hashgui.handler.click.HashGUIClick;
+import fr.hashtek.spigot.hashgui.handler.click.HashGuiClick;
 
-public class HashGUIClickListener implements Listener {
+public class HashGuiClickListener implements Listener
+{
 	
-	private final HashGUIClick clickManager;
+	private final HashGuiClick clickManager;
 	
 	
 	/**
@@ -28,7 +29,7 @@ public class HashGUIClickListener implements Listener {
 	 * 
 	 * @param	clickManager	Click manager
 	 */
-	public HashGUIClickListener(HashGUIClick clickManager)
+	public HashGuiClickListener(HashGuiClick clickManager)
 	{
 		this.clickManager = clickManager;
 	}
@@ -43,7 +44,7 @@ public class HashGUIClickListener implements Listener {
 	 * @param	item		Item
 	 * @param	slot		Slot
 	 */
-	private void processClick(Player player, ClickType clickType, HashGUI gui, ItemStack item, int slot)
+	private void processClick(Player player, ClickType clickType, HashGui gui, ItemStack item, int slot)
 	{
 		ItemMeta meta = item.getItemMeta();
 		String itemDisplayName = meta.getDisplayName();
@@ -78,9 +79,9 @@ public class HashGUIClickListener implements Listener {
 		ItemStack item = event.getCurrentItem();
 		int slot = event.getSlot();
 
-		HashGUI gui = holder instanceof HashGUI
-				? (HashGUI) holder
-				: new HashGUI(inventory);
+		HashGui gui = holder instanceof HashGui
+				? (HashGui) holder
+				: new HashGui(inventory);
 
 		event.setCancelled(true);
 

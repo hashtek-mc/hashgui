@@ -9,7 +9,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.lang.reflect.Field;
 import java.util.UUID;
 
-public class HashSkull extends HashItem {
+public class HashSkull extends HashItem
+{
 
     /**
      * Creates a new HashSkull.
@@ -61,7 +62,7 @@ public class HashSkull extends HashItem {
     public HashSkull(HashItem item, SkullType skullType)
     {
         this(skullType, item.getItemStack().getAmount());
-        super.setItemMeta((SkullMeta) item.getItemMeta());
+        super.setItemMeta(item.getItemMeta());
     }
 
     /**
@@ -72,7 +73,7 @@ public class HashSkull extends HashItem {
     public HashSkull(HashItem item)
     {
         this(item.getItemStack().getAmount());
-        super.setItemMeta((SkullMeta) item.getItemMeta());
+        super.setItemMeta(item.getItemMeta());
     }
 
 

@@ -8,7 +8,8 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class HashGUI implements InventoryHolder {
+public class HashGui implements InventoryHolder
+{
 
 	private final Inventory gui;
 	
@@ -22,7 +23,7 @@ public class HashGUI implements InventoryHolder {
 	 * @param	title	GUI's title
 	 * @param	size	GUI's amount of lines (must be between 1 and 6).
 	 */
-	public HashGUI(String title, int size)
+	public HashGui(String title, int size)
 	{
 		if (size < 1 || size > 6)
 			throw new IllegalArgumentException("Invalid size. A GUI can only have 1 to 6 lines.");
@@ -38,7 +39,7 @@ public class HashGUI implements InventoryHolder {
 	 * 
 	 * @param	inventory	Inventory
 	 */
-	public HashGUI(Inventory inventory)
+	public HashGui(Inventory inventory)
 	{
 		this.gui = inventory;
 		
@@ -77,7 +78,7 @@ public class HashGUI implements InventoryHolder {
 	 * @param	item	Item
 	 * @return	Returns itself.
 	 */
-	public HashGUI setItem(int index, ItemStack item)
+	public HashGui setItem(int index, ItemStack item)
 	{
 		this.gui.setItem(index, item);
 		return this;
@@ -90,7 +91,7 @@ public class HashGUI implements InventoryHolder {
 	 * @param	item	Item
 	 * @return	Returns itself.
 	 */
-	public HashGUI setItem(int index, HashItem item)
+	public HashGui setItem(int index, HashItem item)
 	{
 		this.setItem(index, item.getItemStack());
 		return this;
@@ -102,7 +103,7 @@ public class HashGUI implements InventoryHolder {
 	 * @param	index	Slot index
 	 * @return	Returns itself.
 	 */
-	public HashGUI removeItem(int index)
+	public HashGui removeItem(int index)
 	{
 		this.gui.setItem(index, null);
 		return this;
@@ -114,7 +115,7 @@ public class HashGUI implements InventoryHolder {
 	 * @param	player	Player
 	 * @return	Returns itself.
 	 */
-	public HashGUI update(Player player)
+	public HashGui update(Player player)
 	{
 		player.updateInventory();
 		return this;

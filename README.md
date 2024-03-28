@@ -1,11 +1,11 @@
-# 🎨 ️HashGUI
+# 🎨 ️HashGui
 
 Librairie qui permet de créer des menus et des items personnalisés simplement
 et rapidement.
 
 Cette librairie est constituée de deux classes principales :
 * **HashItem :** Constructeur d'item
-* **HashGUI :** Constructeur de GUI
+* **HashGui :** Constructeur de GUI
 
 [🇬🇧 Also available in English!](https://github.com/hashtek-mc/hashgui/blob/main/README-en.md)
 
@@ -67,7 +67,7 @@ inventaire.
 ```java
 ClickHandler clickHandler = new ClickHandler()
     .addClickType(ClickType.LEFT)
-    .setClickAction((Player player, HashGUI gui, ItemStack clickedItem, int clickedSlot) -> {
+    .setClickAction((Player player, HashGui gui, ItemStack clickedItem, int clickedSlot) -> {
         // Actions à faire lors du clic.
     });
 
@@ -77,7 +77,7 @@ HashItem item = new HashItem(Material.COMPASS)
 ```
 
 `⚠️` `guiManager` (dans la fonction `build()`) doit être une instance de
-[HashGUIManager](#hashguimanager), qui doit être stocké à la racine de votre plugin.
+[HashGuiManager](#hashguimanager), qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les clics et d'exécuter ce qu'il faut en
 fonction de l'item.
 
@@ -109,7 +109,7 @@ HashItem item = new HashItem(Material.COMPASS)
 ```
 
 `⚠️` Tout comme pour les Click Handlers, `guiManager`
-(dans la fonction `build()`) doit être une instance de [HashGUIManager](#hashguimanager),
+(dans la fonction `build()`) doit être une instance de [HashGuiManager](#hashguimanager),
 qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les intéractions et d'exécuter ce qu'il
 faut en fonction de l'item.
@@ -124,7 +124,7 @@ soit pas visible du point de vue du joueur 😉
 
 `ℹ️` Renseignez-vous sur l'enum [Action](https://helpch.at/docs/1.8/index.html?org/bukkit/event/block/Action.html) (du package `org.bukkit`).
 
-### HashGUIManager
+### HashGuiManager
 
 Pour que les `ClickHandler` et les `InteractionHandler` fonctionnent,
 vous devez créer une instance de `HashGUIManager` à la racine de votre plugin
@@ -135,7 +135,7 @@ et donner cette instance lors du build de votre item personnalisé.
 public class Test extends JavaPlugin {
     
     private PluginManager pluginManager;
-    private HashGUIManager guiManager;
+    private HashGuiManager guiManager;
     
     
     /* Initialisation des variables au lancement du serveur */
@@ -143,13 +143,13 @@ public class Test extends JavaPlugin {
     public void onEnable()
     {
         this.pluginManager = this.getServer().getPluginManager();
-        this.setupGUIManager();
+        this.setupGuiManager();
         
         // Reste de votre code
     }
     
     /* Initialisation et configuration du manager */
-    private void setupGUIManager()
+    private void setupGuiManager()
     {
         this.guiManager = new HashGUIManager(this, this.pluginManager);
         this.guiManager.setup();
@@ -157,7 +157,7 @@ public class Test extends JavaPlugin {
     
     
     /* Getter du manager */
-    public HashGUIManager getGUIManager()
+    public HashGuiManager getGuiManager()
     {
         return this.guiManager;
     }
@@ -166,7 +166,7 @@ public class Test extends JavaPlugin {
 ```
 
 `⚠️` Il est très fortement recommandé de n'avoir qu'une seule instance de
-HashGUIManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs).
+HashGuiManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs).
 
 ### HashSkull
 
@@ -198,7 +198,7 @@ les modifications relatives à `HashItem`.
 Quand vous êtes sur la page d'une tête, descendez jusqu'à la section "For developers" pour trouver la valeur
 de la texture en `base64`.
 
-## HashGUI
+## HashGui
 
 ### Utilisation
 
@@ -209,7 +209,7 @@ HashItem item = new HashItem(Material.SIGN)
   .addLore("Cliquez pour accéder aux paramètres")
   .build();
 
-HashGUI gui = new HashGUI("Menu", 5)
+HashGui gui = new HashGui("Menu", 5)
     .setItem(3, item);
     
 gui.open(player);

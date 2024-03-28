@@ -8,7 +8,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class HashGUIClick {
+public class HashGuiClick
+{
 	
 	private final HashMap<String, ArrayList<ClickHandler>> clickHandlers;
 	
@@ -16,7 +17,7 @@ public class HashGUIClick {
 	/**
 	 * Creates a new instance of HashGUIClick.
 	 */
-	public HashGUIClick()
+	public HashGuiClick()
 	{
 		this.clickHandlers = new HashMap<String, ArrayList<ClickHandler>>();
 	}
@@ -29,7 +30,7 @@ public class HashGUIClick {
 	 * @param	handler	Click handler
 	 * @return	Returns itself.
 	 */
-	private HashGUIClick addClickHandler(String title, ClickHandler handler)
+	private HashGuiClick addClickHandler(String title, ClickHandler handler)
 	{
         this.clickHandlers.computeIfAbsent(title, k -> new ArrayList<ClickHandler>());
 		this.clickHandlers.get(title).add(handler);
@@ -42,7 +43,7 @@ public class HashGUIClick {
 	 * @param	item	Item
 	 * @return	Returns itself.
 	 */
-	public HashGUIClick addClickHandler(HashItem item)
+	public HashGuiClick addClickHandler(HashItem item)
 	{
 		List<ClickHandler> clickHandlers = item.getClickHandlers();
 		

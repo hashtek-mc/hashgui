@@ -3,9 +3,10 @@ package fr.hashtek.spigot.hashgui.handler.click;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import fr.hashtek.spigot.hashgui.HashGUI;
+import fr.hashtek.spigot.hashgui.HashGui;
 
-public interface ClickAction {
+public interface ClickAction
+{
 	
 	/**
 	 * Function called when item is clicked.
@@ -17,7 +18,7 @@ public interface ClickAction {
 	 */
 	void execute(
 		Player player,
-		HashGUI gui,
+		HashGui gui,
 		ItemStack item,
 		int slot
 	);

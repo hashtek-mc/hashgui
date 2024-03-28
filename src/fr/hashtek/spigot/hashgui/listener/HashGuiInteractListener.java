@@ -13,12 +13,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.hashtek.spigot.hashgui.handler.interact.HashGUIInteraction;
+import fr.hashtek.spigot.hashgui.handler.interact.HashGuiInteraction;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
 
-public class HashGUIInteractListener implements Listener {
+public class HashGuiInteractListener implements Listener
+{
 	
-	private final HashGUIInteraction interactManager;
+	private final HashGuiInteraction interactManager;
 	
 	
 	/**
@@ -27,7 +28,7 @@ public class HashGUIInteractListener implements Listener {
 	 * 
 	 * @param	interactManager	Interact manager
 	 */
-	public HashGUIInteractListener(HashGUIInteraction interactManager)
+	public HashGuiInteractListener(HashGuiInteraction interactManager)
 	{
 		this.interactManager = interactManager;
 	}
@@ -87,7 +88,7 @@ public class HashGUIInteractListener implements Listener {
 		ItemStack item = event.getPlayer().getItemInHand();
 
 		if (item.getType() == Material.AIR ||
-			player.getTargetBlock((Set<Material>) null, 3).getType() == Material.AIR)
+			player.getTargetBlock((Set<Material>) null, 5).getType() == Material.AIR)
 			return;
 
 		this.processInteraction(player, Action.LEFT_CLICK_BLOCK, item);

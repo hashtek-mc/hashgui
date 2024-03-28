@@ -1,10 +1,10 @@
-# 🎨 ️HashGUI
+# 🎨 ️HashGui
 
 Library that lets you create customized GUIs and items quickly and easily.
 
 This library has two main classes:
 * **HashItem:** Item builder
-* **HashGUI:** GUI builder
+* **HashGui:** GUI builder
 
 [🇫🇷 Egalement disponible en Français !](https://github.com/hashtek-mc/hashgui/blob/main/README.md)
 
@@ -65,7 +65,7 @@ It is possible to define the action executed when an item is clicked in an inven
 ```java
 ClickHandler clickHandler = new ClickHandler()
     .addClickType(ClickType.LEFT)
-    .setClickAction((Player player, HashGUI gui, ItemStack clickedItem, int clickedSlot) -> {
+    .setClickAction((Player player, HashGui gui, ItemStack clickedItem, int clickedSlot) -> {
         // Actions to do when item is clicked.
     });
 
@@ -74,7 +74,7 @@ HashItem item = new HashItem(Material.COMPASS)
     .build(guiManager);
 ```
 
-`⚠️` `guiManager` (in the `build()` function) must be an instance of [HashGUIManager](#hashguimanager),
+`⚠️` `guiManager` (in the `build()` function) must be an instance of [HashGuiManager](#hashguimanager),
 which must be stored at the root of your plugin.
 This instance takes care of detecting clicks and executing the appropriate action depending on the item.
 
@@ -103,7 +103,7 @@ HashItem item = new HashItem(Material.COMPASS)
 ```
 
 `⚠️` Just like ClickHandler, `guiManager` (in the `build()` function) must be an instance of
-[HashGUIManager](#hashguimanager), which must be stored at the root of your plugin.
+[HashGuiManager](#hashguimanager), which must be stored at the root of your plugin.
 This instance takes care of detecting clicks and executing the appropriate action depending on the item.
 
 `⚠️` Item targeting is based on its `displayName`, so be careful not to give the same name to two items
@@ -113,9 +113,9 @@ visible from the player's point of view 😉 (`"§cHi"` and `"§r§cHi"` are dif
 
 `ℹ️` See [Action](https://helpch.at/docs/1.8/index.html?org/bukkit/event/block/Action.html) enum (from `org.bukkit`).
 
-### HashGUIManager
+### HashGuiManager
 
-In order to make click & interaction handlers working, you need to create an instance of `HashGUIManager` at the root
+In order to make click & interaction handlers working, you need to create an instance of `HashGuiManager` at the root
 of your plugin and give this instance to your custom item build.
 
 **Example:**
@@ -123,7 +123,7 @@ of your plugin and give this instance to your custom item build.
 public class Test extends JavaPlugin {
     
     private PluginManager pluginManager;
-    private HashGUIManager guiManager;
+    private HashGuiManager guiManager;
     
     
     /* Variable initialization at server startup */
@@ -131,21 +131,21 @@ public class Test extends JavaPlugin {
     public void onEnable()
     {
         this.pluginManager = this.getServer().getPluginManager();
-        this.setupGUIManager();
+        this.setupGuiManager();
         
         // Your code here
     }
     
     /* Manager initialization and configuration */
-    private void setupGUIManager()
+    private void setupGuiManager()
     {
-        this.guiManager = new HashGUIManager(this, this.pluginManager);
+        this.guiManager = new HashGuiManager(this, this.pluginManager);
         this.guiManager.setup();
     }
     
     
     /* GUI Manager's getter */
-    public HashGUIManager getGUIManager()
+    public HashGuiManager getGuiManager()
     {
         return this.guiManager;
     }
@@ -153,7 +153,7 @@ public class Test extends JavaPlugin {
 }
 ```
 
-`⚠️` It is strongly recommended to only have one instance of HashGUIManager instance in your plugin
+`⚠️` It is strongly recommended to only have one instance of HashGuiManager instance in your plugin
 (in fact, I forbid you to have more than one).
 
 ### HashSkull
@@ -183,7 +183,7 @@ Texture example (in `base64`): `eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90
 `ℹ️` You can find custom skulls on [Minecraft Heads](https://minecraft-heads.com/).\
 When you're on the head page, scroll down to the "For developers" section to find the texture value in `base64`.
 
-## HashGUI
+## HashGui
 
 ### Usage
 
@@ -194,7 +194,7 @@ HashItem item = new HashItem(Material.SIGN)
   .addLore("Right click to access parameters")
   .build();
 
-HashGUI gui = new HashGUI("Menu", 5)
+HashGui gui = new HashGui("Menu", 5)
     .setItem(3, item);
     
 gui.open(player);

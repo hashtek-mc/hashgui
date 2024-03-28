@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import org.bukkit.event.block.Action;
 
-public class InteractHandler {
+public class InteractHandler
+{
 
 	private ArrayList<Action> interactTypes;
 	private InteractAction interactAction;

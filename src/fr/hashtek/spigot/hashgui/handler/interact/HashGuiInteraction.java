@@ -8,7 +8,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class HashGUIInteraction {
+public class HashGuiInteraction
+{
 	
 	private final HashMap<String, ArrayList<InteractHandler>> interactHandlers;
 	
@@ -16,7 +17,7 @@ public class HashGUIInteraction {
 	/**
 	 * Creates a new instance of HashGUIInteraction.
 	 */
-	public HashGUIInteraction()
+	public HashGuiInteraction()
 	{
 		this.interactHandlers = new HashMap<String, ArrayList<InteractHandler>>();
 	}
@@ -29,7 +30,7 @@ public class HashGUIInteraction {
 	 * @param	handler	Interaction handler
 	 * @return	Returns itself.
 	 */
-	private HashGUIInteraction addInteractHandler(String title, InteractHandler handler)
+	private HashGuiInteraction addInteractHandler(String title, InteractHandler handler)
 	{
         this.interactHandlers.computeIfAbsent(title, k -> new ArrayList<InteractHandler>());
 		this.interactHandlers.get(title).add(handler);
@@ -42,7 +43,7 @@ public class HashGUIInteraction {
 	 * @param	item	Item
 	 * @return	Returns itself.
 	 */
-	public HashGUIInteraction addInteractHandler(HashItem item)
+	public HashGuiInteraction addInteractHandler(HashItem item)
 	{
 		List<InteractHandler> interactHandler = item.getInteractHandlers();
 		
