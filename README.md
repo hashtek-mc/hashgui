@@ -35,11 +35,12 @@ HashItem item = new HashItem(Material.ENDER_PEARL, 10)
 Inventory#addItem(item.getItemStack());
 ```
 
-`⚠️` Ne pas oublier de `build()` l'item avant de l'utiliser !
+> [!WARNING]
+> Ne pas oublier de `build()` l'item avant de l'utiliser !\
+> Importez toujours depuis le package `org.bukkit`.
 
-`⚠️` Importez toujours depuis le package `org.bukkit`.
-
-`ℹ️` Renseignez-vous sur les enums [Material](https://helpch.at/docs/1.8/org/bukkit/Material.html), [ItemFlag](https://helpch.at/docs/1.8/index.html?org/bukkit/inventory/ItemFlag.html) et [Enchantment](https://helpch.at/docs/1.8/index.html?org/bukkit/enchantments/Enchantment.html)
+> [!TIP]
+> Renseignez-vous sur les enums [Material](https://helpch.at/docs/1.8/org/bukkit/Material.html), [ItemFlag](https://helpch.at/docs/1.8/index.html?org/bukkit/inventory/ItemFlag.html) et [Enchantment](https://helpch.at/docs/1.8/index.html?org/bukkit/enchantments/Enchantment.html)
 (du package `org.bukkit`).
 
 ### Fonctionnalités
@@ -76,12 +77,12 @@ HashItem item = new HashItem(Material.COMPASS)
     .build(guiManager);
 ```
 
-`⚠️` `guiManager` (dans la fonction `build()`) doit être une instance de
+> [!WARNING]
+> `guiManager` (dans la fonction `build()`) doit être une instance de
 [HashGuiManager](#hashguimanager), qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les clics et d'exécuter ce qu'il faut en
-fonction de l'item.
-
-`⚠️` Le ciblage de l'item se fait à partir de son `displayName`, donc faites
+fonction de l'item.\
+> Le ciblage de l'item se fait à partir de son `displayName`, donc faites
 bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
 qu'ils exécutent la même chose.
 Si deux items doivent avoir le même nom mais
@@ -89,7 +90,8 @@ un click handler différent, alors jouez avec les codes couleurs pour que ça ne
 soit pas visible du point de vue du joueur 😉
 (`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
 
-`ℹ️` Renseignez-vous sur l'enum [ClickType](https://helpch.at/docs/1.8/org/bukkit/event/inventory/ClickType.html) (du package `org.bukkit`).
+> [!TIP]
+> Renseignez-vous sur l'enum [ClickType](https://helpch.at/docs/1.8/org/bukkit/event/inventory/ClickType.html) (du package `org.bukkit`).
 
 ### 🫱 Interaction handler
 
@@ -108,13 +110,13 @@ HashItem item = new HashItem(Material.COMPASS)
     .build(guiManager);
 ```
 
-`⚠️` Tout comme pour les Click Handlers, `guiManager`
+> [!WARNING]
+> Tout comme pour les Click Handlers, `guiManager`
 (dans la fonction `build()`) doit être une instance de [HashGuiManager](#hashguimanager),
 qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les intéractions et d'exécuter ce qu'il
-faut en fonction de l'item.
-
-`⚠️` Le ciblage de l'item se fait à partir de son `displayName`, donc faites
+faut en fonction de l'item.\
+> Le ciblage de l'item se fait à partir de son `displayName`, donc faites
 bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
 qu'ils exécutent la même chose.
 Si deux items doivent avoir le même nom mais
@@ -122,7 +124,8 @@ un click handler différent, alors jouez avec les codes couleurs pour que ça ne
 soit pas visible du point de vue du joueur 😉
 (`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
 
-`ℹ️` Renseignez-vous sur l'enum [Action](https://helpch.at/docs/1.8/index.html?org/bukkit/event/block/Action.html) (du package `org.bukkit`).
+> [!TIP]
+> Renseignez-vous sur l'enum [Action](https://helpch.at/docs/1.8/index.html?org/bukkit/event/block/Action.html) (du package `org.bukkit`).
 
 ### HashGuiManager
 
@@ -165,7 +168,8 @@ public class Test extends JavaPlugin {
 }
 ```
 
-`⚠️` Il est très fortement recommandé de n'avoir qu'une seule instance de
+> [!TIP]
+> Il est très fortement recommandé de n'avoir qu'une seule instance de
 HashGuiManager dans votre plugin (en fait je vous interdis d'en avoir plusieurs).
 
 ### HashSkull
@@ -178,7 +182,8 @@ HashItem playerSkull = new HashSkull()
     .build();
 ```
 
-`⚠️` Exécutez d'abord toutes les modifications relatives à `HashSkull` avant d'exécuter
+> [!TIP]
+> Exécutez d'abord toutes les modifications relatives à `HashSkull` avant d'exécuter
 les modifications relatives à `HashItem`.
 
 **Création d'une tête personnalisée :**
@@ -191,10 +196,12 @@ HashItem customSkull = new HashSkull()
 
 Exemple de texture (en `base64`) : `eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWY0OGMxOTU1NTUwZWFlZGU1NzEzYTdiY2NjOWE0YWUyZTZlMTcxZTI5YWMxYzcxYzBlM2QxYWJiNzI5MGNjYSJ9fX0=`
 
-`⚠️` Exécutez d'abord toutes les modifications relatives à `HashSkull` avant d'exécuter
+> [!TIP]
+> Exécutez d'abord toutes les modifications relatives à `HashSkull` avant d'exécuter
 les modifications relatives à `HashItem`.
 
-`ℹ️` Vous pouvez trouver des têtes personnalisées sur [Minecraft Heads](https://minecraft-heads.com/).\
+> [!TIP]
+> Vous pouvez trouver des têtes personnalisées sur [Minecraft Heads](https://minecraft-heads.com/).\
 Quand vous êtes sur la page d'une tête, descendez jusqu'à la section "For developers" pour trouver la valeur
 de la texture en `base64`.
 
@@ -280,7 +287,8 @@ Si une lettre n'a pas d'item assigné, celui-ci sera placé :
 
 ![](https://cdn.discordapp.com/attachments/1201670734095859812/1204886714057752636/image.png?ex=65d65d32&is=65c3e832&hm=f396f4b9e3373d56fe0bd5c34b2f4d21429b7bbe04653fcfc44040f88412114a&)
 
-`⚠️` Le caractère espace (` `) ne peut pas être assigné à un item, étant donné qu'il
+> [!CAUTION]
+> Le caractère espace (` `) ne peut pas être assigné à un item, étant donné qu'il
 sert de vide.
 
 ## Fait avec 💜 par [Lysandre B.](https://github.com/Shuvlyy) ・ [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021) + [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474)
