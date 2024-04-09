@@ -9,8 +9,11 @@ public class InteractHandler
 
 	private ArrayList<Action> interactTypes;
 	private InteractAction interactAction;
-	
-	
+
+
+	/**
+	 * Creates an empty instance of InteractHandler.
+	 */
 	public InteractHandler() {}
 	
 	

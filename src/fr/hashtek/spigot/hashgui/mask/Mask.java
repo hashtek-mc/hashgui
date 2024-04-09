@@ -20,7 +20,7 @@ public class Mask
 	/**
 	 * Creates a mask for a GUI, from a GUI.
 	 * 
-	 * @param	gui	HashGUI.
+	 * @param	gui		HashGUI.
 	 */
 	public Mask(HashGui gui) {
 		this.gui = gui;
@@ -98,7 +98,7 @@ public class Mask
 	/**
 	 * Adds a pattern in the mask.
 	 * 
-	 * @param	pattern						Pattern
+	 * @param	pattern		Pattern
 	 * @return	Returns itself.
 	 * @throws	IllegalArgumentException	Wrong pattern (not 9 characters long)
 	 */

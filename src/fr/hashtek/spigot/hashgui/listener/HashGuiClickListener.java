@@ -80,8 +80,8 @@ public class HashGuiClickListener implements Listener
 		int slot = event.getSlot();
 
 		HashGui gui = holder instanceof HashGui
-				? (HashGui) holder
-				: new HashGui(inventory);
+			? (HashGui) holder
+			: new HashGui(inventory);
 
 		event.setCancelled(true);
 
