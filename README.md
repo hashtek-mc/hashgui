@@ -81,7 +81,9 @@ HashItem item = new HashItem(Material.COMPASS)
 > `guiManager` (dans la fonction `build()`) doit être une instance de
 [HashGuiManager](#hashguimanager), qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les clics et d'exécuter ce qu'il faut en
-fonction de l'item.\
+fonction de l'item.
+
+> [!WARNING]
 > Le ciblage de l'item se fait à partir de son `displayName`, donc faites
 bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
 qu'ils exécutent la même chose.
@@ -115,7 +117,9 @@ HashItem item = new HashItem(Material.COMPASS)
 (dans la fonction `build()`) doit être une instance de [HashGuiManager](#hashguimanager),
 qui doit être stocké à la racine de votre plugin.
 Cette instance s'occupe de détecter les intéractions et d'exécuter ce qu'il
-faut en fonction de l'item.\
+faut en fonction de l'item.
+
+> [!WARNING]
 > Le ciblage de l'item se fait à partir de son `displayName`, donc faites
 bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
 qu'ils exécutent la même chose.
