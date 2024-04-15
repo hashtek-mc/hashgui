@@ -19,7 +19,7 @@ public class HashItem
 	
 	private final ItemStack itemStack;
 	private ItemMeta itemMeta;
-	
+
 	private List<ClickHandler> clickHandlers;
 	private List<InteractHandler> interactHandlers;
 	
@@ -300,6 +300,28 @@ public class HashItem
 	public HashItem removeEnchant(Enchantment enchantment)
 	{
 		this.itemMeta.removeEnchant(enchantment);
+		return this;
+	}
+
+	/**
+	 * Makes the item untakable, or not.
+	 *
+	 * @param 	untakable	Untakable
+	 * @return	Returns itself.
+	 */
+	public HashItem setUntakable(boolean untakable)
+	{
+		if (!untakable) {
+			this.clickHandlers.clear();
+			return this;
+		}
+
+		this.addClickHandler(
+			new ClickHandler()
+				.addAllClickTypes()
+				.setClickAction((player, gui, item, slot) -> {})
+		);
+
 		return this;
 	}
 
