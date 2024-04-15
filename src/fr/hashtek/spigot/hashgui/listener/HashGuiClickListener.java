@@ -46,9 +46,9 @@ public class HashGuiClickListener implements Listener
 	 */
 	private boolean processClick(Player player, ClickType clickType, HashGui gui, ItemStack item, int slot)
 	{
-		ItemMeta meta = item.getItemMeta();
-		String itemDisplayName = meta.getDisplayName();
-		List<ClickHandler> handlers = this.clickManager.getClickHandlers().get(itemDisplayName);
+		final ItemMeta meta = item.getItemMeta();
+		final String itemDisplayName = meta.getDisplayName();
+		final List<ClickHandler> handlers = this.clickManager.getClickHandlers().get(itemDisplayName);
 
 		if (handlers == null)
 			return false;
@@ -73,19 +73,19 @@ public class HashGuiClickListener implements Listener
 			event.getCurrentItem().getType() == Material.AIR)
 			return;
 
-		Inventory inventory = event.getClickedInventory();
-		InventoryHolder holder = inventory.getHolder();
+		final Inventory inventory = event.getClickedInventory();
+		final InventoryHolder holder = inventory.getHolder();
 
-		Player player = (Player) event.getWhoClicked();
-		ClickType clickType = event.getClick();
-		ItemStack item = event.getCurrentItem();
-		int slot = event.getSlot();
+		final Player player = (Player) event.getWhoClicked();
+		final ClickType clickType = event.getClick();
+		final ItemStack item = event.getCurrentItem();
+		final int slot = event.getSlot();
 
-		HashGui gui = holder instanceof HashGui
+		final HashGui gui = holder instanceof HashGui
 			? (HashGui) holder
 			: new HashGui(inventory);
 
-		boolean cancelEvent = this.processClick(player, clickType, gui, item, slot);
+		final boolean cancelEvent = this.processClick(player, clickType, gui, item, slot);
 
 		event.setCancelled(cancelEvent);
 	}

@@ -43,10 +43,10 @@ public class HashGuiInteractListener implements Listener
 	 */
 	private void processInteraction(Player player, Action interactType, ItemStack item)
 	{
-		ItemMeta meta = item.getItemMeta();
-		String itemDisplayName = meta.getDisplayName();
-		int slot = player.getInventory().getHeldItemSlot();
-		ArrayList<InteractHandler> interactHandlers = this.interactManager.getInteractHandlers().get(itemDisplayName);
+		final ItemMeta meta = item.getItemMeta();
+		final String itemDisplayName = meta.getDisplayName();
+		final int slot = player.getInventory().getHeldItemSlot();
+		final ArrayList<InteractHandler> interactHandlers = this.interactManager.getInteractHandlers().get(itemDisplayName);
 
 		if (interactHandlers == null || interactHandlers.isEmpty())
 			return;
@@ -67,9 +67,9 @@ public class HashGuiInteractListener implements Listener
 		if (event.getItem() == null)
 			return;
 		
-		Player player = event.getPlayer();
-		Action interactType = event.getAction();
-		ItemStack item = event.getItem();
+		final Player player = event.getPlayer();
+		final Action interactType = event.getAction();
+		final ItemStack item = event.getItem();
 
 		this.processInteraction(player, interactType, item);
 	}
@@ -79,13 +79,12 @@ public class HashGuiInteractListener implements Listener
 	 * This event is used because in adventure mode,
 	 * the client doesn't send a packet to the server
 	 * when tapping a block.
-	 * TODO: Verify getTargetBlock range (maybe 5 instead of 3).
 	 */
 	@EventHandler
 	public void onBlockHit(PlayerAnimationEvent event)
 	{
-		Player player = event.getPlayer();
-		ItemStack item = event.getPlayer().getItemInHand();
+		final Player player = event.getPlayer();
+		final ItemStack item = event.getPlayer().getItemInHand();
 
 		if (item.getType() == Material.AIR ||
 			player.getTargetBlock((Set<Material>) null, 5).getType() == Material.AIR)

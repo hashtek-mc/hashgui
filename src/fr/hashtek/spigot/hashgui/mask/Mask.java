@@ -83,7 +83,7 @@ public class Mask
 	public Mask pattern(int index, String pattern)
 		throws IllegalArgumentException, IndexOutOfBoundsException
 	{
-		int guiSize = this.gui.getSize();
+		final int guiSize = this.gui.getSize();
 		
 		if (index < 0)
 			throw new IndexOutOfBoundsException(
@@ -105,6 +105,7 @@ public class Mask
 			this.pattern.set(patternIndex, pattern);
 		} else
 			this.pattern.set(index - 1, pattern);
+
 		return this;
 	}
 	
@@ -128,22 +129,23 @@ public class Mask
 	 */
 	public Mask apply()
 	{
-	    HashItem placeholderItem = new HashItem(Material.BARRIER)
+	    final HashItem placeholderItem = new HashItem(Material.BARRIER)
             .setName("§cItem not found.")
             .addLore("§7§oI am a poor dev that can't do his work properly.")
             .build();
 
 	    for (int rowIndex = 0; rowIndex < this.pattern.size(); rowIndex++) {
-	        String iteratedPattern = this.pattern.get(rowIndex);
+	        final String iteratedPattern = this.pattern.get(rowIndex);
 	        if (iteratedPattern == null)
 	        	continue;
 
 	        for (int columnIndex = 0; columnIndex < iteratedPattern.length(); columnIndex++) {
-	            char iteratedPatternChar = iteratedPattern.charAt(columnIndex);
+	            final char iteratedPatternChar = iteratedPattern.charAt(columnIndex);
+
 	            if (iteratedPatternChar == ' ')
 	            	continue;
 
-	            int guiIndex = columnIndex + (rowIndex * 9);
+	            final int guiIndex = columnIndex + (rowIndex * 9);
 	            
 	            this.gui.setItem(guiIndex, this.items.getOrDefault(iteratedPatternChar, placeholderItem));
 	        }
