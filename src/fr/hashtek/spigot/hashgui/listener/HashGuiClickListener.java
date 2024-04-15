@@ -44,20 +44,22 @@ public class HashGuiClickListener implements Listener
 	 * @param	item		Item
 	 * @param	slot		Slot
 	 */
-	private void processClick(Player player, ClickType clickType, HashGui gui, ItemStack item, int slot)
+	private boolean processClick(Player player, ClickType clickType, HashGui gui, ItemStack item, int slot)
 	{
 		ItemMeta meta = item.getItemMeta();
 		String itemDisplayName = meta.getDisplayName();
 		List<ClickHandler> handlers = this.clickManager.getClickHandlers().get(itemDisplayName);
 
 		if (handlers == null)
-			return;
+			return false;
 
 		handlers.stream()
 			.filter((ClickHandler handler) ->
 				handler.getClickTypes().contains(clickType))
 			.forEach((ClickHandler handler) ->
 				handler.getClickAction().execute(player, gui, item, slot));
+
+		return true;
 	}
 
 	/**
@@ -83,9 +85,9 @@ public class HashGuiClickListener implements Listener
 			? (HashGui) holder
 			: new HashGui(inventory);
 
-		event.setCancelled(true);
+		boolean cancelEvent = this.processClick(player, clickType, gui, item, slot);
 
-		this.processClick(player, clickType, gui, item, slot);
+		event.setCancelled(cancelEvent);
 	}
 	
 }
