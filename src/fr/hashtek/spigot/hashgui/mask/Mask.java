@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import fr.hashtek.spigot.hashgui.HashGui;
@@ -15,14 +16,26 @@ public class Mask
 	private final HashGui gui;
 	private final HashMap<Character, HashItem> items;
 	private final ArrayList<String> pattern;
-	
-	
+
+
+	/**
+	 * Creates a mask for a GUI, from an Inventory.
+	 * Mainly used for Player inventories.
+	 *
+	 * @param	inventory	Inventory
+	 */
+	public Mask(Inventory inventory)
+	{
+		this(new HashGui(inventory));
+	}
+
 	/**
 	 * Creates a mask for a GUI, from a GUI.
 	 * 
 	 * @param	gui		HashGUI.
 	 */
-	public Mask(HashGui gui) {
+	public Mask(HashGui gui)
+	{
 		this.gui = gui;
 		this.items = new HashMap<Character, HashItem>();
 		this.pattern = new ArrayList<String>();
