@@ -1,4 +1,4 @@
-package fr.hashtek.spigot.hashgui;
+package fr.hashtek.spigot.hashgui.manager;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

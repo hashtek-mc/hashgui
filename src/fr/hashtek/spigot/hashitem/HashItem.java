@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.hashtek.spigot.hashgui.HashGuiManager;
+import fr.hashtek.spigot.hashgui.manager.HashGuiManager;
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
 
