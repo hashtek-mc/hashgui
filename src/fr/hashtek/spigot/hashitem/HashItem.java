@@ -250,6 +250,17 @@ public class HashItem
 		this.itemMeta.setLore(lore);
 		return this;
 	}
+
+	/**
+	 * Clears item's lore.
+	 *
+	 * @return	Returns itself.
+	 */
+	public HashItem clearLore()
+	{
+		this.itemMeta.setLore(null);
+		return this;
+	}
 	
 	/**
 	 * Sets item's flags.
@@ -274,6 +285,18 @@ public class HashItem
 	public HashItem addFlag(ItemFlag flag)
 	{
 		this.itemMeta.addItemFlags(flag);
+		return this;
+	}
+
+	/**
+	 * Clears item flags.
+	 *
+	 * @return	Returns itself.
+	 */
+	public HashItem clearFlags()
+	{
+		for (ItemFlag flag : this.getItemMeta().getItemFlags())
+			this.getItemMeta().removeItemFlags(flag);
 		return this;
 	}
 	
