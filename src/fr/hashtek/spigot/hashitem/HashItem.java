@@ -70,6 +70,17 @@ public class HashItem
 	}
 
 	/**
+	 * Creates a HashItem from an existing HashItem.
+	 *
+	 * @param	item	HashItem
+	 */
+	public HashItem(HashItem item)
+	{
+		this.itemStack = item.getItemStack().clone();
+		this.itemStack.setItemMeta(item.getItemMeta().clone());
+	}
+
+	/**
 	 * Creates a HashItem from an existing ItemStack.
 	 * 
 	 * @param	item	ItemStack
