@@ -295,7 +295,7 @@ public class HashItem
 	 */
 	public HashItem clearFlags()
 	{
-		for (ItemFlag flag : this.getItemMeta().getItemFlags())
+		for (ItemFlag flag : this.itemMeta.getItemFlags())
 			this.getItemMeta().removeItemFlags(flag);
 		return this;
 	}
@@ -342,6 +342,18 @@ public class HashItem
 	public HashItem removeEnchant(Enchantment enchantment)
 	{
 		this.itemMeta.removeEnchant(enchantment);
+		return this;
+	}
+
+	/**
+	 * Clears item enchantments.
+	 *
+	 * @return	Returns itself.
+	 */
+	public HashItem clearEnchantments()
+	{
+		for (Enchantment enchantment : this.itemMeta.getEnchants().keySet())
+			this.getItemMeta().removeEnchant(enchantment);
 		return this;
 	}
 
