@@ -33,6 +33,11 @@ public class HashGuiClick
 	private HashGuiClick addClickHandler(String title, ClickHandler handler)
 	{
         this.clickHandlers.computeIfAbsent(title, k -> new ArrayList<ClickHandler>());
+
+		for (ClickHandler h : this.clickHandlers.get(title))
+			if (handler.equals(h))
+				return this;
+
 		this.clickHandlers.get(title).add(handler);
 		return this;
 	}
@@ -53,7 +58,7 @@ public class HashGuiClick
 		ItemMeta meta = item.getItemStack().getItemMeta();
 		String itemName = meta.getDisplayName();
 		
-		for (ClickHandler handler: item.getClickHandlers())
+		for (ClickHandler handler : item.getClickHandlers())
 			this.addClickHandler(itemName, handler);
 		
 		return this;

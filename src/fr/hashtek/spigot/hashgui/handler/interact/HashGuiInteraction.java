@@ -33,6 +33,11 @@ public class HashGuiInteraction
 	private HashGuiInteraction addInteractHandler(String title, InteractHandler handler)
 	{
         this.interactHandlers.computeIfAbsent(title, k -> new ArrayList<InteractHandler>());
+
+		for (InteractHandler h : this.interactHandlers.get(title))
+			if (handler.equals(h))
+				return this;
+
 		this.interactHandlers.get(title).add(handler);
 		return this;
 	}

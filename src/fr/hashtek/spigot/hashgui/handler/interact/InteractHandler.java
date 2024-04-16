@@ -70,6 +70,17 @@ public class InteractHandler
 		this.interactAction = interactAction;
 		return this;
 	}
+
+	/**
+	 * @param	handler	Handler to compare
+	 * @return	Returns true if both handlers contains the same instructions
+	 */
+	public boolean equals(InteractHandler handler)
+	{
+		return
+			this.interactAction.equals(handler.interactAction) ||
+			this.interactTypes.containsAll(handler.getInteractTypes());
+	}
 	
 	
 	/**

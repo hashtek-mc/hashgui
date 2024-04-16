@@ -70,6 +70,17 @@ public class ClickHandler
 		this.clickAction = clickAction;
 		return this;
 	}
+
+	/**
+	 * @param	handler	Handler to compare
+	 * @return	Returns true if both handlers contains the same instructions
+	 */
+	public boolean equals(ClickHandler handler)
+	{
+		return
+			this.clickAction.equals(handler.clickAction) ||
+			this.clickTypes.containsAll(handler.getClickTypes());
+	}
 	
 	
 	/**
