@@ -68,7 +68,7 @@ public class HashItem
 		this.itemStack = new ItemStack(type, amount, data == null ? (byte) 0 : data);
 		this.itemMeta = this.itemStack.getItemMeta();
 	}
-	
+
 	/**
 	 * Creates a HashItem from an existing ItemStack.
 	 * 
@@ -80,6 +80,14 @@ public class HashItem
 		this.itemMeta = this.itemStack.getItemMeta();
 	}
 
+
+	public static HashItem separator(Byte glassColor, HashGuiManager guiManager)
+	{
+		return new HashItem(Material.STAINED_GLASS_PANE, 1, glassColor)
+			.setName("")
+			.setUntakable(true)
+			.build(guiManager);
+	}
 
 	/**
 	 * Builds the item and registers its handlers.
