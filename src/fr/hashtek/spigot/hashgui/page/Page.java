@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HashPage
+public class Page
 {
 
     private final PaginatedHashGui parent;
@@ -16,9 +16,9 @@ public class HashPage
 
 
     /**
-     * Creates a new instance of HashPage.
+     * Creates a new instance of Page.
      */
-    public HashPage(PaginatedHashGui parent)
+    public Page(PaginatedHashGui parent)
     {
         this.parent = parent;
         this.items = new HashMap<Integer, HashItem>();
