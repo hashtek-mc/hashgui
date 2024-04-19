@@ -42,7 +42,7 @@ public class Mask
 		
 		for (int k = 0; k < this.gui.getSize(); k++)
 			this.pattern.add(null);
-	};
+	}
 	
 	
 	/**
@@ -141,12 +141,10 @@ public class Mask
 
 	        for (int columnIndex = 0; columnIndex < iteratedPattern.length(); columnIndex++) {
 	            final char iteratedPatternChar = iteratedPattern.charAt(columnIndex);
-
 	            if (iteratedPatternChar == ' ')
 	            	continue;
 
 	            final int guiIndex = columnIndex + (rowIndex * 9);
-	            
 	            this.gui.setItem(guiIndex, this.items.getOrDefault(iteratedPatternChar, placeholderItem));
 	        }
 	    }
