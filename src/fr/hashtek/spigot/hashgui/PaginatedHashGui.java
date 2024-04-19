@@ -2,7 +2,7 @@ package fr.hashtek.spigot.hashgui;
 
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
 import fr.hashtek.spigot.hashgui.manager.HashGuiManager;
-import fr.hashtek.spigot.hashgui.page.HashPage;
+import fr.hashtek.spigot.hashgui.page.Page;
 import fr.hashtek.spigot.hashitem.HashItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,20 +15,25 @@ import java.util.List;
 public class PaginatedHashGui extends HashGui
 {
 
-    private List<HashPage> pages;
+    private List<Page> pages;
     private List<Integer> freeSlotIndexes;
     private int currentPageIndex;
+
+    private final HashGuiManager guiManager;
 
 
     /**
      * Creates a new Paginated GUI.
      *
-     * @param	title	GUI's title
-     * @param	size	GUI's amount of lines (must be between 1 and 6).
+     * @param	title	    GUI's title
+     * @param	size	    GUI's amount of lines (must be between 1 and 6).
+     * @param   guiManager  Gui manager
      */
-    public PaginatedHashGui(String title, int size)
+    public PaginatedHashGui(String title, int size, HashGuiManager guiManager)
     {
         super(title, size);
+
+        this.guiManager = guiManager;
         this.setup();
     }
 
@@ -36,10 +41,13 @@ public class PaginatedHashGui extends HashGui
      * Creates a new Paginated GUI from an existing Inventory.
      *
      * @param	inventory	Inventory
+     * @param   guiManager  Gui manager
      */
-    public PaginatedHashGui(Inventory inventory)
+    public PaginatedHashGui(Inventory inventory, HashGuiManager guiManager)
     {
         super(inventory);
+
+        this.guiManager = guiManager;
         this.setup();
     }
 
@@ -49,7 +57,7 @@ public class PaginatedHashGui extends HashGui
      */
     private void setup()
     {
-        this.pages = new ArrayList<HashPage>();
+        this.pages = new ArrayList<Page>();
         this.createNewPage();
         this.setCurrentPageIndex(0);
     }
@@ -74,10 +82,9 @@ public class PaginatedHashGui extends HashGui
      *        PaginatedHashGui, we may want to throw an error.
      *
      * @param   item        Item
-     * @param   guiManager  Gui manager
      * @return  Returns itself.
      */
-    public PaginatedHashGui setPreviousPageItem(HashItem item, HashGuiManager guiManager)
+    public PaginatedHashGui setPreviousPageItem(HashItem item)
     {
         item.addClickHandler(
             new ClickHandler()
@@ -97,7 +104,7 @@ public class PaginatedHashGui extends HashGui
                 })
         );
 
-        item.build(guiManager);
+        item.build(this.guiManager);
         return this;
     }
 
@@ -107,10 +114,9 @@ public class PaginatedHashGui extends HashGui
      *        PaginatedHashGui, we may want to throw an error.
      *
      * @param   item        Item
-     * @param   guiManager  Gui manager
      * @return  Returns itself.
      */
-    public PaginatedHashGui setNextPageItem(HashItem item, HashGuiManager guiManager)
+    public PaginatedHashGui setNextPageItem(HashItem item)
     {
         item.addClickHandler(
             new ClickHandler()
@@ -130,7 +136,7 @@ public class PaginatedHashGui extends HashGui
                 })
         );
 
-        item.build(guiManager);
+        item.build(this.guiManager);
         return this;
     }
 
@@ -143,9 +149,10 @@ public class PaginatedHashGui extends HashGui
     @Override
     public PaginatedHashGui update(Player player)
     {
-        final HashPage currentPage = this.getCurrentPage();
+        final Page currentPage = this.getCurrentPage();
 
         this.clearPageContent();
+
         for (int slot : currentPage.getItems().keySet()) {
             final HashItem item = currentPage.getItem(slot);
             super.setItem(slot, item);
@@ -167,6 +174,7 @@ public class PaginatedHashGui extends HashGui
 
         for (int k : this.freeSlotIndexes)
             super.getInventory().setItem(k, null);
+
         return this;
     }
 
@@ -177,9 +185,9 @@ public class PaginatedHashGui extends HashGui
      *
      * @return  Created page
      */
-    public HashPage createNewPage()
+    public Page createNewPage()
     {
-        final HashPage page = new HashPage(this);
+        final Page page = new Page(this);
 
         this.pages.add(page);
         return page;
@@ -202,7 +210,7 @@ public class PaginatedHashGui extends HashGui
      * @param   index  Page index
      * @return  Page at index
      */
-    public HashPage getPage(int index)
+    public Page getPage(int index)
     {
         return this.pages.get(index);
     }
@@ -210,7 +218,7 @@ public class PaginatedHashGui extends HashGui
     /**
      * @return  All pages
      */
-    public List<HashPage> getPages()
+    public List<Page> getPages()
     {
         return this.pages;
     }
@@ -218,17 +226,24 @@ public class PaginatedHashGui extends HashGui
     /**
      * @return  Last page
      */
-    public HashPage getLastPage()
+    public Page getLastPage()
     {
-        return this.pages.get(this.pages.isEmpty() ? 0 : this.pages.size() - 1);
+        final int pagesAmount = this.pages.size();
+
+        return this.getPages().get(pagesAmount == 0 ? 0 : pagesAmount - 1);
     }
 
     /**
      * @return  Current page
      */
-    public HashPage getCurrentPage()
+    public Page getCurrentPage()
     {
-        return this.getPage(this.getCurrentPageIndex());
+        return this.getPage(this.currentPageIndex);
+    }
+
+    private List<Integer> getFreeSlotIndexes()
+    {
+        return this.freeSlotIndexes;
     }
 
     /**
