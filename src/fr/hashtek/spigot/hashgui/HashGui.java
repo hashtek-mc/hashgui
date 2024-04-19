@@ -1,12 +1,15 @@
 package fr.hashtek.spigot.hashgui;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import fr.hashtek.spigot.hashitem.HashItem;
+
+import java.util.Arrays;
 
 public class HashGui implements InventoryHolder
 {
@@ -106,6 +109,29 @@ public class HashGui implements InventoryHolder
 	public HashGui removeItem(int index)
 	{
 		this.gui.setItem(index, null);
+		return this;
+	}
+
+	/**
+	 * Replaces every item of a certain name by another item.
+	 * FIXME: You may want to perform further checks, not only the name.
+	 *
+	 * @param	toReplace		Name of the item to replace
+	 * @param	toReplaceWith	Replacing item
+	 * @return	Returns itself.
+	 */
+	public HashGui replaceAll(String toReplace, HashItem toReplaceWith)
+	{
+		for (int k = 0; k < this.getTotalSize(); k++) {
+			final ItemStack item = this.gui.getItem(k);
+
+			if (item == null || item.getType() == Material.AIR)
+				continue;
+
+			if (item.getItemMeta().getDisplayName().equals(toReplace))
+				this.gui.setItem(k, toReplaceWith.getItemStack());
+		}
+
 		return this;
 	}
 	
