@@ -79,6 +79,8 @@ public class HashItem
 		this.itemStack = item.getItemStack().clone();
 		this.itemMeta = item.getItemMeta().clone();
 		this.itemStack.setItemMeta(this.itemMeta);
+		this.clickHandlers = item.getClickHandlers();
+		this.interactHandlers = item.getInteractHandlers();
 	}
 
 	/**
@@ -112,7 +114,6 @@ public class HashItem
 		
 		guiManager.getClickManager().addClickHandler(this);
 		guiManager.getInteractionManager().addInteractHandler(this);
-
 		return this;
 	}
 	
@@ -196,7 +197,7 @@ public class HashItem
 	
 	/**
 	 * Sets item's data.
-	 * TODO: Finish this function ASAP.
+	 * TODO: Finish this function.
 	 *
 	 * @param	data	Item data.
 	 * @return	Returns itself.
