@@ -3,6 +3,7 @@ package fr.hashtek.spigot.hashgui.listener;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -85,6 +86,9 @@ public class HashGuiInteractListener implements Listener
 	{
 		final Player player = event.getPlayer();
 		final ItemStack item = event.getPlayer().getItemInHand();
+
+		if (player.getGameMode() != GameMode.ADVENTURE)
+			return;
 
 		if (item.getType() == Material.AIR ||
 			player.getTargetBlock((Set<Material>) null, 5).getType() == Material.AIR)
