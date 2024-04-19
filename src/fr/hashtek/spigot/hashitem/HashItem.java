@@ -77,7 +77,8 @@ public class HashItem
 	public HashItem(HashItem item)
 	{
 		this.itemStack = item.getItemStack().clone();
-		this.itemStack.setItemMeta(item.getItemMeta().clone());
+		this.itemMeta = item.getItemMeta().clone();
+		this.itemStack.setItemMeta(this.itemMeta);
 	}
 
 	/**
@@ -189,17 +190,17 @@ public class HashItem
 	 */
 	public HashItem setDurability(short durability)
 	{
-		this.itemStack.setDurability(durability);
+		this.itemStack.setDurability((short) (this.itemStack.getType().getMaxDurability() - durability));
 		return this;
 	}
 	
 	/**
 	 * Sets item's data.
-	 * 
+	 * TODO: Finish this function ASAP.
+	 *
 	 * @param	data	Item data.
 	 * @return	Returns itself.
 	 * @deprecated
-	 * TODO: Finish this function ASAP.
 	 */
 	public HashItem setData(Byte data)
 	{
