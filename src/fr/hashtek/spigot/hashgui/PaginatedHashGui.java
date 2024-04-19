@@ -241,6 +241,9 @@ public class PaginatedHashGui extends HashGui
         return this.getPage(this.currentPageIndex);
     }
 
+    /**
+     * @return  Free slots indexes
+     */
     private List<Integer> getFreeSlotIndexes()
     {
         return this.freeSlotIndexes;
