@@ -2,6 +2,8 @@ package fr.hashtek.spigot.hashgui.mask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -14,8 +16,8 @@ public class Mask
 {
 
 	private final HashGui gui;
-	private final HashMap<Character, HashItem> items;
-	private final ArrayList<String> pattern;
+	private final Map<Character, HashItem> items;
+	private final List<String> pattern;
 
 
 	/**
@@ -141,15 +143,45 @@ public class Mask
 
 	        for (int columnIndex = 0; columnIndex < iteratedPattern.length(); columnIndex++) {
 	            final char iteratedPatternChar = iteratedPattern.charAt(columnIndex);
-	            if (iteratedPatternChar == ' ')
-	            	continue;
+				final int guiIndex = columnIndex + (rowIndex * 9);
 
-	            final int guiIndex = columnIndex + (rowIndex * 9);
+	            if (iteratedPatternChar == ' ') {
+					final ItemStack i = this.gui.getInventory().getItem(guiIndex);
+
+					if (i != null && i.getType() != Material.AIR)
+						this.gui.setItem(guiIndex, new ItemStack(Material.AIR));
+					continue;
+				}
+
 	            this.gui.setItem(guiIndex, this.items.getOrDefault(iteratedPatternChar, placeholderItem));
 	        }
 	    }
 	    
 	    return this;
+	}
+
+	/**
+	 * @return	Linked GUI
+	 */
+	public HashGui getGui()
+	{
+		return this.gui;
+	}
+
+	/**
+	 * @return	Items
+	 */
+	public Map<Character, HashItem> getItems()
+	{
+		return this.items;
+	}
+
+	/**
+	 * @return	Pattern
+	 */
+	public List<String> getPattern()
+	{
+		return this.pattern;
 	}
 	
 }
