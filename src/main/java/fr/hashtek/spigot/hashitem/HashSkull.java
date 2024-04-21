@@ -113,8 +113,8 @@ public class HashSkull extends HashItem
         if (texture.isEmpty())
             return this;
 
-        SkullMeta skullMeta = this.getSkullMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        final SkullMeta skullMeta = this.getSkullMeta();
+        final GameProfile profile = new GameProfile(UUID.randomUUID(), null);
 
         profile.getProperties().put("textures", new Property("textures", texture));
 
