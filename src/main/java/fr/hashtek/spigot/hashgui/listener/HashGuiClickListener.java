@@ -24,7 +24,7 @@ public class HashGuiClickListener implements Listener
 	
 	
 	/**
-	 * Creates a new instance of HashGUIClickListener, with
+	 * Creates a new instance of HashGuiClickListener, with
 	 * a click manager for click handling.
 	 * 
 	 * @param	clickManager	Click manager

@@ -1,5 +1,7 @@
 package fr.hashtek.spigot.hashgui.manager;
 
+import fr.hashtek.spigot.hashgui.handler.hold.HashGuiHold;
+import fr.hashtek.spigot.hashgui.listener.HashGuiHoldListener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +18,7 @@ public class HashGuiManager
 	
 	private HashGuiClick clickManager;
 	private HashGuiInteraction interactionManager;
+	private HashGuiHold holdManager;
 	
 	
 	/**
@@ -43,10 +46,12 @@ public class HashGuiManager
 	{
 		this.clickManager = new HashGuiClick();
 		this.interactionManager = new HashGuiInteraction();
-		
+		this.holdManager = new HashGuiHold();
+
 		this.pluginManager.registerEvents(new HashGuiClickListener(this.clickManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiInteractListener(this.interactionManager), this.plugin);
-		
+		this.pluginManager.registerEvents(new HashGuiHoldListener(this.holdManager), this.plugin);
+
 		return this;
 	}
 	
@@ -65,6 +70,14 @@ public class HashGuiManager
 	public HashGuiInteraction getInteractionManager()
 	{
 		return this.interactionManager;
+	}
+
+	/**
+	 * @return	Hold manager
+	 */
+	public HashGuiHold getHoldManager()
+	{
+		return this.holdManager;
 	}
 
 }

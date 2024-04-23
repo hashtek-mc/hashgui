@@ -24,7 +24,7 @@ public class HashGuiInteractListener implements Listener
 	
 	
 	/**
-	 * Creates a new instance of HashGUIInteract, with
+	 * Creates a new instance of HashGuiInteractListener, with
 	 * an interact manager for interact handling.
 	 * 
 	 * @param	interactManager	Interact manager

@@ -3,6 +3,7 @@ package fr.hashtek.spigot.hashitem;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -22,6 +23,7 @@ public class HashItem
 
 	private List<ClickHandler> clickHandlers;
 	private List<InteractHandler> interactHandlers;
+	private List<HoldHandler> holdHandlers;
 	
 	
 	/**
@@ -81,6 +83,7 @@ public class HashItem
 		this.itemStack.setItemMeta(this.itemMeta);
 		this.clickHandlers = item.getClickHandlers();
 		this.interactHandlers = item.getInteractHandlers();
+		this.holdHandlers = item.getHoldHandlers();
 	}
 
 	/**
@@ -114,6 +117,7 @@ public class HashItem
 		
 		guiManager.getClickManager().addClickHandler(this);
 		guiManager.getInteractionManager().addInteractHandler(this);
+		guiManager.getHoldManager().addHoldHandler(this);
 		return this;
 	}
 	
@@ -414,6 +418,21 @@ public class HashItem
 		this.interactHandlers.add(interactHandler);
 		return this;
 	}
+
+	/**
+	 * Adds a hold handler to the item.
+	 *
+	 * @param	holdHandler	Hold handler.
+	 * @return	Returns itself.
+	 */
+	public HashItem addHoldHandler(HoldHandler holdHandler)
+	{
+		if (this.holdHandlers == null)
+			this.holdHandlers = new ArrayList<HoldHandler>();
+
+		this.holdHandlers.add(holdHandler);
+		return this;
+	}
 	
 	/**
 	 * @return	Item's click handlers.
@@ -430,4 +449,13 @@ public class HashItem
 	{
 		return this.interactHandlers;
 	}
+
+	/**
+	 * @return	Item's hold handlers.
+	 */
+	public List<HoldHandler> getHoldHandlers()
+	{
+		return this.holdHandlers;
+	}
+
 }
