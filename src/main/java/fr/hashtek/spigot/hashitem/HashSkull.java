@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
@@ -48,9 +49,7 @@ public class HashSkull extends HashItem
      */
     public HashSkull(SkullType skullType, int amount)
     {
-        super(Material.SKULL_ITEM, amount);
-        super.setDurability((short) skullType.ordinal());
-        super.setItemMeta((SkullMeta) super.getItemMeta());
+        super(new ItemStack(Material.SKULL_ITEM, amount, (short) skullType.ordinal()));
     }
 
     /**
@@ -106,9 +105,8 @@ public class HashSkull extends HashItem
      *
      * @param   texture     Skull texture
      * @return  Returns itself.
-     * @throws  Exception   Texture set fail
      */
-    public HashSkull setTexture(String texture) throws Exception
+    public HashSkull setTexture(String texture)
     {
         if (texture.isEmpty())
             return this;
@@ -118,10 +116,13 @@ public class HashSkull extends HashItem
 
         profile.getProperties().put("textures", new Property("textures", texture));
 
-        Field profileField = skullMeta.getClass().getDeclaredField("profile");
-        profileField.setAccessible(true);
-        profileField.set(skullMeta, profile);
-
+        try {
+            final Field profileField = skullMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(skullMeta, profile);
+        } catch (NoSuchFieldException | IllegalAccessException exception) {
+            // TODO: Log this.
+        }
         return this;
     }
 
