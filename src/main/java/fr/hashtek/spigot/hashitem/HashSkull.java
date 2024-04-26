@@ -107,6 +107,7 @@ public class HashSkull extends HashItem
      * @return  Returns itself.
      */
     public HashSkull setTexture(String texture)
+        throws NoSuchFieldException, IllegalAccessException
     {
         if (texture.isEmpty())
             return this;
@@ -116,13 +117,10 @@ public class HashSkull extends HashItem
 
         profile.getProperties().put("textures", new Property("textures", texture));
 
-        try {
-            final Field profileField = skullMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(skullMeta, profile);
-        } catch (NoSuchFieldException | IllegalAccessException exception) {
-            // TODO: Log this.
-        }
+        final Field profileField = skullMeta.getClass().getDeclaredField("profile");
+        profileField.setAccessible(true);
+        profileField.set(skullMeta, profile);
+
         return this;
     }
 
