@@ -1,16 +1,14 @@
 package fr.hashtek.spigot.hashgui.manager;
 
+import fr.hashtek.spigot.hashgui.handler.destroy.HashGuiDestroy;
 import fr.hashtek.spigot.hashgui.handler.hold.HashGuiHold;
 import fr.hashtek.spigot.hashgui.handler.hit.HashGuiHit;
-import fr.hashtek.spigot.hashgui.listener.HashGuiHoldListener;
-import fr.hashtek.spigot.hashgui.listener.HashGuiHitListener;
+import fr.hashtek.spigot.hashgui.listener.*;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.hashtek.spigot.hashgui.handler.click.HashGuiClick;
 import fr.hashtek.spigot.hashgui.handler.interact.HashGuiInteraction;
-import fr.hashtek.spigot.hashgui.listener.HashGuiClickListener;
-import fr.hashtek.spigot.hashgui.listener.HashGuiInteractListener;
 
 public class HashGuiManager
 {
@@ -22,7 +20,8 @@ public class HashGuiManager
 	private HashGuiInteraction interactionManager;
 	private HashGuiHold holdManager;
 	private HashGuiHit hitManager;
-	
+	private HashGuiDestroy destroyManager;
+
 	
 	/**
 	 * Creates a new instance of HashGUIManager.
@@ -51,11 +50,13 @@ public class HashGuiManager
 		this.interactionManager = new HashGuiInteraction();
 		this.holdManager = new HashGuiHold();
 		this.hitManager = new HashGuiHit();
+		this.destroyManager = new HashGuiDestroy();
 
 		this.pluginManager.registerEvents(new HashGuiClickListener(this.clickManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiInteractListener(this.interactionManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiHoldListener(this.holdManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiHitListener(this.hitManager), this.plugin);
+		this.pluginManager.registerEvents(new HashGuiDestroyListener(this.destroyManager), this.plugin);
 
 		return this;
 	}
@@ -91,6 +92,14 @@ public class HashGuiManager
 	public HashGuiHit getHitManager()
 	{
 		return this.hitManager;
+	}
+
+	/**
+	 * @return	Destroy manager
+	 */
+	public HashGuiDestroy getDestroyManager()
+	{
+		return this.destroyManager;
 	}
 
 }

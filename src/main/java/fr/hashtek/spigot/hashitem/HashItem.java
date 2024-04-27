@@ -3,6 +3,7 @@ package fr.hashtek.spigot.hashitem;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
 import org.bukkit.ChatColor;
@@ -26,7 +27,8 @@ public class HashItem
 	private List<InteractHandler> interactHandlers;
 	private List<HoldHandler> holdHandlers;
 	private List<HitHandler> hitHandlers;
-	
+	private List<DestroyHandler> destroyHandlers;
+
 	
 	/**
 	 * Creates a new HashItem.
@@ -86,6 +88,8 @@ public class HashItem
 		this.clickHandlers = item.getClickHandlers();
 		this.interactHandlers = item.getInteractHandlers();
 		this.holdHandlers = item.getHoldHandlers();
+		this.hitHandlers = item.getHitHandlers();
+		this.destroyHandlers = item.getDestroyHandlers();
 	}
 
 	/**
@@ -121,6 +125,7 @@ public class HashItem
 		guiManager.getInteractionManager().addInteractHandler(this);
 		guiManager.getHoldManager().addHoldHandler(this);
 		guiManager.getHitManager().addHitHandler(this);
+		guiManager.getDestroyManager().addDestroyHandler(this);
 		return this;
 	}
 	
@@ -404,6 +409,13 @@ public class HashItem
 		this.clickHandlers.add(clickHandler);
 		return this;
 	}
+
+	public HashItem clearClickHandlers()
+	{
+		if (this.clickHandlers != null)
+			this.clickHandlers.clear();
+		return this;
+	}
 	
 	/**
 	 * Adds an interact handler to the item.
@@ -422,6 +434,13 @@ public class HashItem
 		return this;
 	}
 
+	public HashItem clearInteractHandlers()
+	{
+		if (this.interactHandlers != null)
+			this.interactHandlers.clear();
+		return this;
+	}
+
 	/**
 	 * Adds a hold handler to the item.
 	 *
@@ -437,6 +456,13 @@ public class HashItem
 		return this;
 	}
 
+	public HashItem clearHoldHandlers()
+	{
+		if (this.holdHandlers != null)
+			this.holdHandlers.clear();
+		return this;
+	}
+
 	/**
 	 * Adds a hit handler to the item.
 	 *
@@ -449,6 +475,45 @@ public class HashItem
 			this.hitHandlers = new ArrayList<HitHandler>();
 
 		this.hitHandlers.add(hitHandler);
+		return this;
+	}
+
+	public HashItem clearHitHandlers()
+	{
+		if (this.hitHandlers != null)
+			this.hitHandlers.clear();
+		return this;
+	}
+
+	/**
+	 * Adds a destroy handler to the item.
+	 *
+	 * @param	destroyHandler	Destroy handler.
+	 * @return	Returns itself.
+	 */
+	public HashItem addDestroyHandler(DestroyHandler destroyHandler)
+	{
+		if (this.destroyHandlers == null)
+			this.destroyHandlers = new ArrayList<DestroyHandler>();
+
+		this.destroyHandlers.add(destroyHandler);
+		return this;
+	}
+
+	public HashItem clearDestroyHandlers()
+	{
+		if (this.destroyHandlers != null)
+			this.destroyHandlers.clear();
+		return this;
+	}
+
+	public HashItem clearHandlers()
+	{
+		this.clearClickHandlers();
+		this.clearInteractHandlers();
+		this.clearHoldHandlers();
+		this.clearHitHandlers();
+		this.clearDestroyHandlers();
 		return this;
 	}
 	
@@ -482,6 +547,14 @@ public class HashItem
 	public List<HitHandler> getHitHandlers()
 	{
 		return this.hitHandlers;
+	}
+
+	/**
+	 * @return	Item's destroy handlers.
+	 */
+	public List<DestroyHandler> getDestroyHandlers()
+	{
+		return this.destroyHandlers;
 	}
 
 }
