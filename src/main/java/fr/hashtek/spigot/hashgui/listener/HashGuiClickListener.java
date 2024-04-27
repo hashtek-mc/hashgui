@@ -63,7 +63,7 @@ public class HashGuiClickListener implements Listener
 	}
 
 	/**
-	 * Click handling
+	 * Click handling.
 	 */
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event)

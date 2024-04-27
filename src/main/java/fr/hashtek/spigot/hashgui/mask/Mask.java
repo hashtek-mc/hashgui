@@ -34,7 +34,7 @@ public class Mask
 	/**
 	 * Creates a mask for a GUI, from a GUI.
 	 * 
-	 * @param	gui		HashGUI.
+	 * @param	gui		HashGui.
 	 */
 	public Mask(HashGui gui)
 	{

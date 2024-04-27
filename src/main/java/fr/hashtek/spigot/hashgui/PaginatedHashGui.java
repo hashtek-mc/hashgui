@@ -27,7 +27,7 @@ public class PaginatedHashGui extends HashGui
      *
      * @param	title	    GUI's title
      * @param	size	    GUI's amount of lines (must be between 1 and 6).
-     * @param   guiManager  Gui manager
+     * @param   guiManager  GUI manager
      */
     public PaginatedHashGui(String title, int size, HashGuiManager guiManager)
     {

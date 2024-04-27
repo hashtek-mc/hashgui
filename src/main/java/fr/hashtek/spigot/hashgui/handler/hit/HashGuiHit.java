@@ -14,7 +14,7 @@ public class HashGuiHit
 	
 	
 	/**
-	 * Creates a new instance of HashGUIInteraction.
+	 * Creates a new instance of HashGuiHit.
 	 */
 	public HashGuiHit()
 	{
@@ -26,7 +26,7 @@ public class HashGuiHit
 	 * Adds a hit handler for a certain title.
 	 * 
 	 * @param	title	Title
-	 * @param	handler	Interaction handler
+	 * @param	handler	Hit handler
 	 * @return	Returns itself.
 	 */
 	private HashGuiHit addHitHandler(String title, HitHandler handler)
@@ -57,7 +57,7 @@ public class HashGuiHit
 		final ItemMeta meta = item.getItemStack().getItemMeta();
 		final String itemName = meta.getDisplayName();
 		
-		for (HitHandler handler: item.getHitHandlers())
+		for (HitHandler handler: hitHandlers)
 			this.addHitHandler(itemName, handler);
 		
 		return this;
@@ -65,7 +65,7 @@ public class HashGuiHit
 
 
 	/**
-	 * @return	Registered interact handlers
+	 * @return	Registered hit handlers
 	 */
 	public HashMap<String, ArrayList<HitHandler>> getHitHandlers()
 	{

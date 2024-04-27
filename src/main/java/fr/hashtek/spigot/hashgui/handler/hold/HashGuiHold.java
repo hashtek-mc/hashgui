@@ -53,15 +53,15 @@ public class HashGuiHold
      */
     public HashGuiHold addHoldHandler(HashItem item)
     {
-        List<HoldHandler> clickHandlers = item.getHoldHandlers();
+        List<HoldHandler> holdHandlers = item.getHoldHandlers();
 
-        if (clickHandlers == null || clickHandlers.isEmpty())
+        if (holdHandlers == null || holdHandlers.isEmpty())
             return this;
 
         final ItemMeta meta = item.getItemStack().getItemMeta();
         final String itemName = meta.getDisplayName();
 
-        for (HoldHandler handler : item.getHoldHandlers())
+        for (HoldHandler handler : holdHandlers)
             this.addHoldHandler(itemName, handler);
 
         return this;
