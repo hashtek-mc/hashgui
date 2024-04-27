@@ -55,8 +55,8 @@ public class HashGuiClick
 		if (clickHandlers == null || clickHandlers.isEmpty())
 			return this;
 		
-		ItemMeta meta = item.getItemStack().getItemMeta();
-		String itemName = meta.getDisplayName();
+		final ItemMeta meta = item.getItemStack().getItemMeta();
+		final String itemName = meta.getDisplayName();
 		
 		for (ClickHandler handler : item.getClickHandlers())
 			this.addClickHandler(itemName, handler);

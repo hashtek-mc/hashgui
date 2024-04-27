@@ -55,8 +55,8 @@ public class HashGuiInteraction
 		if (interactHandler == null || interactHandler.isEmpty())
 			return this;
 		
-		ItemMeta meta = item.getItemStack().getItemMeta();
-		String itemName = meta.getDisplayName();
+		final ItemMeta meta = item.getItemStack().getItemMeta();
+		final String itemName = meta.getDisplayName();
 		
 		for (InteractHandler handler: item.getInteractHandlers())
 			this.addInteractHandler(itemName, handler);
