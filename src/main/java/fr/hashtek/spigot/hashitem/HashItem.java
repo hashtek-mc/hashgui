@@ -7,6 +7,7 @@ import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import fr.hashtek.spigot.hashgui.manager.HashGuiManager;
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class HashItem
 {
@@ -392,6 +394,25 @@ public class HashItem
 
 		return this;
 	}
+
+	/**
+	 * Sets leather armor color.
+	 *
+	 * @param	color				Wanted color
+	 * @return	Returns itself.
+	 * @throws	ClassCastException	If item is not a leather armor piece
+	 */
+	public HashItem setLeatherArmorColor(Color color)
+		throws ClassCastException
+	{
+		if (!this.itemStack.getType().name().startsWith("LEATHER_"))
+			throw new ClassCastException("Item must be a leather armor piece.");
+
+		((LeatherArmorMeta) this.itemMeta).setColor(color);
+		return this;
+	}
+
+	/* Handlers management */
 
 	/**
 	 * Adds a click handler to the item.
