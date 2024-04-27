@@ -26,7 +26,7 @@ public class HashGuiHit
 	 * Adds a hit handler for a certain title.
 	 * 
 	 * @param	title	Title
-	 * @param	handler	Interaction handler
+	 * @param	handler	Hit handler
 	 * @return	Returns itself.
 	 */
 	private HashGuiHit addHitHandler(String title, HitHandler handler)
@@ -57,7 +57,7 @@ public class HashGuiHit
 		final ItemMeta meta = item.getItemStack().getItemMeta();
 		final String itemName = meta.getDisplayName();
 		
-		for (HitHandler handler: item.getHitHandlers())
+		for (HitHandler handler: hitHandlers)
 			this.addHitHandler(itemName, handler);
 		
 		return this;

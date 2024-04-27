@@ -58,7 +58,7 @@ public class HashGuiClick
 		final ItemMeta meta = item.getItemStack().getItemMeta();
 		final String itemName = meta.getDisplayName();
 		
-		for (ClickHandler handler : item.getClickHandlers())
+		for (ClickHandler handler : clickHandlers)
 			this.addClickHandler(itemName, handler);
 		
 		return this;

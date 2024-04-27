@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class HashGuiHitListener implements Listener
 {
-
     private final HashGuiHit hitManager;
 
 
@@ -36,16 +35,17 @@ public class HashGuiHitListener implements Listener
      * @param	victim		Player who got hit
      * @param	item        Used item
      */
-    private void processHit(
+    public static void processHit(
         Player attacker,
         Player victim,
         ItemStack item,
-        boolean isKill
+        boolean isKill,
+        HashGuiHit hitManager
     )
     {
         final ItemMeta meta = item.getItemMeta();
         final String itemDisplayName = meta.getDisplayName();
-        final ArrayList<HitHandler> hitHandlers = this.hitManager.getHitHandlers().get(itemDisplayName);
+        final ArrayList<HitHandler> hitHandlers = hitManager.getHitHandlers().get(itemDisplayName);
 
         if (hitHandlers == null || hitHandlers.isEmpty())
             return;
@@ -74,8 +74,10 @@ public class HashGuiHitListener implements Listener
             attacker,
             victim,
             itemUsed,
-            victim.getHealth() - event.getFinalDamage() <= 0
+            victim.getHealth() - event.getFinalDamage() <= 0,
+            this.hitManager
         );
     }
+
 
 }

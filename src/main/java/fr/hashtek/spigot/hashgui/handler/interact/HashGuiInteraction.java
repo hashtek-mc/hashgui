@@ -50,15 +50,15 @@ public class HashGuiInteraction
 	 */
 	public HashGuiInteraction addInteractHandler(HashItem item)
 	{
-		List<InteractHandler> interactHandler = item.getInteractHandlers();
+		List<InteractHandler> interactHandlers = item.getInteractHandlers();
 		
-		if (interactHandler == null || interactHandler.isEmpty())
+		if (interactHandlers == null || interactHandlers.isEmpty())
 			return this;
 		
 		final ItemMeta meta = item.getItemStack().getItemMeta();
 		final String itemName = meta.getDisplayName();
 		
-		for (InteractHandler handler: item.getInteractHandlers())
+		for (InteractHandler handler: interactHandlers)
 			this.addInteractHandler(itemName, handler);
 		
 		return this;
