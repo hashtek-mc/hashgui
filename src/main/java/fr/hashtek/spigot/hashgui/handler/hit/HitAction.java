@@ -10,8 +10,8 @@ public interface HitAction
 	 * Function called when item is used in a hit.
 	 * 
 	 * @param	attacker	Player who hit
-	 * @param	victim	Player who got hit
-	 * @param	item	Used item
+	 * @param	victim		Player who got hit
+	 * @param	item		Used item
 	 */
     void execute(
 		Player attacker,

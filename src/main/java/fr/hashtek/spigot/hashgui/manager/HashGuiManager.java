@@ -24,9 +24,9 @@ public class HashGuiManager
 
 	
 	/**
-	 * Creates a new instance of HashGUIManager.
-	 * HashGUIManager aims to handle clicks and interactions
-	 * for items.
+	 * Creates a new instance of HashGuiManager.
+	 * HashGuiManager aims to handle different interactions
+	 * with the items (click, interact, hold, hit...)
 	 * 
 	 * @param	plugin			Main instance
 	 * @param	pluginManager	Plugin manager
@@ -39,7 +39,7 @@ public class HashGuiManager
 	
 
 	/**
-	 * Setups the manager to handle clicks and interactions
+	 * Setups the manager to handle different interactions
 	 * for items.
 	 * 
 	 * @return Returns itself.

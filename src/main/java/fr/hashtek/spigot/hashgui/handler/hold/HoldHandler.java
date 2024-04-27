@@ -8,7 +8,7 @@ public class HoldHandler
 
 
     /**
-     * Creates an empty instance of ClickHandler.
+     * Creates an empty instance of HoldHandler.
      */
     public HoldHandler() {}
 
@@ -38,7 +38,7 @@ public class HoldHandler
     }
 
     /**
-     * @param	handler	Handler to compare
+     * @param	handler Handler to compare
      * @return	Returns true if both handlers contains the same instructions
      */
     public boolean equals(HoldHandler handler)

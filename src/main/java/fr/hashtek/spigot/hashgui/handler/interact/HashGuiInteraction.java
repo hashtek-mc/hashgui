@@ -15,7 +15,7 @@ public class HashGuiInteraction
 	
 	
 	/**
-	 * Creates a new instance of HashGUIInteraction.
+	 * Creates a new instance of HashGuiInteraction.
 	 */
 	public HashGuiInteraction()
 	{

@@ -51,7 +51,7 @@ public class HashGuiDestroyListener implements Listener
     }
 
     /**
-     * Block destroy handling
+     * Block destroy handling.
      */
     @EventHandler
     public void onInteract(BlockBreakEvent event)

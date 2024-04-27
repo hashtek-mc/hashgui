@@ -7,7 +7,7 @@ public class DestroyHandler
 
 
 	/**
-	 * Creates an empty instance of InteractHandler.
+	 * Creates an empty instance of DestroyHandler.
 	 */
 	public DestroyHandler() {}
 
@@ -15,7 +15,7 @@ public class DestroyHandler
 	/**
 	 * Sets handler's destroy action. (on block destroy, then do...)
 	 * 
-	 * @param	destroyAction	Interact action
+	 * @param	destroyAction	Destroy action
 	 * @return	Returns itself.
 	 */
 	public DestroyHandler setDestroyAction(DestroyAction destroyAction)

@@ -14,7 +14,7 @@ public class HashGuiHit
 	
 	
 	/**
-	 * Creates a new instance of HashGUIInteraction.
+	 * Creates a new instance of HashGuiHit.
 	 */
 	public HashGuiHit()
 	{
@@ -65,7 +65,7 @@ public class HashGuiHit
 
 
 	/**
-	 * @return	Registered interact handlers
+	 * @return	Registered hit handlers
 	 */
 	public HashMap<String, ArrayList<HitHandler>> getHitHandlers()
 	{

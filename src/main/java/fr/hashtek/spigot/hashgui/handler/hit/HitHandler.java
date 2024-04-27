@@ -8,7 +8,7 @@ public class HitHandler
 
 
 	/**
-	 * Creates an empty instance of InteractHandler.
+	 * Creates an empty instance of HitHandler.
 	 */
 	public HitHandler()
 	{

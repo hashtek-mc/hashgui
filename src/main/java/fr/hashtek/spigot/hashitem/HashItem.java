@@ -410,6 +410,11 @@ public class HashItem
 		return this;
 	}
 
+	/**
+	 * Clears item's click handlers.
+	 *
+	 * @return	Returns itself.
+	 */
 	public HashItem clearClickHandlers()
 	{
 		if (this.clickHandlers != null)
@@ -434,6 +439,11 @@ public class HashItem
 		return this;
 	}
 
+	/**
+	 * Clears item's interact handlers.
+	 *
+	 * @return	Returns itself.
+	 */
 	public HashItem clearInteractHandlers()
 	{
 		if (this.interactHandlers != null)
@@ -456,6 +466,11 @@ public class HashItem
 		return this;
 	}
 
+	/**
+	 * Clears item's hold handlers.
+	 *
+	 * @return	Returns itself.
+	 */
 	public HashItem clearHoldHandlers()
 	{
 		if (this.holdHandlers != null)
@@ -478,6 +493,11 @@ public class HashItem
 		return this;
 	}
 
+	/**
+	 * Clears item's hit handlers.
+	 *
+	 * @return	Returns itself.
+	 */
 	public HashItem clearHitHandlers()
 	{
 		if (this.hitHandlers != null)
@@ -500,6 +520,11 @@ public class HashItem
 		return this;
 	}
 
+	/**
+	 * Clears item's destroy handlers.
+	 *
+	 * @return	Returns itself.
+	 */
 	public HashItem clearDestroyHandlers()
 	{
 		if (this.destroyHandlers != null)
@@ -507,6 +532,11 @@ public class HashItem
 		return this;
 	}
 
+	/**
+	 * Clears item's handlers.
+	 *
+	 * @return	Returns itself.
+	 */
 	public HashItem clearHandlers()
 	{
 		this.clearClickHandlers();

@@ -62,7 +62,7 @@ public class HashGuiInteractListener implements Listener
 	}
 
 	/**
-	 * Interact handling
+	 * Interact handling.
 	 */
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event)

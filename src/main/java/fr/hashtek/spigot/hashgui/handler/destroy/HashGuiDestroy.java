@@ -14,7 +14,7 @@ public class HashGuiDestroy
 	
 	
 	/**
-	 * Creates a new instance of HashGUIDestroy.
+	 * Creates a new instance of HashGuiDestroy.
 	 */
 	public HashGuiDestroy()
 	{
@@ -42,7 +42,7 @@ public class HashGuiDestroy
 	}
 
 	/**
-	 * Adds a hit handler for an item.
+	 * Adds a destroy handler for an item.
 	 * 
 	 * @param	item	Item
 	 * @return	Returns itself.

@@ -17,9 +17,9 @@ public class HashGuiHoldListener implements Listener
 
     /**
      * Creates a new instance of HashGuiHoldListener, with
-     * an interact manager for hold handling.
+     * a hold manager for hold handling.
      *
-     * @param	holdManager Hold manager
+     * @param   holdManager Hold manager
      */
     public HashGuiHoldListener(HashGuiHold holdManager)
     {
@@ -28,7 +28,7 @@ public class HashGuiHoldListener implements Listener
 
 
     /**
-     * Hold handling
+     * Hold handling.
      */
     @EventHandler
     public void onInteract(PlayerItemHeldEvent event)
@@ -44,7 +44,7 @@ public class HashGuiHoldListener implements Listener
     }
 
     /**
-     * If player drops the held item, then execute NotHold action.
+     * If player drops the held item, then execute Not Hold action.
      */
     @EventHandler
     public void onDrop(PlayerDropItemEvent event)
