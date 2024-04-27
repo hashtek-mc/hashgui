@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
+import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -24,6 +25,7 @@ public class HashItem
 	private List<ClickHandler> clickHandlers;
 	private List<InteractHandler> interactHandlers;
 	private List<HoldHandler> holdHandlers;
+	private List<HitHandler> hitHandlers;
 	
 	
 	/**
@@ -111,13 +113,14 @@ public class HashItem
 	 * 
 	 * @return	Returns itself.
 	 */
-	public HashItem build(HashGuiManager guiManager) throws IllegalArgumentException
+	public HashItem build(HashGuiManager guiManager)
 	{
 		this.itemStack.setItemMeta(this.itemMeta);
 		
 		guiManager.getClickManager().addClickHandler(this);
 		guiManager.getInteractionManager().addInteractHandler(this);
 		guiManager.getHoldManager().addHoldHandler(this);
+		guiManager.getHitManager().addHitHandler(this);
 		return this;
 	}
 	
@@ -126,7 +129,7 @@ public class HashItem
 	 * 
 	 * @return	Returns itself.
 	 */
-	public HashItem build() throws IllegalArgumentException
+	public HashItem build()
 	{
 		this.itemStack.setItemMeta(this.itemMeta);
 		return this;
@@ -433,6 +436,21 @@ public class HashItem
 		this.holdHandlers.add(holdHandler);
 		return this;
 	}
+
+	/**
+	 * Adds a hit handler to the item.
+	 *
+	 * @param	hitHandler	Hit handler.
+	 * @return	Returns itself.
+	 */
+	public HashItem addHitHandler(HitHandler hitHandler)
+	{
+		if (this.hitHandlers == null)
+			this.hitHandlers = new ArrayList<HitHandler>();
+
+		this.hitHandlers.add(hitHandler);
+		return this;
+	}
 	
 	/**
 	 * @return	Item's click handlers.
@@ -456,6 +474,14 @@ public class HashItem
 	public List<HoldHandler> getHoldHandlers()
 	{
 		return this.holdHandlers;
+	}
+
+	/**
+	 * @return	Item's hit handlers.
+	 */
+	public List<HitHandler> getHitHandlers()
+	{
+		return this.hitHandlers;
 	}
 
 }
