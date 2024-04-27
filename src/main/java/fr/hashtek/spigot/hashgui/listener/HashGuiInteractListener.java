@@ -42,7 +42,7 @@ public class HashGuiInteractListener implements Listener
 	 * @param	interactType	Interaction type
 	 * @param	item			Item
 	 */
-	private void processInteraction(Player player, Action interactType, ItemStack item)
+	private boolean processInteraction(Player player, Action interactType, ItemStack item)
 	{
 		final ItemMeta meta = item.getItemMeta();
 		final String itemDisplayName = meta.getDisplayName();
@@ -50,13 +50,15 @@ public class HashGuiInteractListener implements Listener
 		final ArrayList<InteractHandler> interactHandlers = this.interactManager.getInteractHandlers().get(itemDisplayName);
 
 		if (interactHandlers == null || interactHandlers.isEmpty())
-			return;
+			return false;
 
 		interactHandlers.stream()
 			.filter((InteractHandler handler) ->
 				handler.getInteractTypes().contains(interactType))
 			.forEach((InteractHandler handler) ->
 				handler.getInteractAction().execute(player, item, slot));
+
+		return true;
 	}
 
 	/**
@@ -72,7 +74,7 @@ public class HashGuiInteractListener implements Listener
 		final Action interactType = event.getAction();
 		final ItemStack item = event.getItem();
 
-		this.processInteraction(player, interactType, item);
+		event.setCancelled(this.processInteraction(player, interactType, item));
 	}
 
 	/**
