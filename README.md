@@ -59,12 +59,13 @@ Inventory#addItem(item.getItemStack());
 * `removeEnchant()` : Retire un enchantement à l'item
 * `build()` : Construit l'item pour qu'il soit utilisable
 
-### 🖱️ Click handler
+### Handlers
 
-Il est possible de définir l'action exécutée lors d'un clic sur l'item dans un
-inventaire.
+Un Handler est un morceau de code qui va être exécuté lorsqu'un joueur va faire une certaine\
+action avec un item.
 
-**Exemple :**
+### Utilisation (exemple : [Click Handler](#Click handler))
+
 ```java
 ClickHandler clickHandler = new ClickHandler()
     .addClickType(ClickType.LEFT)
@@ -92,6 +93,20 @@ un click handler différent, alors jouez avec les codes couleurs pour que ça ne
 soit pas visible du point de vue du joueur 😉
 (`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
 
+### Click handler
+
+Il est possible de définir l'action exécutée lors d'un clic sur l'item dans un
+inventaire.
+
+#### Fonctionnalités :
+
+- Type de click (clic gauche, clic droit, shift + clic...)
+```java
+ClickHandler#addClickType(ClickType.LEFT);
+ClickHandler#addClickTypes(ClickType.SHIFT_LEFT, ClickType.SHIFT_RIGHT); // Ajoute plusieurs types de clics en une fois.
+ClickHandler#addAllClickTypes(); // Ajoute tous les types de clic possibles.
+```
+
 > [!TIP]
 > Renseignez-vous sur l'enum [ClickType](https://helpch.at/docs/1.8/org/bukkit/event/inventory/ClickType.html) (du package `org.bukkit`).
 
@@ -99,42 +114,68 @@ soit pas visible du point de vue du joueur 😉
 
 Il est possible de définir l'action exécutée lors d'une interaction avec l'item.
 
-**Exemple :**
+#### Fonctionnalités :
+
+- Type d'interaction (clic gauche, clic droit, dans l'air, ou pas...)
 ```java
-InteractionHandler interactionHandler = new InteractionHandler()
-    .addInteractionType(Action.RIGHT_CLICK_AIR)
-    .setClickAction((Player player, ItemStack clickedItem, int clickedSlot) -> {
-        // Actions à faire lors de l'interaction.
-    });
-    
-HashItem item = new HashItem(Material.COMPASS)
-    .addInteractionHandler(interactionHandler)
-    .build(guiManager);
+InteractHandler#addInteractType(Action.LEFT_CLICK_AIR);
+InteractHandler#addInteractTypes(Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK); // Ajoute plusieurs types d'interactions en une fois.
+InteractHandler#addAllInteractTypes(); // Ajoute tous les types de clic possibles.
 ```
-
-> [!WARNING]
-> Tout comme pour les Click Handlers, `guiManager`
-(dans la fonction `build()`) doit être une instance de [HashGuiManager](#hashguimanager),
-qui doit être stocké à la racine de votre plugin.
-Cette instance s'occupe de détecter les intéractions et d'exécuter ce qu'il
-faut en fonction de l'item.
-
-> [!WARNING]
-> Le ciblage de l'item se fait à partir de son `displayName`, donc faites
-bien attention à ne pas donner le même nom à deux items si vous ne voulez pas
-qu'ils exécutent la même chose.
-Si deux items doivent avoir le même nom mais
-un click handler différent, alors jouez avec les codes couleurs pour que ça ne
-soit pas visible du point de vue du joueur 😉
-(`"§cTest"` et `"§r§cTest"` sont différents mais rendent pareil à l'écran)
 
 > [!TIP]
 > Renseignez-vous sur l'enum [Action](https://helpch.at/docs/1.8/index.html?org/bukkit/event/block/Action.html) (du package `org.bukkit`).
 
+### 🫱 Hold handler
+
+Il est possible de définir l'action exécutée lorsqu'un joueur prend (ou retire) un item dans sa main.
+
+#### Fonctionnalités :
+
+- Action de maintien (action exécutée lorsque le joueur prend l'item dans sa main)
+```java
+HoldAction action = (Player player, ItemStack item, int slot) -> {
+    // ...
+};
+
+HoldHandler#setHoldAction(action);
+```
+
+- Action de non-maintien (action exécutée lorsque le joueur retire l'item de sa main)
+```java
+HoldAction action = (Player player, ItemStack item, int slot) -> {
+    // ...
+};
+
+HoldHandler#setNotHoldAction(action);
+```
+
+> [!CAUTION]
+> Les armures sont compatibles avec le Gestionnaire de maintien.\
+> Cependant, si vous utilisez PlayerInventory#setHelmet (ou une autre méthode pour définir une pièce d'armure),
+> le Gestionnaire de maintien ne le détectera pas automatiquement.\
+> Vous devrez appeler la fonction HashGuiHold#refreshArmorState(Player player) pour actualiser la détection.
+
+### 🫱 Hit handler
+
+Il est possible de définir l'action exécutée lorsqu'un joueur tape un autre joueur.
+
+#### Fonctionnalités :
+
+- Mort uniquement (n'exécute l'action que si le coup tue l'autre joueur)
+```java
+HitHandler#setOnlyKill(true);
+```
+
+### 🫱 Destroy handler
+
+Il est possible de définir l'action exécutée lorsqu'un joueur casse un bloc.
+
+
 ### HashGuiManager
 
-Pour que les `ClickHandler` et les `InteractionHandler` fonctionnent,
-vous devez créer une instance de `HashGUIManager` à la racine de votre plugin
+Pour que les différents handlers fonctionnent,
+vous devez créer une instance de `HashGuiManager` à la racine de votre plugin
 et donner cette instance lors du build de votre item personnalisé.
 
 **Exemple :**
@@ -154,6 +195,7 @@ public class Test extends JavaPlugin {
         
         // Reste de votre code
     }
+    
     
     /* Initialisation et configuration du manager */
     private void setupGuiManager()
@@ -209,6 +251,8 @@ les modifications relatives à `HashItem`.
 Quand vous êtes sur la page d'une tête, descendez jusqu'à la section "For developers" pour trouver la valeur
 de la texture en `base64`.
 
+## Guis
+
 ## HashGui
 
 ### Utilisation
@@ -220,7 +264,10 @@ HashItem item = new HashItem(Material.SIGN)
   .addLore("Cliquez pour accéder aux paramètres")
   .build();
 
-HashGui gui = new HashGui("Menu", 5)
+String title = "Menu";
+int linesAmount = 5;
+
+HashGui gui = new HashGui(title, linesAmount)
     .setItem(3, item);
     
 gui.open(player);
@@ -233,7 +280,7 @@ gui.open(player);
 * `update()` : Rafraîchit la GUI d'un joueur
 * `setItem()` : Place un item dans la GUI
 
-### Masks
+## Masks
 
 Les masques (`Mask`) sont utilisés pour créer un agencement d'items dans une GUI.
 
@@ -244,33 +291,36 @@ Par exemple, si vous voulez faire une bordure comme ceci :
 ... un code normal serait :
 
 ```java
+Inventory gui;
+
 ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE);
 ItemStack grass = new ItemStack(Material.GRASS);
 ItemStack glowstone = new ItemStack(Material.GLOWSTONE);
 ItemStack bookshelf = new ItemStack(Material.BOOKSHELF);
 
 for (int i = 0 ; i < 10 ; i++) {
-    menu.setItem(i, glass);
+    gui.setItem(i, glass);
 }
 for (int i = 17 ; i < 26 ; i++) {
-    menu.setItem(i, glass);
+    gui.setItem(i, glass);
 }
-menu.setItem(11, grass);
-menu.setItem(13, glowstone);
-menu.setItem(15, bookshelf);
+gui.setItem(11, grass);
+gui.setItem(13, glowstone);
+gui.setItem(15, bookshelf);
 ```
 
 Pas dingue, n'est-ce pas ? Et c'est là qu'interviennent les masques. Le code
 ci-dessus devient alors :
 
 ```java
+HashGui gui; // Peut être une instance de Inventory.
+
 ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE);
 ItemStack grass = new ItemStack(Material.GRASS);
 ItemStack glowstone = new ItemStack(Material.GLOWSTONE);
 ItemStack bookshelf = new ItemStack(Material.BOOKSHELF);
 
-/*                   ⬇️ Doit être une instance de HashGUI. */
-Mask mask = new Mask(menu);
+Mask mask = new Mask(gui);
 
 mask.setItem('s', glass);
     .setItem('g', grass);
@@ -295,4 +345,80 @@ Si une lettre n'a pas d'item assigné, celui-ci sera placé :
 > Le caractère espace (` `) ne peut pas être assigné à un item, étant donné qu'il
 sert de vide.
 
-## Fait avec 💜 par [Lysandre B.](https://github.com/Shuvlyy) ・ [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021) + [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474)
+
+## PaginatedHashGui
+
+PaginatedHashGui est une HashGui avec un système de pages.
+
+### Utilisation
+
+```java
+String title = "Menu paginé";
+int linesAmount = 6;
+
+PaginatedHashGui gui = new PaginatedHashGui(title, linesAmount, guiManager); // guiManager doit être une instance de HashGuiManager.
+
+HashItem previousPage = new HashItem(Material.ARROW)
+    .setName("Page précédente");
+
+HashItem nextPage = new HashItem(Material.ARROW)
+    .setName("Page suivante");
+
+gui.setPreviousPageItem(previousPage); // Lors du clic sur previousPage, la GUI se rafraîchira à la page précédente.
+gui.setNextPageItem(nextPage); // Lors du clic sur nextPage, la GUI se rafraîchira à la page suivante.
+```
+
+#### Fonctionnalités
+
+* `setPreviousPageItem(HashItem item)` : Actualise la GUI à la page précédente (si possible)
+* `setNextPageItem(HashItem item)` : Actualise la GUI à la page suivante (si possible)
+* `update(Player player)` : Rafraîchit la GUI (pour les pages)
+* `clearPageContent()` : Vide visuellement la page actuelle (utilisé pour le rafraîchissement)
+* `addPage(Page page)` : Ajoute une page
+* `createNewPage()` : Crée une nouvelle page et l'ajoute
+* `clearPages()` : Supprime toutes les pages
+
+### Pages
+
+#### Création d'une page
+
+```java
+PaginatedHashGui gui;
+
+Page page = gui.createNewPage(); // Crée une nouvelle page et l'ajoute à la GUI
+
+/* OU */
+
+Page page = new Page(gui); // Crée une nouvelle page
+gui.addPage(page); // L'ajoute à la GUI
+```
+
+#### Fonctionnalités
+* `addItem(HashItem item)` : Ajoute un item dans la page au premier slot libre
+* `setItem(int slot, HashItem item)` : Ajoute un item dans la page à un endroit précis
+* `removeItem(int slot)` : Retire un item d'un slot
+* `clearItems()` : Retire tous les items de la page
+
+> [!TIP]
+> Par défaut, à la création d'une `PaginatedHashGui`, une nouvelle page vierge se crée automatiquement.
+
+#### Gestion de page
+
+```java
+Page page;
+
+HashItem item1 = new HashItem(Material.BED);
+HashItem item2 = new HashItem(Material.BEDROCK);
+
+page.addItem(item1);
+page.setItem(8, item2);
+page.removeItem(8);
+```
+
+> [!WARNING]
+> * Pour `Page#addItem()`, si aucun slot n'est disponible, une exception de type `IllegalArgumentException` sera renvoyée.\
+> * Pour `Page#setItem()` ou `Page#removeItem()`, si le slot donné n'est pas disponible, la même exception sera renvoyée.\
+> * **Un slot est considéré non disponible s'il n'est pas valide (en dessous de 0 ou au dessus de la capacité maximum de la GUI)
+> ou si un item est déjà présent sur ce slot dans la GUI parente.**
+
+## Fait avec 💜 par [Lysandre B.](https://github.com/Shuvlyy) ・ [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d794b-8bf6-46ef-acb3-549287335474) + [![wakatime](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021.svg)](https://wakatime.com/badge/user/2f50fe6c-0368-4bef-aa01-3a67193b63f8/project/018d7a18-67ef-47e3-a6c4-5c8cc4b45021)
