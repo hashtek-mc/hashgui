@@ -64,7 +64,7 @@ Inventory#addItem(item.getItemStack());
 Un Handler est un morceau de code qui va être exécuté lorsqu'un joueur va faire une certaine\
 action avec un item.
 
-### Utilisation (exemple : [Click Handler](#Click handler))
+### Utilisation (exemple : Click handler)
 
 ```java
 ClickHandler clickHandler = new ClickHandler()
@@ -151,10 +151,10 @@ HoldHandler#setNotHoldAction(action);
 ```
 
 > [!CAUTION]
-> Les armures sont compatibles avec le Gestionnaire de maintien.\
-> Cependant, si vous utilisez PlayerInventory#setHelmet (ou une autre méthode pour définir une pièce d'armure),
-> le Gestionnaire de maintien ne le détectera pas automatiquement.\
-> Vous devrez appeler la fonction HashGuiHold#refreshArmorState(Player player) pour actualiser la détection.
+> Les armures sont compatibles avec HoldHandler.\
+> Cependant, si vous utilisez `PlayerInventory#setHelmet` (ou une autre méthode pour définir une pièce d'armure),
+> HoldHandler ne le détectera pas automatiquement.\
+> Vous devrez appeler la fonction `HashGuiHold#refreshArmorState(Player player)` pour actualiser la détection.
 
 ### 🫱 Hit handler
 
@@ -348,7 +348,7 @@ sert de vide.
 
 ## PaginatedHashGui
 
-PaginatedHashGui est une HashGui avec un système de pages.
+`PaginatedHashGui` est une `HashGui` avec un système de pages.
 
 ### Utilisation
 
