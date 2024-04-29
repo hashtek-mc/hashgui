@@ -151,9 +151,9 @@ HoldHandler#setNotHoldAction(action);
 ```
 
 > [!CAUTION]
-> Les armures sont compatibles avec HoldHandler.\
+> Les armures sont compatibles avec `HoldHandler`.\
 > Cependant, si vous utilisez `PlayerInventory#setHelmet` (ou une autre méthode pour définir une pièce d'armure),
-> HoldHandler ne le détectera pas automatiquement.\
+> `HoldHandler` ne le détectera pas automatiquement.\
 > Vous devrez appeler la fonction `HashGuiHold#refreshArmorState(Player player)` pour actualiser la détection.
 
 ### 🫱 Hit handler
@@ -416,8 +416,8 @@ page.removeItem(8);
 ```
 
 > [!WARNING]
-> * Pour `Page#addItem()`, si aucun slot n'est disponible, une exception de type `IllegalArgumentException` sera renvoyée.\
-> * Pour `Page#setItem()` ou `Page#removeItem()`, si le slot donné n'est pas disponible, la même exception sera renvoyée.\
+> * Pour `Page#addItem()`, si aucun slot n'est disponible, une exception de type `IllegalArgumentException` sera renvoyée.
+> * Pour `Page#setItem()` ou `Page#removeItem()`, si le slot donné n'est pas disponible, la même exception sera renvoyée.
 > * **Un slot est considéré non disponible s'il n'est pas valide (en dessous de 0 ou au dessus de la capacité maximum de la GUI)
 > ou si un item est déjà présent sur ce slot dans la GUI parente.**
 
