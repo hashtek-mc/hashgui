@@ -181,6 +181,18 @@ public class PaginatedHashGui extends HashGui
     /* Page management */
 
     /**
+     * Adds a new page to the Gui.
+     *
+     * @param   page    Page to add
+     * @return  Returns itself.
+     */
+    public PaginatedHashGui addPage(Page page)
+    {
+        this.pages.add(page);
+        return this;
+    }
+
+    /**
      * Creates a fresh new page.
      *
      * @return  Created page
@@ -189,7 +201,7 @@ public class PaginatedHashGui extends HashGui
     {
         final Page page = new Page(this);
 
-        this.pages.add(page);
+        this.addPage(page);
         return page;
     }
 
