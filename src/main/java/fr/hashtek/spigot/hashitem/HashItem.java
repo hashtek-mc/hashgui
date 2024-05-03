@@ -106,6 +106,14 @@ public class HashItem
 	}
 
 
+	/**
+	 * Creates a Separator, a Stained Glass Pane of a certain color
+	 * that does nothing, just for decoration.
+	 *
+	 * @param	glassColor	Stained Glass Pane color
+	 * @param	guiManager	Gui manager
+	 * @return	Created HashItem
+	 */
 	public static HashItem separator(Byte glassColor, HashGuiManager guiManager)
 	{
 		return new HashItem(Material.STAINED_GLASS_PANE, 1, glassColor)
