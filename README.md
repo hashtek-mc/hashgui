@@ -9,6 +9,22 @@ Cette librairie est constituée de deux classes principales :
 
 [🇬🇧 Also available in English!](https://github.com/hashtek-mc/hashgui/blob/main/README-en.md)
 
+## Installation
+
+Après installation, le .jar se trouve dans le dossier `builds/libs/`.
+
+### Linux / MacOS :
+
+```shell
+./gradlew make
+```
+
+### Windows
+
+```shell
+.\gradlew.bat make
+```
+
 ## HashItem
 
 ### Utilisation
@@ -120,7 +136,7 @@ Il est possible de définir l'action exécutée lors d'une interaction avec l'it
 ```java
 InteractHandler#addInteractType(Action.LEFT_CLICK_AIR);
 InteractHandler#addInteractTypes(Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK); // Ajoute plusieurs types d'interactions en une fois.
-InteractHandler#addAllInteractTypes(); // Ajoute tous les types de clic possibles.
+InteractHandler#addAllInteractTypes(); // Ajoute tous les types d'interaction possibles.
 ```
 
 > [!TIP]
