@@ -9,8 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.hashtek.spigot.hashitem.HashItem;
 
-import java.util.Arrays;
-
 public class HashGui implements InventoryHolder
 {
 
