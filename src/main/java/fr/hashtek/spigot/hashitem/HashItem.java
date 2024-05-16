@@ -276,6 +276,27 @@ public class HashItem
 	}
 
 	/**
+	 * Adds some lines to item's lore.
+	 *
+	 * @param	content		Content to add.
+	 * @return	Returns itself.
+	 */
+	public HashItem addLore(List<String> content)
+	{
+		List<String> lore;
+
+		if (this.itemMeta.hasLore())
+			lore = this.itemMeta.getLore();
+		else
+			lore = new ArrayList<String>();
+
+		lore.addAll(content);
+
+		this.itemMeta.setLore(lore);
+		return this;
+	}
+
+	/**
 	 * Clears item's lore.
 	 *
 	 * @return	Returns itself.
