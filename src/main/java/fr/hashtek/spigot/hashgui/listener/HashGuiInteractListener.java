@@ -92,8 +92,9 @@ public class HashGuiInteractListener implements Listener
 		if (player.getGameMode() != GameMode.ADVENTURE)
 			return;
 
-		if (item.getType() == Material.AIR ||
-			player.getTargetBlock((Set<Material>) null, 5).getType() == Material.AIR)
+		if (item == null ||
+			item.getType() == Material.AIR ||
+			player.getTargetBlock((Set<Material>) null, 4).getType() == Material.AIR)
 			return;
 
 		this.processInteraction(player, Action.LEFT_CLICK_BLOCK, item);

@@ -85,6 +85,9 @@ public class HashGuiClickListener implements Listener
 			? (HashGui) holder
 			: new HashGui(inventory);
 
+		if (item == null || item.getType() == Material.AIR)
+			return;
+
 		final boolean cancelEvent = this.processClick(player, clickType, gui, item, slot);
 
 		event.setCancelled(cancelEvent);

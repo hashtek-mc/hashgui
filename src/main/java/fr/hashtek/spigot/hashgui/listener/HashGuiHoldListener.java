@@ -52,6 +52,9 @@ public class HashGuiHoldListener implements Listener
         final Player player = event.getPlayer();
         final ItemStack item = event.getItemDrop().getItemStack();
 
+        if (item == null || item.getType() == Material.AIR)
+            return;
+
         this.holdManager.processHold(player, item, false);
     }
 

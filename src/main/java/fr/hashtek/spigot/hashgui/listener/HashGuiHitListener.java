@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashgui.listener;
 
 import fr.hashtek.spigot.hashgui.handler.hit.HashGuiHit;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -71,6 +72,9 @@ public class HashGuiHitListener implements Listener
         final Player attacker = (Player) event.getDamager();
         final Player victim = (Player) event.getEntity();
         final ItemStack itemUsed = attacker.getInventory().getItemInHand();
+
+        if (itemUsed == null || itemUsed.getType() == Material.AIR)
+            return;
 
         processHit(
             attacker,

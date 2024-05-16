@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashgui.listener;
 
 import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.destroy.HashGuiDestroy;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -59,6 +60,9 @@ public class HashGuiDestroyListener implements Listener
         final Player player = event.getPlayer();
         final ItemStack itemUsed = player.getInventory().getItemInHand();
         final Block destroyedBlock = event.getBlock();
+
+        if (itemUsed == null || itemUsed.getType() == Material.AIR)
+            return;
 
         this.processBlockDestroy(player, itemUsed, destroyedBlock);
     }
