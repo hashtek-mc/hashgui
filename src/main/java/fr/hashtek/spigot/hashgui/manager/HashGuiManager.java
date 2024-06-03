@@ -4,6 +4,7 @@ import fr.hashtek.spigot.hashgui.handler.destroy.HashGuiDestroy;
 import fr.hashtek.spigot.hashgui.handler.hold.HashGuiHold;
 import fr.hashtek.spigot.hashgui.handler.hit.HashGuiHit;
 import fr.hashtek.spigot.hashgui.listener.*;
+import fr.hashtek.spigot.hashitem.common.DefaultItems;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,6 +58,9 @@ public class HashGuiManager
 		this.pluginManager.registerEvents(new HashGuiHoldListener(this.holdManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiHitListener(this.hitManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiDestroyListener(this.destroyManager), this.plugin);
+
+		for (DefaultItems item : DefaultItems.values())
+			item.getItem().build(this);
 
 		return this;
 	}
