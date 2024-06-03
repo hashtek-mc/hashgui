@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashitem;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import fr.hashtek.spigot.hashitem.common.DefaultItems;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.inventory.ItemStack;
@@ -106,22 +107,26 @@ public class HashSkull extends HashItem
      * @param   texture     Skull texture
      * @return  Returns itself.
      */
-    public HashSkull setTexture(String texture)
-        throws NoSuchFieldException, IllegalAccessException
+    public HashItem setTexture(String texture)
     {
         if (texture.isEmpty())
             return this;
 
-        final SkullMeta skullMeta = this.getSkullMeta();
-        final GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        try {
+            final SkullMeta skullMeta = this.getSkullMeta();
+            final GameProfile profile = new GameProfile(UUID.randomUUID(), null);
 
-        profile.getProperties().put("textures", new Property("textures", texture));
+            profile.getProperties().put("textures", new Property("textures", texture));
 
-        final Field profileField = skullMeta.getClass().getDeclaredField("profile");
-        profileField.setAccessible(true);
-        profileField.set(skullMeta, profile);
+            final Field profileField = skullMeta.getClass().getDeclaredField("profile");
 
-        return this;
+            profileField.setAccessible(true);
+            profileField.set(skullMeta, profile);
+
+            return this;
+        } catch (NoSuchFieldException | IllegalAccessException exception) {
+            return DefaultItems.ITEM_BUILD_FAIL.getItem();
+        }
     }
 
 }
