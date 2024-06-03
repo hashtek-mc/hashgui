@@ -44,7 +44,13 @@ public class HashGuiClickListener implements Listener
 	 * @param	item		Item
 	 * @param	slot		Slot
 	 */
-	private boolean processClick(Player player, ClickType clickType, HashGui gui, ItemStack item, int slot)
+	private boolean processClick(
+		Player player,
+		ClickType clickType,
+		HashGui gui,
+		ItemStack item,
+		int slot
+	)
 	{
 		final ItemMeta meta = item.getItemMeta();
 		final String itemDisplayName = meta.getDisplayName();
@@ -54,8 +60,12 @@ public class HashGuiClickListener implements Listener
 			return false;
 
 		handlers.stream()
-			.filter((ClickHandler handler) ->
-				handler.getClickTypes().contains(clickType))
+			.filter((ClickHandler handler) -> {
+				if (handler.isWhitelistOn() && !handler.isGuiInWhitelist(gui.getTitle()))
+					return false;
+
+				return handler.getClickTypes().contains(clickType);
+			})
 			.forEach((ClickHandler handler) ->
 				handler.getClickAction().execute(player, gui, item, slot));
 

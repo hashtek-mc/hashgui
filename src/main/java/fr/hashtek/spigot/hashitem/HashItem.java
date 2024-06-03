@@ -1,8 +1,10 @@
 package fr.hashtek.spigot.hashitem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import fr.hashtek.spigot.hashgui.HashGui;
 import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
@@ -124,7 +126,8 @@ public class HashItem
 
 	/**
 	 * Builds the item and registers its handlers.
-	 * 
+	 *
+	 * @param	guiManager	GUI Manager
 	 * @return	Returns itself.
 	 */
 	public HashItem build(HashGuiManager guiManager)
@@ -137,6 +140,36 @@ public class HashItem
 		guiManager.getHitManager().addHitHandler(this);
 		guiManager.getDestroyManager().addDestroyHandler(this);
 		return this;
+	}
+
+	/**
+	 * Builds the item and registers its handlers, only for
+	 * a certain GUI title (mainly the parent gui of the item).
+	 *
+	 * @param	guiTitle	GUI title
+	 * @param	guiManager	GUI Manager
+	 * @return	Returns itself.
+	 */
+	public HashItem build(String guiTitle, HashGuiManager guiManager)
+	{
+		if (this.clickHandlers != null)
+			for (ClickHandler handler : this.clickHandlers)
+				handler.addGuiToWhitelist(guiTitle);
+
+		return this.build(guiManager);
+	}
+
+	/**
+	 * Builds the item and registers its handlers, only for
+	 * a certain GUI (mainly the parent gui of the item).
+	 *
+	 * @param	gui		GUI
+	 * @param	guiManager	GUI Manager
+	 * @return	Returns itself.
+	 */
+	public HashItem build(HashGui gui, HashGuiManager guiManager)
+	{
+		return this.build(gui.getTitle(), guiManager);
 	}
 	
 	/**
@@ -259,17 +292,15 @@ public class HashItem
 	 * 
 	 * @param	line	Lore line.
 	 * @return	Returns itself.
+	 * @apiNote Handles line breaks ! (<code>\n</code>)
 	 */
 	public HashItem addLore(String line)
 	{
-		List<String> lore;
-		
-		if (this.itemMeta.hasLore())
-			lore = this.itemMeta.getLore();
-		else
-			lore = new ArrayList<String>();
-		
-		lore.add(line);
+		final List<String> lore = this.itemMeta.hasLore()
+			? this.itemMeta.getLore()
+			: new ArrayList<String>();
+
+		lore.addAll(Arrays.asList(line.split("\\r?\\n")));
 		
 		this.itemMeta.setLore(lore);
 		return this;
@@ -283,16 +314,8 @@ public class HashItem
 	 */
 	public HashItem addLore(List<String> content)
 	{
-		List<String> lore;
-
-		if (this.itemMeta.hasLore())
-			lore = this.itemMeta.getLore();
-		else
-			lore = new ArrayList<String>();
-
-		lore.addAll(content);
-
-		this.itemMeta.setLore(lore);
+		for (String line : content)
+			this.addLore(line);
 		return this;
 	}
 

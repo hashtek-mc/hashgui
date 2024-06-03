@@ -1,12 +1,14 @@
 package fr.hashtek.spigot.hashgui.handler.click;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.event.inventory.ClickType;
 
 public class ClickHandler
 {
-	
+
+	private List<String> parentGuiWhitelist;
 	private ArrayList<ClickType> clickTypes;
 	private ClickAction clickAction;
 
@@ -72,6 +74,36 @@ public class ClickHandler
 	}
 
 	/**
+	 * Adds a GUI title to the handler's GUI whitelist.
+	 *
+	 * @param   guiTitle    GUI's title
+	 * @return  Returns itself.
+	 */
+	public ClickHandler addGuiToWhitelist(String guiTitle)
+	{
+		if (this.parentGuiWhitelist == null)
+			this.parentGuiWhitelist = new ArrayList<String>();
+
+		this.parentGuiWhitelist.add(guiTitle);
+		return this;
+	}
+
+	/**
+	 * Adds multiple GUI titles to the handler's GUI whitelist.
+	 *
+	 * @param   guisTitle   GUIs' title
+	 * @return  Returns itself.
+	 */
+	public ClickHandler addGuisToWhitelist(List<String> guisTitle)
+	{
+		if (this.parentGuiWhitelist == null)
+			this.parentGuiWhitelist = new ArrayList<String>();
+
+		this.parentGuiWhitelist.addAll(guisTitle);
+		return this;
+	}
+
+	/**
 	 * @param	handler	Handler to compare
 	 * @return	Returns true if both handlers contains the same instructions
 	 */
@@ -97,6 +129,23 @@ public class ClickHandler
 	public ClickAction getClickAction()
 	{
 		return this.clickAction;
+	}
+
+	/**
+	 * @param   guiTitle    GUI's title
+	 * @return  True if given title is in the GUI whitelist.
+	 */
+	public boolean isGuiInWhitelist(String guiTitle)
+	{
+		return this.parentGuiWhitelist.contains(guiTitle);
+	}
+
+	/**
+	 * @return  True if whitelist is on.
+	 */
+	public boolean isWhitelistOn()
+	{
+		return this.parentGuiWhitelist != null;
 	}
 
 }
