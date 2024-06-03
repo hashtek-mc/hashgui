@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.hashtek.spigot.hashitem.common.DefaultItems;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -126,16 +127,17 @@ public class Mask
 	
 	/**
 	 * Applies the mask to the linked GUI.
+	 * <p>
+	 * <strong>NOTE:</strong>
+	 * <br>
+	 *   - Spaces (<code> </code>) are <u>replaced by {@link Material#AIR}</u>.
+	 * <br>
+	 *   - At (<code>@</code>) are <u>ignored</u>.
 	 * 
 	 * @return	Returns itself.
 	 */
 	public Mask apply()
 	{
-	    final HashItem placeholderItem = new HashItem(Material.BARRIER)
-            .setName("§cItem not found.")
-            .addLore("§7§oI am a poor dev that can't do his work properly.")
-            .build();
-
 	    for (int rowIndex = 0; rowIndex < this.pattern.size(); rowIndex++) {
 	        final String iteratedPattern = this.pattern.get(rowIndex);
 	        if (iteratedPattern == null)
@@ -145,6 +147,9 @@ public class Mask
 	            final char iteratedPatternChar = iteratedPattern.charAt(columnIndex);
 				final int guiIndex = columnIndex + (rowIndex * 9);
 
+				if (iteratedPatternChar == '@')
+					continue;
+
 	            if (iteratedPatternChar == ' ') {
 					final ItemStack i = this.gui.getInventory().getItem(guiIndex);
 
@@ -153,7 +158,13 @@ public class Mask
 					continue;
 				}
 
-	            this.gui.setItem(guiIndex, this.items.getOrDefault(iteratedPatternChar, placeholderItem));
+	            this.gui.setItem(
+					guiIndex,
+					this.items.getOrDefault(
+						iteratedPatternChar,
+						DefaultItems.ITEM_NOT_FOUND.getItem()
+					)
+				);
 	        }
 	    }
 	    
