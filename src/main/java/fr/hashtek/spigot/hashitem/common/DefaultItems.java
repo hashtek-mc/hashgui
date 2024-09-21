@@ -16,7 +16,7 @@ public enum DefaultItems
             .addLore("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly.")
     ),
 
-    ITEM_BUILD_FAIL (
+    ITEM_BUILD_FAIL(
         new HashItem(Material.BARRIER)
             .setName(ChatColor.RED + "Item not found.")
             .addLore("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly.")
