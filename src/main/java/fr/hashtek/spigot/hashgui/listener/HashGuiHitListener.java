@@ -70,13 +70,15 @@ public class HashGuiHitListener implements Listener
     public void onInteract(EntityDamageByEntityEvent event)
     {
         if (!(event.getDamager() instanceof Player attacker &&
-            event.getEntity() instanceof Player victim))
+            event.getEntity() instanceof Player victim)) {
             return;
+        }
 
-        final ItemStack itemUsed = attacker.getInventory().getItemInHand();
+        final ItemStack itemUsed = attacker.getItemOnCursor();
 
-        if (itemUsed.getType() == Material.AIR)
+        if (itemUsed.getType() == Material.AIR) {
             return;
+        }
 
         processHit(
             attacker,

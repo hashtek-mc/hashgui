@@ -60,7 +60,7 @@ public class HashGuiDestroyListener implements Listener
     public void onInteract(BlockBreakEvent event)
     {
         final Player player = event.getPlayer();
-        final ItemStack itemUsed = player.getInventory().getItemInHand();
+        final ItemStack itemUsed = player.getItemOnCursor();
         final Block destroyedBlock = event.getBlock();
 
         if (itemUsed.getType() == Material.AIR)

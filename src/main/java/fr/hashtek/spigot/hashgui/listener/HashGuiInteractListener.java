@@ -50,8 +50,9 @@ public class HashGuiInteractListener implements Listener
 		final int slot = player.getInventory().getHeldItemSlot();
 		final ArrayList<InteractHandler> interactHandlers = this.interactManager.getInteractHandlers().get(itemDisplayName);
 
-		if (interactHandlers == null || interactHandlers.isEmpty())
+		if (interactHandlers == null || interactHandlers.isEmpty()) {
 			return false;
+		}
 
 		interactHandlers.stream()
 			.filter((InteractHandler handler) ->
@@ -68,8 +69,9 @@ public class HashGuiInteractListener implements Listener
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event)
 	{
-		if (event.getItem() == null)
+		if (event.getItem() == null) {
 			return;
+		}
 		
 		final Player player = event.getPlayer();
 		final Action interactType = event.getAction();
@@ -88,15 +90,16 @@ public class HashGuiInteractListener implements Listener
 	public void onBlockHit(PlayerAnimationEvent event)
 	{
 		final Player player = event.getPlayer();
-		final ItemStack item = event.getPlayer().getItemInHand();
+		final ItemStack item = event.getPlayer().getItemOnCursor();
 
-		if (player.getGameMode() != GameMode.ADVENTURE)
+		if (player.getGameMode() != GameMode.ADVENTURE) {
 			return;
+		}
 
-		if (item == null ||
-			item.getType() == Material.AIR ||
-			player.getTargetBlock((Set<Material>) null, 4).getType() == Material.AIR)
+		if (item.getType() == Material.AIR ||
+			player.getTargetBlock(null, 4).getType() == Material.AIR) {
 			return;
+		}
 
 		this.processInteraction(player, Action.LEFT_CLICK_BLOCK, item);
 	}

@@ -83,7 +83,8 @@ public class HashGuiClickListener implements Listener
 	{
 		if (!(event.getWhoClicked() instanceof Player player) ||
 			event.getClickedInventory() == null ||
-			Objects.requireNonNull(event.getCurrentItem()).getType() == Material.AIR)
+			event.getCurrentItem() == null ||
+			event.getCurrentItem().getType() == Material.AIR)
 			return;
 
 		final Inventory inventory = event.getClickedInventory();
