@@ -1,7 +1,6 @@
 package fr.hashtek.spigot.hashitem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import fr.hashtek.spigot.hashgui.HashGui;
@@ -9,7 +8,7 @@ import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
 import net.kyori.adventure.text.Component;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -127,9 +126,36 @@ public class HashItem
 		}
 
 		return new HashItem(mat, 1)
-			.setName("")
+			.setName(Component.text(""))
 			.setUntakable(true)
 			.build(guiManager);
+	}
+
+	/**
+	 * Special triggers handling.
+	 * - <code>>br/<</code>: Line break
+	 */
+	private void formatLore()
+	{
+		if (!this.itemMeta.hasLore()) {
+			return;
+		}
+
+		final List<Component> newLore = new ArrayList<Component>();
+
+		for (Component line : this.itemMeta.lore()) {
+			if (!(line instanceof TextComponent l)) {
+				continue;
+			}
+			final String lineAsString = l.content();
+			final String[] splittedLine = lineAsString.split("\\n");
+
+			for (String s : splittedLine) {
+				newLore.add(Component.text(s));
+			}
+		}
+
+		this.itemMeta.lore(newLore);
 	}
 
 	/**
@@ -140,6 +166,7 @@ public class HashItem
 	 */
 	public HashItem build(HashGuiManager guiManager)
 	{
+		this.formatLore();
 		this.itemStack.setItemMeta(this.itemMeta);
 		
 		guiManager.getClickManager().addClickHandler(this);
@@ -189,6 +216,7 @@ public class HashItem
 	 */
 	public HashItem build()
 	{
+		this.formatLore();
 		this.itemStack.setItemMeta(this.itemMeta);
 		return this;
 	}
@@ -278,19 +306,19 @@ public class HashItem
 	{
 		return this;
 	}
-	
+
 	/**
 	 * Sets item's name.
-	 * 
+	 *
 	 * @param	name	Item name.
 	 * @return	Returns itself.
 	 */
-	public HashItem setName(String name)
+	public HashItem setName(Component name)
 	{
-		this.itemMeta.displayName(Component.text(ChatColor.RESET + name));
+		this.itemMeta.displayName(name);
 		return this;
 	}
-	
+
 	/**
 	 * Sets item's lore.
 	 * 
@@ -308,7 +336,7 @@ public class HashItem
 	 * 
 	 * @param	line	Lore line.
 	 * @return	Returns itself.
-	 * @apiNote Handles line breaks ! (<code>\n</code>)
+	 * @apiNote Handles line breaks ! (<code>>br/<</code>)
 	 */
 	public HashItem addLore(Component line)
 	{
@@ -316,11 +344,9 @@ public class HashItem
 			? this.itemMeta.lore()
 			: new ArrayList<Component>();
 
-        if (lore != null) {
-            lore.add(Component.text(Arrays.toString(line.toString().split("\\r?\\n"))));
-        }
+		lore.add(line);
 
-        this.itemMeta.lore(lore);
+		this.setLore(lore);
 		return this;
 	}
 
