@@ -1,6 +1,7 @@
 package fr.hashtek.spigot.hashgui.handler.destroy;
 
 import fr.hashtek.spigot.hashitem.HashItem;
+import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 public class HashGuiDestroy
 {
 	
-	private final HashMap<String, ArrayList<DestroyHandler>> destroyHandlers;
+	private final HashMap<Component, ArrayList<DestroyHandler>> destroyHandlers;
 	
 	
 	/**
@@ -18,7 +19,7 @@ public class HashGuiDestroy
 	 */
 	public HashGuiDestroy()
 	{
-		this.destroyHandlers = new HashMap<String, ArrayList<DestroyHandler>>();
+		this.destroyHandlers = new HashMap<Component, ArrayList<DestroyHandler>>();
 	}
 
 
@@ -29,14 +30,15 @@ public class HashGuiDestroy
 	 * @param	handler	Destroy handler
 	 * @return	Returns itself.
 	 */
-	private HashGuiDestroy addDestroyHandler(String title, DestroyHandler handler)
+	private HashGuiDestroy addDestroyHandler(Component title, DestroyHandler handler)
 	{
         this.destroyHandlers.computeIfAbsent(title, k -> new ArrayList<DestroyHandler>());
 
-		for (DestroyHandler h : this.destroyHandlers.get(title))
-			if (handler.equals(h))
+		for (DestroyHandler h : this.destroyHandlers.get(title)) {
+			if (handler.equals(h)) {
 				return this;
-
+			}
+		}
 		this.destroyHandlers.get(title).add(handler);
 		return this;
 	}
@@ -51,15 +53,16 @@ public class HashGuiDestroy
 	{
 		List<DestroyHandler> destroyHandlers = item.getDestroyHandlers();
 		
-		if (destroyHandlers == null || destroyHandlers.isEmpty())
+		if (destroyHandlers == null || destroyHandlers.isEmpty()) {
 			return this;
+		}
 		
 		final ItemMeta meta = item.getItemStack().getItemMeta();
-		final String itemName = meta.getDisplayName();
+		final Component itemName = meta.displayName();
 		
-		for (DestroyHandler handler: destroyHandlers)
+		for (DestroyHandler handler: destroyHandlers) {
 			this.addDestroyHandler(itemName, handler);
-		
+		}
 		return this;
 	}
 
@@ -67,7 +70,7 @@ public class HashGuiDestroy
 	/**
 	 * @return	Registered interact handlers
 	 */
-	public HashMap<String, ArrayList<DestroyHandler>> getDestroyHandlers()
+	public HashMap<Component, ArrayList<DestroyHandler>> getDestroyHandlers()
 	{
 		return this.destroyHandlers;
 	}

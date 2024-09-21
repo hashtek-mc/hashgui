@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashgui.listener;
 
 import fr.hashtek.spigot.hashgui.handler.hit.HashGuiHit;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class HashGuiHitListener implements Listener
 {
+
     private final HashGuiHit hitManager;
 
 
@@ -47,11 +49,12 @@ public class HashGuiHitListener implements Listener
     )
     {
         final ItemMeta meta = item.getItemMeta();
-        final String itemDisplayName = meta.getDisplayName();
+        final Component itemDisplayName = meta.displayName();
         final ArrayList<HitHandler> hitHandlers = hitManager.getHitHandlers().get(itemDisplayName);
 
-        if (hitHandlers == null || hitHandlers.isEmpty())
+        if (hitHandlers == null || hitHandlers.isEmpty()) {
             return;
+        }
 
         hitHandlers.stream()
             .filter((HitHandler hitHandler) ->
@@ -66,14 +69,13 @@ public class HashGuiHitListener implements Listener
     @EventHandler
     public void onInteract(EntityDamageByEntityEvent event)
     {
-        if (!(event.getDamager() instanceof Player && event.getEntity() instanceof Player))
+        if (!(event.getDamager() instanceof Player attacker &&
+            event.getEntity() instanceof Player victim))
             return;
 
-        final Player attacker = (Player) event.getDamager();
-        final Player victim = (Player) event.getEntity();
         final ItemStack itemUsed = attacker.getInventory().getItemInHand();
 
-        if (itemUsed == null || itemUsed.getType() == Material.AIR)
+        if (itemUsed.getType() == Material.AIR)
             return;
 
         processHit(

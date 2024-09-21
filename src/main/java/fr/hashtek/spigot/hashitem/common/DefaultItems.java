@@ -1,6 +1,7 @@
 package fr.hashtek.spigot.hashitem.common;
 
 import fr.hashtek.spigot.hashitem.HashItem;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
@@ -12,14 +13,14 @@ public enum DefaultItems
 
     ITEM_NOT_FOUND(
         new HashItem(Material.BARRIER)
-            .setName(ChatColor.RED + "Item not found.")
-            .addLore("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly.")
+            .setName(Component.text(ChatColor.RED + "Item not found."))
+            .addLore(Component.text("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly."))
     ),
 
     ITEM_BUILD_FAIL(
         new HashItem(Material.BARRIER)
-            .setName(ChatColor.RED + "Item not found.")
-            .addLore("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly.")
+            .setName(Component.text(ChatColor.RED + "Item not found."))
+            .addLore(Component.text("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly."))
     );
 
 

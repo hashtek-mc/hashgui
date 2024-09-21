@@ -60,9 +60,9 @@ public class Page
     public void addItem(HashItem item) throws IllegalArgumentException
     {
         for (int k = 0; k < this.parent.getTotalSize(); k++) {
-            if (this.isItemInParentGui(k) || this.items.containsKey(k))
+            if (this.isItemInParentGui(k) || this.items.containsKey(k)) {
                 continue;
-
+            }
             this.items.put(k, item);
             return;
         }
@@ -78,9 +78,9 @@ public class Page
      */
     public void removeItem(int slot) throws IllegalArgumentException
     {
-        if (this.isItemInParentGui(slot))
+        if (this.isItemInParentGui(slot)) {
             throw new IllegalArgumentException("Item can't be removed from the slot " + slot + ".");
-
+        }
         this.items.remove(slot);
     }
 

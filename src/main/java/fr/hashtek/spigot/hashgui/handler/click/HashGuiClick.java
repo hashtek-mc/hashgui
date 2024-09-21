@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashitem.HashItem;
@@ -11,7 +12,7 @@ import fr.hashtek.spigot.hashitem.HashItem;
 public class HashGuiClick
 {
 	
-	private final HashMap<String, ArrayList<ClickHandler>> clickHandlers;
+	private final HashMap<Component, ArrayList<ClickHandler>> clickHandlers;
 	
 	
 	/**
@@ -19,7 +20,7 @@ public class HashGuiClick
 	 */
 	public HashGuiClick()
 	{
-		this.clickHandlers = new HashMap<String, ArrayList<ClickHandler>>();
+		this.clickHandlers = new HashMap<Component, ArrayList<ClickHandler>>();
 	}
 	
 	
@@ -30,14 +31,15 @@ public class HashGuiClick
 	 * @param	handler	Click handler
 	 * @return	Returns itself.
 	 */
-	private HashGuiClick addClickHandler(String title, ClickHandler handler)
+	private HashGuiClick addClickHandler(Component title, ClickHandler handler)
 	{
         this.clickHandlers.computeIfAbsent(title, k -> new ArrayList<ClickHandler>());
 
-		for (ClickHandler h : this.clickHandlers.get(title))
-			if (handler.equals(h))
+		for (ClickHandler h : this.clickHandlers.get(title)) {
+			if (handler.equals(h)) {
 				return this;
-
+			}
+		}
 		this.clickHandlers.get(title).add(handler);
 		return this;
 	}
@@ -52,15 +54,16 @@ public class HashGuiClick
 	{
 		List<ClickHandler> clickHandlers = item.getClickHandlers();
 		
-		if (clickHandlers == null || clickHandlers.isEmpty())
+		if (clickHandlers == null || clickHandlers.isEmpty()) {
 			return this;
+		}
 		
 		final ItemMeta meta = item.getItemStack().getItemMeta();
-		final String itemName = meta.getDisplayName();
+		final Component itemName = meta.displayName();
 		
-		for (ClickHandler handler : clickHandlers)
+		for (ClickHandler handler : clickHandlers) {
 			this.addClickHandler(itemName, handler);
-		
+		}
 		return this;
 	}
 	
@@ -68,7 +71,7 @@ public class HashGuiClick
 	/**
 	 * @return	Every registered click handler
 	 */
-	public HashMap<String, ArrayList<ClickHandler>> getClickHandlers()
+	public HashMap<Component, ArrayList<ClickHandler>> getClickHandlers()
 	{
 		return this.clickHandlers;
 	}

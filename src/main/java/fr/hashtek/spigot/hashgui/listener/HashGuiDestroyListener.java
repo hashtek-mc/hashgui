@@ -2,6 +2,7 @@ package fr.hashtek.spigot.hashgui.listener;
 
 import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.destroy.HashGuiDestroy;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -41,11 +42,12 @@ public class HashGuiDestroyListener implements Listener
     private void processBlockDestroy(Player player, ItemStack itemUsed, Block destroyedBlock)
     {
         final ItemMeta meta = itemUsed.getItemMeta();
-        final String itemDisplayName = meta.getDisplayName();
+        final Component itemDisplayName = meta.displayName();
         final ArrayList<DestroyHandler> destroyHandlers = this.destroyManager.getDestroyHandlers().get(itemDisplayName);
 
-        if (destroyHandlers == null || destroyHandlers.isEmpty())
+        if (destroyHandlers == null || destroyHandlers.isEmpty()) {
             return;
+        }
 
         destroyHandlers.forEach((DestroyHandler handler) ->
             handler.getDestroyAction().execute(player, itemUsed, destroyedBlock));
@@ -61,7 +63,7 @@ public class HashGuiDestroyListener implements Listener
         final ItemStack itemUsed = player.getInventory().getItemInHand();
         final Block destroyedBlock = event.getBlock();
 
-        if (itemUsed == null || itemUsed.getType() == Material.AIR)
+        if (itemUsed.getType() == Material.AIR)
             return;
 
         this.processBlockDestroy(player, itemUsed, destroyedBlock);

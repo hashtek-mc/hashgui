@@ -1,6 +1,7 @@
 package fr.hashtek.spigot.hashgui.handler.hit;
 
 import fr.hashtek.spigot.hashitem.HashItem;
+import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 public class HashGuiHit
 {
 	
-	private final HashMap<String, ArrayList<HitHandler>> hitHandlers;
+	private final HashMap<Component, ArrayList<HitHandler>> hitHandlers;
 	
 	
 	/**
@@ -18,7 +19,7 @@ public class HashGuiHit
 	 */
 	public HashGuiHit()
 	{
-		this.hitHandlers = new HashMap<String, ArrayList<HitHandler>>();
+		this.hitHandlers = new HashMap<Component, ArrayList<HitHandler>>();
 	}
 
 
@@ -29,13 +30,15 @@ public class HashGuiHit
 	 * @param	handler	Hit handler
 	 * @return	Returns itself.
 	 */
-	private HashGuiHit addHitHandler(String title, HitHandler handler)
+	private HashGuiHit addHitHandler(Component title, HitHandler handler)
 	{
         this.hitHandlers.computeIfAbsent(title, k -> new ArrayList<HitHandler>());
 
-		for (HitHandler h : this.hitHandlers.get(title))
-			if (handler.equals(h))
+		for (HitHandler h : this.hitHandlers.get(title)) {
+			if (handler.equals(h)) {
 				return this;
+			}
+		}
 
 		this.hitHandlers.get(title).add(handler);
 		return this;
@@ -55,11 +58,11 @@ public class HashGuiHit
 			return this;
 		
 		final ItemMeta meta = item.getItemStack().getItemMeta();
-		final String itemName = meta.getDisplayName();
+		final Component itemName = meta.displayName();
 		
-		for (HitHandler handler: hitHandlers)
+		for (HitHandler handler: hitHandlers) {
 			this.addHitHandler(itemName, handler);
-		
+		}
 		return this;
 	}
 
@@ -67,7 +70,7 @@ public class HashGuiHit
 	/**
 	 * @return	Registered hit handlers
 	 */
-	public HashMap<String, ArrayList<HitHandler>> getHitHandlers()
+	public HashMap<Component, ArrayList<HitHandler>> getHitHandlers()
 	{
 		return this.hitHandlers;
 	}

@@ -43,8 +43,9 @@ public class Mask
 		this.items = new HashMap<Character, HashItem>();
 		this.pattern = new ArrayList<String>();
 		
-		for (int k = 0; k < this.gui.getSize(); k++)
+		for (int k = 0; k < this.gui.getSize(); k++) {
 			this.pattern.add(null);
+		}
 	}
 	
 	
@@ -88,26 +89,30 @@ public class Mask
 	{
 		final int guiSize = this.gui.getSize();
 		
-		if (index < 0)
+		if (index < 0) {
 			throw new IndexOutOfBoundsException(
 				"Index must be greater than or equal to 0 (index is " + index + ")");
+		}
 		
-		if (index > guiSize)
+		if (index > guiSize) {
 			throw new IndexOutOfBoundsException(
 				"Index is too big (index is " + index + ", GUI size is " + guiSize + ").");
+		}
 		
-		if (pattern.length() != 9)
+		if (pattern.length() != 9) {
 			throw new IllegalArgumentException("A pattern must be 9 characters long.");
+		}
 		
 		if (index == 0) {
 			int patternIndex = this.pattern.indexOf(null);
 			
-			if (patternIndex == -1)
+			if (patternIndex == -1) {
 				throw new IllegalStateException("Patterns are full.");
-
+			}
 			this.pattern.set(patternIndex, pattern);
-		} else
+		} else {
 			this.pattern.set(index - 1, pattern);
+		}
 
 		return this;
 	}
@@ -140,21 +145,24 @@ public class Mask
 	{
 	    for (int rowIndex = 0; rowIndex < this.pattern.size(); rowIndex++) {
 	        final String iteratedPattern = this.pattern.get(rowIndex);
-	        if (iteratedPattern == null)
-	        	continue;
+	        if (iteratedPattern == null) {
+				continue;
+			}
 
 	        for (int columnIndex = 0; columnIndex < iteratedPattern.length(); columnIndex++) {
 	            final char iteratedPatternChar = iteratedPattern.charAt(columnIndex);
 				final int guiIndex = columnIndex + (rowIndex * 9);
 
-				if (iteratedPatternChar == '@')
+				if (iteratedPatternChar == '@') {
 					continue;
+				}
 
 	            if (iteratedPatternChar == ' ') {
 					final ItemStack i = this.gui.getInventory().getItem(guiIndex);
 
-					if (i != null && i.getType() != Material.AIR)
+					if (i != null && i.getType() != Material.AIR) {
 						this.gui.setItem(guiIndex, new ItemStack(Material.AIR));
+					}
 					continue;
 				}
 

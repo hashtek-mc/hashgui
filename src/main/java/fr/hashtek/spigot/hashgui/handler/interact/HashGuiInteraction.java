@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashitem.HashItem;
@@ -11,7 +12,7 @@ import fr.hashtek.spigot.hashitem.HashItem;
 public class HashGuiInteraction
 {
 	
-	private final HashMap<String, ArrayList<InteractHandler>> interactHandlers;
+	private final HashMap<Component, ArrayList<InteractHandler>> interactHandlers;
 	
 	
 	/**
@@ -19,7 +20,7 @@ public class HashGuiInteraction
 	 */
 	public HashGuiInteraction()
 	{
-		this.interactHandlers = new HashMap<String, ArrayList<InteractHandler>>();
+		this.interactHandlers = new HashMap<Component, ArrayList<InteractHandler>>();
 	}
 	
 	
@@ -30,14 +31,15 @@ public class HashGuiInteraction
 	 * @param	handler	Interaction handler
 	 * @return	Returns itself.
 	 */
-	private HashGuiInteraction addInteractHandler(String title, InteractHandler handler)
+	private HashGuiInteraction addInteractHandler(Component title, InteractHandler handler)
 	{
         this.interactHandlers.computeIfAbsent(title, k -> new ArrayList<InteractHandler>());
 
-		for (InteractHandler h : this.interactHandlers.get(title))
-			if (handler.equals(h))
+		for (InteractHandler h : this.interactHandlers.get(title)) {
+			if (handler.equals(h)) {
 				return this;
-
+			}
+		}
 		this.interactHandlers.get(title).add(handler);
 		return this;
 	}
@@ -56,11 +58,11 @@ public class HashGuiInteraction
 			return this;
 		
 		final ItemMeta meta = item.getItemStack().getItemMeta();
-		final String itemName = meta.getDisplayName();
+		final Component itemName = meta.displayName();
 		
-		for (InteractHandler handler: interactHandlers)
+		for (InteractHandler handler: interactHandlers) {
 			this.addInteractHandler(itemName, handler);
-		
+		}
 		return this;
 	}
 	
@@ -68,7 +70,7 @@ public class HashGuiInteraction
 	/**
 	 * @return	Registered interact handlers
 	 */
-	public HashMap<String, ArrayList<InteractHandler>> getInteractHandlers()
+	public HashMap<Component, ArrayList<InteractHandler>> getInteractHandlers()
 	{
 		return this.interactHandlers;
 	}

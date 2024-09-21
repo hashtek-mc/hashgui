@@ -3,8 +3,8 @@ package fr.hashtek.spigot.hashitem;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import fr.hashtek.spigot.hashitem.common.DefaultItems;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -19,7 +19,7 @@ public class HashSkull extends HashItem
      */
     public HashSkull()
     {
-        this(SkullType.PLAYER);
+        this(1);
     }
 
     /**
@@ -29,40 +29,7 @@ public class HashSkull extends HashItem
      */
     public HashSkull(int amount)
     {
-        this(SkullType.PLAYER, amount);
-    }
-
-    /**
-     * Creates a new HashSkull, using a specific {@link SkullType}.
-     *
-     * @param   skullType   Skull type
-     */
-    public HashSkull(SkullType skullType)
-    {
-        this(skullType, 1);
-    }
-
-    /**
-     * Creates a new HashSkull.
-     *
-     * @param   skullType   Skull type
-     * @param   amount      Amount of items
-     */
-    public HashSkull(SkullType skullType, int amount)
-    {
-        super(new ItemStack(Material.SKULL_ITEM, amount, (short) skullType.ordinal()));
-    }
-
-    /**
-     * Creates a HashSkull from an existing {@link HashItem}.
-     *
-     * @param   item        Item
-     * @param   skullType   Skull type
-     */
-    public HashSkull(HashItem item, SkullType skullType)
-    {
-        this(skullType, item.getItemStack().getAmount());
-        super.setItemMeta(item.getItemMeta());
+        super(new ItemStack(Material.PLAYER_HEAD, amount));
     }
 
     /**
@@ -89,13 +56,18 @@ public class HashSkull extends HashItem
      * Sets skull's texture to a player's head.
      * To set skull's texture to a custom texture,
      * use {@link HashSkull#setTexture(String)}.
+     * </p>
+     * {@link Bukkit#getOfflinePlayer(String)} is used because
+     * no other options are available right now.
+     * One solution is to get targeted player's UUID from
+     * Mojang's API, but it is kinda overkill.
      *
      * @param   playerName  Targeted player's name
      * @return  Returns itself.
      */
     public HashSkull setOwner(String playerName)
     {
-        this.getSkullMeta().setOwner(playerName);
+        this.getSkullMeta().setOwningPlayer(Bukkit.getOfflinePlayer(playerName));
         return this;
     }
 
@@ -109,8 +81,9 @@ public class HashSkull extends HashItem
      */
     public HashItem setTexture(String texture)
     {
-        if (texture.isEmpty())
+        if (texture.isEmpty()) {
             return this;
+        }
 
         try {
             final SkullMeta skullMeta = this.getSkullMeta();

@@ -1,6 +1,7 @@
 package fr.hashtek.spigot.hashgui.handler.hold;
 
 import fr.hashtek.spigot.hashitem.HashItem;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,7 +15,7 @@ import java.util.List;
 public class HashGuiHold
 {
 
-    private final HashMap<String, ArrayList<HoldHandler>> holdHandlers;
+    private final HashMap<Component, ArrayList<HoldHandler>> holdHandlers;
 
 
     /**
@@ -22,7 +23,7 @@ public class HashGuiHold
      */
     public HashGuiHold()
     {
-        this.holdHandlers = new HashMap<String, ArrayList<HoldHandler>>();
+        this.holdHandlers = new HashMap<Component, ArrayList<HoldHandler>>();
     }
 
 
@@ -33,14 +34,15 @@ public class HashGuiHold
      * @param	handler	Hold handler
      * @return	Returns itself.
      */
-    private HashGuiHold addHoldHandler(String title, HoldHandler handler)
+    private HashGuiHold addHoldHandler(Component title, HoldHandler handler)
     {
         this.holdHandlers.computeIfAbsent(title, k -> new ArrayList<HoldHandler>());
 
-        for (HoldHandler h : this.holdHandlers.get(title))
-            if (handler.equals(h))
+        for (HoldHandler h : this.holdHandlers.get(title)) {
+            if (handler.equals(h)) {
                 return this;
-
+            }
+        }
         this.holdHandlers.get(title).add(handler);
         return this;
     }
@@ -59,11 +61,11 @@ public class HashGuiHold
             return this;
 
         final ItemMeta meta = item.getItemStack().getItemMeta();
-        final String itemName = meta.getDisplayName();
+        final Component itemName = meta.displayName();
 
-        for (HoldHandler handler : holdHandlers)
+        for (HoldHandler handler : holdHandlers) {
             this.addHoldHandler(itemName, handler);
-
+        }
         return this;
     }
 
@@ -76,19 +78,21 @@ public class HashGuiHold
     public void processHold(Player player, ItemStack item, boolean activeItem)
     {
         final ItemMeta meta = item.getItemMeta();
-        final String itemDisplayName = meta.getDisplayName();
+        final Component itemDisplayName = meta.displayName();
         final int slot = player.getInventory().getHeldItemSlot();
         final ArrayList<HoldHandler> holdHandlers = this.getHoldHandlers().get(itemDisplayName);
 
-        if (holdHandlers == null || holdHandlers.isEmpty())
+        if (holdHandlers == null || holdHandlers.isEmpty()) {
             return;
+        }
 
-        if (activeItem)
+        if (activeItem) {
             holdHandlers.forEach((HoldHandler handler) ->
                 handler.getHoldAction().execute(player, item, slot));
-        else
+        } else {
             holdHandlers.forEach((HoldHandler handler) ->
                 handler.getNotHoldAction().execute(player, item, slot));
+        }
     }
 
     /**
@@ -102,13 +106,13 @@ public class HashGuiHold
         final PlayerInventory inventory = player.getInventory();
 
         for (ItemStack armorPiece : inventory.getArmorContents()) {
-            if (armorPiece == null || armorPiece.getType() == Material.AIR || !armorPiece.hasItemMeta())
+            if (armorPiece.getType() == Material.AIR || !armorPiece.hasItemMeta()) {
                 continue;
-
+            }
             this.processHold(
                 player,
                 armorPiece,
-                this.holdHandlers.containsKey(armorPiece.getItemMeta().getDisplayName())
+                this.holdHandlers.containsKey(armorPiece.getItemMeta().displayName())
             );
         }
     }
@@ -117,7 +121,7 @@ public class HashGuiHold
     /**
      * @return	Every registered hold handler
      */
-    public HashMap<String, ArrayList<HoldHandler>> getHoldHandlers()
+    public HashMap<Component, ArrayList<HoldHandler>> getHoldHandlers()
     {
         return this.holdHandlers;
     }

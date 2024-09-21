@@ -59,9 +59,9 @@ public class HashGuiManager
 		this.pluginManager.registerEvents(new HashGuiHitListener(this.hitManager), this.plugin);
 		this.pluginManager.registerEvents(new HashGuiDestroyListener(this.destroyManager), this.plugin);
 
-		for (DefaultItems item : DefaultItems.values())
+		for (DefaultItems item : DefaultItems.values()) {
 			item.getItem().build(this);
-
+		}
 		return this;
 	}
 	

@@ -4,6 +4,7 @@ import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
 import fr.hashtek.spigot.hashgui.manager.HashGuiManager;
 import fr.hashtek.spigot.hashgui.page.Page;
 import fr.hashtek.spigot.hashitem.HashItem;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -29,7 +30,7 @@ public class PaginatedHashGui extends HashGui
      * @param	size	    GUI's amount of lines (must be between 1 and 6).
      * @param   guiManager  GUI manager
      */
-    public PaginatedHashGui(String title, int size, HashGuiManager guiManager)
+    public PaginatedHashGui(Component title, int size, HashGuiManager guiManager)
     {
         super(title, size);
 
@@ -90,10 +91,9 @@ public class PaginatedHashGui extends HashGui
             new ClickHandler()
                 .addAllClickTypes()
                 .setClickAction((Player player, HashGui gui, ItemStack i, int slot) -> {
-                    if (!(gui instanceof PaginatedHashGui))
+                    if (!(gui instanceof PaginatedHashGui paginatedGui))
                         return;
 
-                    final PaginatedHashGui paginatedGui = (PaginatedHashGui) gui;
                     final int pageIndex = paginatedGui.getCurrentPageIndex() - 1;
 
                     if (pageIndex < 0)
@@ -122,10 +122,9 @@ public class PaginatedHashGui extends HashGui
             new ClickHandler()
                 .addAllClickTypes()
                 .setClickAction((Player player, HashGui gui, ItemStack i, int slot) -> {
-                    if (!(gui instanceof PaginatedHashGui))
+                    if (!(gui instanceof PaginatedHashGui paginatedGui))
                         return;
 
-                    final PaginatedHashGui paginatedGui = (PaginatedHashGui) gui;
                     final int pageIndex = paginatedGui.getCurrentPageIndex() + 1;
 
                     if (pageIndex >= this.pages.size())

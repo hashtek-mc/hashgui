@@ -1,7 +1,9 @@
 package fr.hashtek.spigot.hashgui.listener;
 
 import java.util.List;
+import java.util.Objects;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -53,17 +55,18 @@ public class HashGuiClickListener implements Listener
 	)
 	{
 		final ItemMeta meta = item.getItemMeta();
-		final String itemDisplayName = meta.getDisplayName();
+		final Component itemDisplayName = meta.displayName();
 		final List<ClickHandler> handlers = this.clickManager.getClickHandlers().get(itemDisplayName);
 
-		if (handlers == null)
+		if (handlers == null) {
 			return false;
+		}
 
 		handlers.stream()
 			.filter((ClickHandler handler) -> {
-				if (handler.isWhitelistOn() && !handler.isGuiInWhitelist(gui.getTitle()))
+				if (handler.isWhitelistOn() && !handler.isGuiInWhitelist(gui.getTitle())) {
 					return false;
-
+				}
 				return handler.getClickTypes().contains(clickType);
 			})
 			.forEach((ClickHandler handler) ->
@@ -78,16 +81,15 @@ public class HashGuiClickListener implements Listener
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event)
 	{
-		if (!(event.getWhoClicked() instanceof Player) ||
+		if (!(event.getWhoClicked() instanceof Player player) ||
 			event.getClickedInventory() == null ||
-			event.getCurrentItem().getType() == Material.AIR)
+			Objects.requireNonNull(event.getCurrentItem()).getType() == Material.AIR)
 			return;
 
 		final Inventory inventory = event.getClickedInventory();
 		final InventoryHolder holder = inventory.getHolder();
 
-		final Player player = (Player) event.getWhoClicked();
-		final ClickType clickType = event.getClick();
+        final ClickType clickType = event.getClick();
 		final ItemStack item = event.getCurrentItem();
 		final int slot = event.getSlot();
 

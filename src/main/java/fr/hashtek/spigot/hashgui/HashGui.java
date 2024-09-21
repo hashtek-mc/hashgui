@@ -1,5 +1,6 @@
 package fr.hashtek.spigot.hashgui;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,13 +10,15 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.hashtek.spigot.hashitem.HashItem;
 
+import java.util.Objects;
+
 public class HashGui implements InventoryHolder
 {
 
 	private final Inventory gui;
 	
 	private final int size;
-	private final String title;
+	private final Component title;
 	
 	
 	/**
@@ -24,20 +27,21 @@ public class HashGui implements InventoryHolder
 	 * @param	title	GUI's title
 	 * @param	size	GUI's amount of lines (must be between 1 and 6).
 	 */
-	public HashGui(String title, int size)
+	public HashGui(Component title, int size)
 	{
 		if (size < 1 || size > 6)
 			throw new IllegalArgumentException("Invalid size. A GUI can only have 1 to 6 lines.");
 		
 		this.title = title;
 		this.size = size;
-		
+
 		this.gui = Bukkit.createInventory(this, this.getTotalSize(), this.title);
 	}
 	
 	/**
 	 * Creates a new instance of HashGUI from an existing Inventory.
-	 * 
+	 * TODO(l.52): Try to get the inventory's title.
+	 *
 	 * @param	inventory	Inventory
 	 */
 	public HashGui(Inventory inventory)
@@ -45,7 +49,7 @@ public class HashGui implements InventoryHolder
 		this.gui = inventory;
 		
 		this.size = this.gui.getSize() / 9;
-		this.title = this.gui.getTitle();
+		this.title = Component.text("??");
 	}
 	
 	
@@ -56,9 +60,7 @@ public class HashGui implements InventoryHolder
 	 */
 	public void open(Player player)
 	{
-		if (player.getOpenInventory() != null)
-			this.close(player);
-		
+		player.getOpenInventory().close();
 		player.openInventory(this.gui);
 	}
 	
@@ -118,7 +120,7 @@ public class HashGui implements InventoryHolder
 	 * @param	toReplaceWith	Replacing item
 	 * @return	Returns itself.
 	 */
-	public HashGui replaceAll(String toReplace, HashItem toReplaceWith)
+	public HashGui replaceAll(Component toReplace, HashItem toReplaceWith)
 	{
 		for (int k = 0; k < this.getTotalSize(); k++) {
 			final ItemStack item = this.gui.getItem(k);
@@ -126,8 +128,9 @@ public class HashGui implements InventoryHolder
 			if (item == null || item.getType() == Material.AIR)
 				continue;
 
-			if (item.getItemMeta().getDisplayName().equals(toReplace))
+			if (Objects.equals(item.getItemMeta().displayName(), toReplace)) {
 				this.gui.setItem(k, toReplaceWith.getItemStack());
+			}
 		}
 
 		return this;
@@ -174,7 +177,7 @@ public class HashGui implements InventoryHolder
 	/**
 	 * @return	GUI's title
 	 */
-	public String getTitle()
+	public Component getTitle()
 	{
 		return this.title;
 	}

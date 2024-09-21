@@ -8,12 +8,14 @@ import fr.hashtek.spigot.hashgui.HashGui;
 import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
 import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashgui.manager.HashGuiManager;
@@ -112,13 +114,19 @@ public class HashItem
 	 * Creates a Separator, a Stained Glass Pane of a certain color
 	 * that does nothing, just for decoration.
 	 *
-	 * @param	glassColor	Stained Glass Pane color
+	 * @param	glass		Stained Glass Pane color
 	 * @param	guiManager	Gui manager
 	 * @return	Created HashItem
 	 */
-	public static HashItem separator(Byte glassColor, HashGuiManager guiManager)
+	public static HashItem separator(Material glass, HashGuiManager guiManager)
 	{
-		return new HashItem(Material.STAINED_GLASS_PANE, 1, glassColor)
+		Material mat = glass;
+
+		if (!glass.name().endsWith("STAINED_GLASS_PANE")) {
+			mat = Material.BLACK_STAINED_GLASS_PANE;
+		}
+
+		return new HashItem(mat, 1)
 			.setName("")
 			.setUntakable(true)
 			.build(guiManager);
@@ -150,11 +158,13 @@ public class HashItem
 	 * @param	guiManager	GUI Manager
 	 * @return	Returns itself.
 	 */
-	public HashItem build(String guiTitle, HashGuiManager guiManager)
+	public HashItem build(Component guiTitle, HashGuiManager guiManager)
 	{
-		if (this.clickHandlers != null)
-			for (ClickHandler handler : this.clickHandlers)
+		if (this.clickHandlers != null) {
+			for (ClickHandler handler : this.clickHandlers) {
 				handler.addGuiToWhitelist(guiTitle);
+			}
+		}
 
 		return this.build(guiManager);
 	}
@@ -246,7 +256,13 @@ public class HashItem
 	 */
 	public HashItem setDurability(short durability)
 	{
-		this.itemStack.setDurability((short) (this.itemStack.getType().getMaxDurability() - durability));
+		if (!(this.itemMeta instanceof Damageable)) {
+			// TODO: Log
+			return this;
+		}
+
+		((Damageable) this.itemMeta).setDamage(durability); // TODO: Maybe use the formula used below?
+//		this.itemStack.setDurability((short) (this.itemStack.getType().getMaxDurability() - durability));
 		return this;
 	}
 	
@@ -271,7 +287,7 @@ public class HashItem
 	 */
 	public HashItem setName(String name)
 	{
-		this.itemMeta.setDisplayName(ChatColor.RESET + name);
+		this.itemMeta.displayName(Component.text(ChatColor.RESET + name));
 		return this;
 	}
 	
@@ -281,9 +297,9 @@ public class HashItem
 	 * @param	lore	Item lore.
 	 * @return	Returns itself.
 	 */
-	public HashItem setLore(List<String> lore)
+	public HashItem setLore(List<Component> lore)
 	{
-		this.itemMeta.setLore(lore);
+		this.itemMeta.lore(lore);
 		return this;
 	}
 	
@@ -294,15 +310,17 @@ public class HashItem
 	 * @return	Returns itself.
 	 * @apiNote Handles line breaks ! (<code>\n</code>)
 	 */
-	public HashItem addLore(String line)
+	public HashItem addLore(Component line)
 	{
-		final List<String> lore = this.itemMeta.hasLore()
-			? this.itemMeta.getLore()
-			: new ArrayList<String>();
+		final List<Component> lore = this.itemMeta.hasLore()
+			? this.itemMeta.lore()
+			: new ArrayList<Component>();
 
-		lore.addAll(Arrays.asList(line.split("\\r?\\n")));
-		
-		this.itemMeta.setLore(lore);
+        if (lore != null) {
+            lore.add(Component.text(Arrays.toString(line.toString().split("\\r?\\n"))));
+        }
+
+        this.itemMeta.lore(lore);
 		return this;
 	}
 
@@ -312,10 +330,11 @@ public class HashItem
 	 * @param	content		Content to add.
 	 * @return	Returns itself.
 	 */
-	public HashItem addLore(List<String> content)
+	public HashItem addLore(List<Component> content)
 	{
-		for (String line : content)
+		for (Component line : content) {
 			this.addLore(line);
+		}
 		return this;
 	}
 
@@ -326,7 +345,7 @@ public class HashItem
 	 */
 	public HashItem clearLore()
 	{
-		this.itemMeta.setLore(null);
+		this.itemMeta.lore(null);
 		return this;
 	}
 	
@@ -363,8 +382,9 @@ public class HashItem
 	 */
 	public HashItem clearFlags()
 	{
-		for (ItemFlag flag : this.itemMeta.getItemFlags())
+		for (ItemFlag flag : this.itemMeta.getItemFlags()) {
 			this.getItemMeta().removeItemFlags(flag);
+		}
 		return this;
 	}
 	
@@ -376,7 +396,7 @@ public class HashItem
 	 */
 	public HashItem setUnbreakable(boolean unbreakable)
 	{
-		this.itemMeta.spigot().setUnbreakable(unbreakable);
+		this.itemMeta.setUnbreakable(unbreakable);
 		return this;
 	}
 	
@@ -385,7 +405,7 @@ public class HashItem
 	 */
 	public boolean isUnbreakable()
 	{
-		return this.itemMeta.spigot().isUnbreakable();
+		return this.itemMeta.isUnbreakable();
 	}
 	
 	/**
@@ -420,8 +440,9 @@ public class HashItem
 	 */
 	public HashItem clearEnchantments()
 	{
-		for (Enchantment enchantment : this.itemMeta.getEnchants().keySet())
+		for (Enchantment enchantment : this.itemMeta.getEnchants().keySet()) {
 			this.getItemMeta().removeEnchant(enchantment);
+		}
 		return this;
 	}
 
@@ -457,9 +478,9 @@ public class HashItem
 	public HashItem setLeatherArmorColor(Color color)
 		throws ClassCastException
 	{
-		if (!this.itemStack.getType().name().startsWith("LEATHER_"))
+		if (!this.itemStack.getType().name().startsWith("LEATHER_")) {
 			throw new ClassCastException("Item must be a leather armor piece.");
-
+		}
 		((LeatherArmorMeta) this.itemMeta).setColor(color);
 		return this;
 	}
@@ -476,9 +497,9 @@ public class HashItem
 	 */
 	public HashItem addClickHandler(ClickHandler clickHandler)
 	{
-		if (this.clickHandlers == null)
+		if (this.clickHandlers == null) {
 			this.clickHandlers = new ArrayList<ClickHandler>();
-					
+		}
 		this.clickHandlers.add(clickHandler);
 		return this;
 	}
@@ -490,8 +511,9 @@ public class HashItem
 	 */
 	public HashItem clearClickHandlers()
 	{
-		if (this.clickHandlers != null)
+		if (this.clickHandlers != null) {
 			this.clickHandlers.clear();
+		}
 		return this;
 	}
 	
@@ -505,9 +527,9 @@ public class HashItem
 	 */
 	public HashItem addInteractHandler(InteractHandler interactHandler)
 	{
-		if (this.interactHandlers == null)
+		if (this.interactHandlers == null) {
 			this.interactHandlers = new ArrayList<InteractHandler>();
-					
+		}
 		this.interactHandlers.add(interactHandler);
 		return this;
 	}
@@ -519,8 +541,9 @@ public class HashItem
 	 */
 	public HashItem clearInteractHandlers()
 	{
-		if (this.interactHandlers != null)
+		if (this.interactHandlers != null) {
 			this.interactHandlers.clear();
+		}
 		return this;
 	}
 
@@ -532,9 +555,9 @@ public class HashItem
 	 */
 	public HashItem addHoldHandler(HoldHandler holdHandler)
 	{
-		if (this.holdHandlers == null)
+		if (this.holdHandlers == null) {
 			this.holdHandlers = new ArrayList<HoldHandler>();
-
+		}
 		this.holdHandlers.add(holdHandler);
 		return this;
 	}
@@ -546,8 +569,9 @@ public class HashItem
 	 */
 	public HashItem clearHoldHandlers()
 	{
-		if (this.holdHandlers != null)
+		if (this.holdHandlers != null) {
 			this.holdHandlers.clear();
+		}
 		return this;
 	}
 
@@ -559,9 +583,9 @@ public class HashItem
 	 */
 	public HashItem addHitHandler(HitHandler hitHandler)
 	{
-		if (this.hitHandlers == null)
+		if (this.hitHandlers == null) {
 			this.hitHandlers = new ArrayList<HitHandler>();
-
+		}
 		this.hitHandlers.add(hitHandler);
 		return this;
 	}
@@ -573,8 +597,9 @@ public class HashItem
 	 */
 	public HashItem clearHitHandlers()
 	{
-		if (this.hitHandlers != null)
+		if (this.hitHandlers != null) {
 			this.hitHandlers.clear();
+		}
 		return this;
 	}
 
@@ -586,9 +611,9 @@ public class HashItem
 	 */
 	public HashItem addDestroyHandler(DestroyHandler destroyHandler)
 	{
-		if (this.destroyHandlers == null)
+		if (this.destroyHandlers == null) {
 			this.destroyHandlers = new ArrayList<DestroyHandler>();
-
+		}
 		this.destroyHandlers.add(destroyHandler);
 		return this;
 	}
@@ -600,8 +625,9 @@ public class HashItem
 	 */
 	public HashItem clearDestroyHandlers()
 	{
-		if (this.destroyHandlers != null)
+		if (this.destroyHandlers != null) {
 			this.destroyHandlers.clear();
+		}
 		return this;
 	}
 

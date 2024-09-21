@@ -3,12 +3,13 @@ package fr.hashtek.spigot.hashgui.handler.click;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.event.inventory.ClickType;
 
 public class ClickHandler
 {
 
-	private List<String> parentGuiWhitelist;
+	private List<Component> parentGuiWhitelist;
 	private ArrayList<ClickType> clickTypes;
 	private ClickAction clickAction;
 
@@ -27,12 +28,12 @@ public class ClickHandler
 	 */
 	public ClickHandler addClickType(ClickType clickType)
 	{
-		if (this.clickTypes == null)
+		if (this.clickTypes == null) {
 			this.clickTypes = new ArrayList<ClickType>();
-		
-		if (!this.clickTypes.contains(clickType))
+		}
+		if (!this.clickTypes.contains(clickType)) {
 			this.clickTypes.add(clickType);
-		
+		}
 		return this;
 	}
 	
@@ -44,9 +45,9 @@ public class ClickHandler
 	 */
 	public ClickHandler addClickTypes(ClickType... clickTypes)
 	{
-		for (ClickType clickType: clickTypes)
+		for (ClickType clickType: clickTypes) {
 			this.addClickType(clickType);
-		
+		}
 		return this;
 	}
 
@@ -79,11 +80,11 @@ public class ClickHandler
 	 * @param   guiTitle    GUI's title
 	 * @return  Returns itself.
 	 */
-	public ClickHandler addGuiToWhitelist(String guiTitle)
+	public ClickHandler addGuiToWhitelist(Component guiTitle)
 	{
-		if (this.parentGuiWhitelist == null)
-			this.parentGuiWhitelist = new ArrayList<String>();
-
+		if (this.parentGuiWhitelist == null) {
+			this.parentGuiWhitelist = new ArrayList<Component>();
+		}
 		this.parentGuiWhitelist.add(guiTitle);
 		return this;
 	}
@@ -94,11 +95,11 @@ public class ClickHandler
 	 * @param   guisTitle   GUIs' title
 	 * @return  Returns itself.
 	 */
-	public ClickHandler addGuisToWhitelist(List<String> guisTitle)
+	public ClickHandler addGuisToWhitelist(List<Component> guisTitle)
 	{
-		if (this.parentGuiWhitelist == null)
-			this.parentGuiWhitelist = new ArrayList<String>();
-
+		if (this.parentGuiWhitelist == null) {
+			this.parentGuiWhitelist = new ArrayList<Component>();
+		}
 		this.parentGuiWhitelist.addAll(guisTitle);
 		return this;
 	}
@@ -135,7 +136,7 @@ public class ClickHandler
 	 * @param   guiTitle    GUI's title
 	 * @return  True if given title is in the GUI whitelist.
 	 */
-	public boolean isGuiInWhitelist(String guiTitle)
+	public boolean isGuiInWhitelist(Component guiTitle)
 	{
 		return this.parentGuiWhitelist.contains(guiTitle);
 	}

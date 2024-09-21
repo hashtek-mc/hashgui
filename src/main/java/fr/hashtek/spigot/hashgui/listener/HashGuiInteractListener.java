@@ -3,6 +3,7 @@ package fr.hashtek.spigot.hashgui.listener;
 import java.util.ArrayList;
 import java.util.Set;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -45,7 +46,7 @@ public class HashGuiInteractListener implements Listener
 	private boolean processInteraction(Player player, Action interactType, ItemStack item)
 	{
 		final ItemMeta meta = item.getItemMeta();
-		final String itemDisplayName = meta.getDisplayName();
+		final Component itemDisplayName = meta.displayName();
 		final int slot = player.getInventory().getHeldItemSlot();
 		final ArrayList<InteractHandler> interactHandlers = this.interactManager.getInteractHandlers().get(itemDisplayName);
 
