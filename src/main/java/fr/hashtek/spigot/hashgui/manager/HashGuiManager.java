@@ -64,8 +64,8 @@ public class HashGuiManager
 		}
 		return this;
 	}
-	
-	
+
+
 	/**
 	 * @return	Click manager
 	 */

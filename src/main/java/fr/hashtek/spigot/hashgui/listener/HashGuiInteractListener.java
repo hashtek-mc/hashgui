@@ -1,16 +1,12 @@
 package fr.hashtek.spigot.hashgui.listener;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -72,36 +68,12 @@ public class HashGuiInteractListener implements Listener
 		if (event.getItem() == null) {
 			return;
 		}
-		
+
 		final Player player = event.getPlayer();
 		final Action interactType = event.getAction();
 		final ItemStack item = event.getItem();
 
 		event.setCancelled(this.processInteraction(player, interactType, item));
-	}
-
-	/**
-	 * Also interact handling.
-	 * This event is used because in adventure mode,
-	 * the client doesn't send a packet to the server
-	 * when tapping a block.
-	 */
-	@EventHandler
-	public void onBlockHit(PlayerAnimationEvent event)
-	{
-		final Player player = event.getPlayer();
-		final ItemStack item = event.getPlayer().getItemOnCursor();
-
-		if (player.getGameMode() != GameMode.ADVENTURE) {
-			return;
-		}
-
-		if (item.getType() == Material.AIR ||
-			player.getTargetBlock(null, 4).getType() == Material.AIR) {
-			return;
-		}
-
-		this.processInteraction(player, Action.LEFT_CLICK_BLOCK, item);
 	}
 
 }
