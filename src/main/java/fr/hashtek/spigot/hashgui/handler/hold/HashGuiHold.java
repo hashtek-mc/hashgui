@@ -106,7 +106,9 @@ public class HashGuiHold
         final PlayerInventory inventory = player.getInventory();
 
         for (ItemStack armorPiece : inventory.getArmorContents()) {
-            if (armorPiece.getType() == Material.AIR || !armorPiece.hasItemMeta()) {
+            if (armorPiece == null ||
+                armorPiece.getType() == Material.AIR ||
+                !armorPiece.hasItemMeta()) {
                 continue;
             }
             this.processHold(
