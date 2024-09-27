@@ -48,6 +48,11 @@ public class HashGuiHitListener implements Listener
         HashGuiHit hitManager
     )
     {
+        if (item == null ||
+            item.getType() == Material.AIR) {
+            return;
+        }
+
         final ItemMeta meta = item.getItemMeta();
         final Component itemDisplayName = meta.displayName();
         final ArrayList<HitHandler> hitHandlers = hitManager.getHitHandlers().get(itemDisplayName);
@@ -74,11 +79,7 @@ public class HashGuiHitListener implements Listener
             return;
         }
 
-        final ItemStack itemUsed = attacker.getItemOnCursor();
-
-        if (itemUsed.getType() == Material.AIR) {
-            return;
-        }
+        final ItemStack itemUsed = attacker.getInventory().getItemInMainHand();
 
         processHit(
             attacker,
