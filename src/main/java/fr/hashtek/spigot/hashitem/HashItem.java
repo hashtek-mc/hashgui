@@ -279,19 +279,49 @@ public class HashItem
 	/**
 	 * Sets item's durability.
 	 * 
-	 * @param	durability	Item durability.
+	 * @param	durability	Durability to set
 	 * @return	Returns itself.
 	 */
-	public HashItem setDurability(short durability)
+	public HashItem setDurability(int durability)
 	{
 		if (!(this.itemMeta instanceof Damageable)) {
-			// TODO: Log
+			/* System.err.println is used because HashLogger can't be. */
+			System.err.println(
+				"HashItem#setDurability: Called with an incompatible ItemMeta (not instance of Damageable).\n" +
+				"HashItem used: " + this
+			);
 			return this;
 		}
 
-		((Damageable) this.itemMeta).setDamage(durability); // TODO: Maybe use the formula used below?
-//		this.itemStack.setDurability((short) (this.itemStack.getType().getMaxDurability() - durability));
+		((Damageable) this.itemMeta).setDamage(this.itemStack.getType().getMaxDurability() - durability);
 		return this;
+	}
+
+	/**
+	 * Sets item's durability.
+	 * If you're manipulating {@link HashItem}s, please use
+	 * {@link HashItem#setDurability(int)}.
+	 * <p>
+	 * This code is duplicated, but, I guess I can't do better.
+	 *
+	 * @param	item		Item
+	 * @param	durability	Durability to set
+	 */
+	public static void setDurability(ItemStack item, int durability)
+	{
+		final ItemMeta meta = item.getItemMeta();
+
+		if (!(meta instanceof Damageable)) {
+			/* System.err.println is used because HashLogger can't be. */
+			System.err.println(
+				"HashItem#setDurability: Called with an incompatible ItemMeta (not instance of Damageable).\n" +
+				"ItemStack used: " + item
+			);
+			return;
+		}
+
+		((Damageable) meta).setDamage(item.getType().getMaxDurability() - durability);
+		item.setItemMeta(meta);
 	}
 	
 	/**
