@@ -72,8 +72,10 @@ public class PaginatedHashGui extends HashGui
 
         for (int k = 0; k < super.getTotalSize(); k++) {
             final ItemStack item = super.getInventory().getItem(k);
-            if (item == null || item.getType() == Material.AIR)
+
+            if (item == null || item.getType() == Material.AIR) {
                 this.freeSlotIndexes.add(k);
+            }
         }
     }
 
@@ -104,7 +106,7 @@ public class PaginatedHashGui extends HashGui
                 })
         );
 
-        item.build(this.guiManager);
+        item.build(this, this.guiManager);
         return this;
     }
 
@@ -135,8 +137,15 @@ public class PaginatedHashGui extends HashGui
                 })
         );
 
-        item.build(this.guiManager);
+        item.build(this, this.guiManager);
         return this;
+    }
+
+    @Override
+    public void open(Player player)
+    {
+        super.open(player);
+        this.update(player);
     }
 
     /**
@@ -168,11 +177,13 @@ public class PaginatedHashGui extends HashGui
      */
     public PaginatedHashGui clearPageContent()
     {
-        if (this.freeSlotIndexes == null)
+        if (this.freeSlotIndexes == null) {
             this.findFreeSlotIndexes();
+        }
 
-        for (int k : this.freeSlotIndexes)
+        for (int k : this.freeSlotIndexes) {
             super.getInventory().setItem(k, null);
+        }
 
         return this;
     }
@@ -211,6 +222,7 @@ public class PaginatedHashGui extends HashGui
      */
     public PaginatedHashGui clearPages()
     {
+        this.clearPageContent();
         this.pages.clear();
         this.createNewPage();
         this.setCurrentPageIndex(0);
