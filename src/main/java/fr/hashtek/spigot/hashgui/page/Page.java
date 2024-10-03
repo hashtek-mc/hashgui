@@ -45,8 +45,9 @@ public class Page
      */
     public void setItem(int slot, HashItem item) throws IllegalArgumentException
     {
-        if (this.isItemInParentGui(slot))
+        if (this.isItemInParentGui(slot)) {
             throw new IllegalArgumentException("Item can't be placed at the slot " + slot + ".");
+        }
 
         this.items.put(slot, item);
     }
