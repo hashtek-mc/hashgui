@@ -133,7 +133,9 @@ public class HashItem
 
 	/**
 	 * Special triggers handling.
-	 * - <code>>br/<</code>: Line break
+	 * <ul>
+	 *     <li><code>>br/<</code>: Line break</li>
+	 * </ul>
 	 */
 	private void formatLore()
 	{

@@ -55,10 +55,11 @@ public class Page
     /**
      * Adds an item to the page.
      *
-     * @param   item                        Item
+     * @param   item                        Item to add
      * @throws  IllegalArgumentException    No slot left
      */
-    public void addItem(HashItem item) throws IllegalArgumentException
+    public void addItem(HashItem item)
+        throws IllegalArgumentException
     {
         for (int k = 0; k < this.parent.getTotalSize(); k++) {
             if (this.isItemInParentGui(k) || this.items.containsKey(k)) {
