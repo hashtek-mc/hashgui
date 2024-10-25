@@ -6,12 +6,14 @@ import java.util.Objects;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -78,14 +80,15 @@ public class HashGuiClickListener implements Listener
 	/**
 	 * Click handling.
 	 */
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onInventoryClick(InventoryClickEvent event)
 	{
 		if (!(event.getWhoClicked() instanceof Player player) ||
 			event.getClickedInventory() == null ||
 			event.getCurrentItem() == null ||
-			event.getCurrentItem().getType() == Material.AIR)
+			event.getCurrentItem().getType() == Material.AIR) {
 			return;
+		}
 
 		final Inventory inventory = event.getClickedInventory();
 		final InventoryHolder holder = inventory.getHolder();
@@ -98,12 +101,41 @@ public class HashGuiClickListener implements Listener
 			? (HashGui) holder
 			: new HashGui(inventory);
 
-		if (item == null || item.getType() == Material.AIR)
+		if (item == null || item.getType() == Material.AIR) {
 			return;
+		}
 
 		final boolean cancelEvent = this.processClick(player, clickType, gui, item, slot);
 
 		event.setCancelled(cancelEvent);
 	}
-	
+
+	/**
+	 * Called for preventing items from moving from a HashGui to another
+	 * inventory (e.g. player's inventory) if {@link HashGui#areItemsLockedIn()} is true.
+	 * @apiNote Don't prevent the player from moving an item to his inventory by using his mouse.
+	 *          This is a Minecraft issue, so it is pretty much unfixable.
+	 */
+	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
+	public void onItemDrag(InventoryClickEvent event)
+	{
+		final InventoryView view = event.getView();
+
+		if (!(view.getTopInventory().getHolder() instanceof HashGui gui) ||
+			view.getCursor() == null) {
+			return;
+		}
+
+		if (!gui.areItemsLockedIn()) {
+			return;
+		}
+
+		if (event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY ||
+			event.getAction() == InventoryAction.HOTBAR_SWAP ||
+			event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) {
+			event.setCancelled(true);
+		}
+
+	}
+
 }
