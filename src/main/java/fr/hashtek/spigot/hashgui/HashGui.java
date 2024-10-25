@@ -19,39 +19,69 @@ public class HashGui implements InventoryHolder
 	
 	private final int size;
 	private final Component title;
-	
-	
+	private final boolean areItemsLockedIn;
+
+
 	/**
 	 * Creates a new GUI.
-	 * 
-	 * @param	title	GUI's title
-	 * @param	size	GUI's amount of lines (must be between 1 and 6).
+	 *
+	 * @param	title		GUI's title
+	 * @param	size		GUI's amount of lines (must be between 1 and 6)
 	 */
 	public HashGui(Component title, int size)
+	{
+		this(title, size, true);
+	}
+
+	/**
+	 * Creates a new GUI.
+	 *
+	 * @param	title				GUI's title
+	 * @param	size				GUI's amount of lines (must be between 1 and 6)
+	 * @param 	areItemsLockedIn	Are items present in the gui locked inside the inventory?
+	 */
+	public HashGui(
+		Component title,
+		int size,
+		boolean areItemsLockedIn
+	)
 	{
 		if (size < 1 || size > 6)
 			throw new IllegalArgumentException("Invalid size. A GUI can only have 1 to 6 lines.");
 		
 		this.title = title;
 		this.size = size;
+		this.areItemsLockedIn = areItemsLockedIn;
 
 		this.gui = Bukkit.createInventory(this, this.getTotalSize(), this.title);
 	}
-	
+
 	/**
 	 * Creates a new instance of HashGUI from an existing Inventory.
-	 * TODO(l.52): Try to get the inventory's title.
 	 *
 	 * @param	inventory	Inventory
 	 */
 	public HashGui(Inventory inventory)
 	{
+		this(inventory, true);
+	}
+
+	/**
+	 * Creates a new instance of HashGUI from an existing Inventory.
+	 * TODO(l.52): Try to get the inventory's title.
+	 *
+	 * @param	inventory	Inventory
+	 * @param 	areItemsLockedIn	Are items present in the gui locked inside the inventory?
+	 */
+	public HashGui(Inventory inventory, boolean areItemsLockedIn)
+	{
 		this.gui = inventory;
 		
 		this.size = this.gui.getSize() / 9;
 		this.title = Component.text("??");
+		this.areItemsLockedIn = areItemsLockedIn;
 	}
-	
+
 	
 	/**
 	 * Opens the GUI for a player.
@@ -125,8 +155,9 @@ public class HashGui implements InventoryHolder
 		for (int k = 0; k < this.getTotalSize(); k++) {
 			final ItemStack item = this.gui.getItem(k);
 
-			if (item == null || item.getType() == Material.AIR)
+			if (item == null || item.getType() == Material.AIR) {
 				continue;
+			}
 
 			if (Objects.equals(item.getItemMeta().displayName(), toReplace)) {
 				this.gui.setItem(k, toReplaceWith.getItemStack());
@@ -153,7 +184,8 @@ public class HashGui implements InventoryHolder
 	 * @return	GUI's inventory
 	 */
 	@Override
-	public Inventory getInventory() {
+	public Inventory getInventory()
+	{
 		return this.gui;
 	}
 	
@@ -180,6 +212,14 @@ public class HashGui implements InventoryHolder
 	public Component getTitle()
 	{
 		return this.title;
+	}
+
+	/**
+	 * @return	True if items are locked inside the gui
+	 */
+	public boolean areItemsLockedIn()
+	{
+		return this.areItemsLockedIn;
 	}
 
 }
