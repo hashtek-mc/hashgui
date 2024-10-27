@@ -68,7 +68,7 @@ public class HashGui implements InventoryHolder
 
 	/**
 	 * Creates a new instance of HashGUI from an existing Inventory.
-	 * TODO(l.52): Try to get the inventory's title.
+	 * TODO(l.81): Try to get the inventory's title.
 	 *
 	 * @param	inventory	Inventory
 	 * @param 	areItemsLockedIn	Are items present in the gui locked inside the inventory?
@@ -105,7 +105,7 @@ public class HashGui implements InventoryHolder
 	}
 	
 	/**
-	 * Sets an item in the GUI.
+	 * Sets an item in the GUI at a given index.
 	 * 
 	 * @param	index	Slot index
 	 * @param	item	Item
@@ -118,7 +118,8 @@ public class HashGui implements InventoryHolder
 	}
 	
 	/**
-	 * Sets an item in the GUI and registers its handler (if it exists).
+	 * Sets an item in the GUI at a given index
+	 * and registers its handlers (if any exists).
 	 * 
 	 * @param	index	Slot index
 	 * @param	item	Item
