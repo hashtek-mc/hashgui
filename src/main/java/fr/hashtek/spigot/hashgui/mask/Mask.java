@@ -196,6 +196,17 @@ public class Mask
 	}
 
 	/**
+	 * Returns the item linked to a character.
+	 *
+	 * @param	character	Character
+	 * @return	Item linked to the given character
+	 */
+	public HashItem getItem(Character character)
+	{
+		return this.items.get(character);
+	}
+
+	/**
 	 * @return	Pattern
 	 */
 	public List<String> getPattern()
