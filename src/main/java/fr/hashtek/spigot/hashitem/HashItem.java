@@ -153,11 +153,11 @@ public class HashItem
 			final String lineAsString = l.content();
 			String[] splittedLine = lineAsString.split("\\n");
 
-			for (int i = 0; i < splittedLine.length; i++) {
-				if (i > 0) {
-					splittedLine[i] = ChatColor.getLastColors(splittedLine[i - 1]) + splittedLine[i];
+			for (int k = 0; k < splittedLine.length; k++) {
+				if (k > 0) {
+					splittedLine[k] = ChatColor.getLastColors(splittedLine[k - 1]) + splittedLine[k];
 				}
-				newLore.add(Component.text(splittedLine[i]));
+				newLore.add(Component.text(splittedLine[k]));
 			}
 		}
 
