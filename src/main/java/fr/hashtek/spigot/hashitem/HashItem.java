@@ -9,6 +9,7 @@ import fr.hashtek.spigot.hashgui.handler.hold.HoldHandler;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -134,7 +135,7 @@ public class HashItem
 	/**
 	 * Special triggers handling.
 	 * <ul>
-	 *     <li><code>>br/<</code>: Line break</li>
+	 *     <li><code>\n</code>: Line break</li>
 	 * </ul>
 	 */
 	private void formatLore()
@@ -150,10 +151,13 @@ public class HashItem
 				continue;
 			}
 			final String lineAsString = l.content();
-			final String[] splittedLine = lineAsString.split("\\n");
+			String[] splittedLine = lineAsString.split("\\n");
 
-			for (String s : splittedLine) {
-				newLore.add(Component.text(s));
+			for (int i = 0; i < splittedLine.length; i++) {
+				if (i > 0) {
+					splittedLine[i] = ChatColor.getLastColors(splittedLine[i - 1]) + splittedLine[i];
+				}
+				newLore.add(Component.text(splittedLine[i]));
 			}
 		}
 
