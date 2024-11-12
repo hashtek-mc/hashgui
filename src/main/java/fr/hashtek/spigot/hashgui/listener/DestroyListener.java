@@ -1,7 +1,7 @@
 package fr.hashtek.spigot.hashgui.listener;
 
 import fr.hashtek.spigot.hashgui.handler.destroy.DestroyHandler;
-import fr.hashtek.spigot.hashgui.handler.destroy.HashGuiDestroy;
+import fr.hashtek.spigot.hashgui.handler.destroy.DestroyManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,10 +14,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class HashGuiDestroyListener implements Listener
+public class DestroyListener implements Listener
 {
 
-    private final HashGuiDestroy destroyManager;
+    private final DestroyManager destroyManager;
 
 
     /**
@@ -26,7 +26,7 @@ public class HashGuiDestroyListener implements Listener
      *
      * @param	destroyManager Destroy manager
      */
-    public HashGuiDestroyListener(HashGuiDestroy destroyManager)
+    public DestroyListener(DestroyManager destroyManager)
     {
         this.destroyManager = destroyManager;
     }

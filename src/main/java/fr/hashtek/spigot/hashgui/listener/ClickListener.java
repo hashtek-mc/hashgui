@@ -17,12 +17,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.hashtek.spigot.hashgui.HashGui;
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
-import fr.hashtek.spigot.hashgui.handler.click.HashGuiClick;
+import fr.hashtek.spigot.hashgui.handler.click.ClickManager;
 
-public class HashGuiClickListener implements Listener
+public class ClickListener implements Listener
 {
 	
-	private final HashGuiClick clickManager;
+	private final ClickManager clickManager;
 	
 	
 	/**
@@ -31,7 +31,7 @@ public class HashGuiClickListener implements Listener
 	 * 
 	 * @param	clickManager	Click manager
 	 */
-	public HashGuiClickListener(HashGuiClick clickManager)
+	public ClickListener(ClickManager clickManager)
 	{
 		this.clickManager = clickManager;
 	}

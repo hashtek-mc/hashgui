@@ -11,13 +11,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import fr.hashtek.spigot.hashgui.handler.interact.HashGuiInteraction;
+import fr.hashtek.spigot.hashgui.handler.interact.InteractionManager;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
 
-public class HashGuiInteractListener implements Listener
+public class InteractListener implements Listener
 {
 	
-	private final HashGuiInteraction interactManager;
+	private final InteractionManager interactManager;
 	
 	
 	/**
@@ -26,7 +26,7 @@ public class HashGuiInteractListener implements Listener
 	 * 
 	 * @param	interactManager	Interact manager
 	 */
-	public HashGuiInteractListener(HashGuiInteraction interactManager)
+	public InteractListener(InteractionManager interactManager)
 	{
 		this.interactManager = interactManager;
 	}

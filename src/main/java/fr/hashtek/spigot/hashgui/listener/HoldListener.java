@@ -1,6 +1,6 @@
 package fr.hashtek.spigot.hashgui.listener;
 
-import fr.hashtek.spigot.hashgui.handler.hold.HashGuiHold;
+import fr.hashtek.spigot.hashgui.handler.hold.HoldManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,10 +9,10 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class HashGuiHoldListener implements Listener
+public class HoldListener implements Listener
 {
 
-    private final HashGuiHold holdManager;
+    private final HoldManager holdManager;
 
 
     /**
@@ -21,7 +21,7 @@ public class HashGuiHoldListener implements Listener
      *
      * @param   holdManager Hold manager
      */
-    public HashGuiHoldListener(HashGuiHold holdManager)
+    public HoldListener(HoldManager holdManager)
     {
         this.holdManager = holdManager;
     }

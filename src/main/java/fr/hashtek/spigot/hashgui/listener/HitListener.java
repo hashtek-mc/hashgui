@@ -1,6 +1,6 @@
 package fr.hashtek.spigot.hashgui.listener;
 
-import fr.hashtek.spigot.hashgui.handler.hit.HashGuiHit;
+import fr.hashtek.spigot.hashgui.handler.hit.HitManager;
 import fr.hashtek.spigot.hashgui.handler.hit.HitHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -13,10 +13,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class HashGuiHitListener implements Listener
+public class HitListener implements Listener
 {
 
-    private final HashGuiHit hitManager;
+    private final HitManager hitManager;
 
 
     /**
@@ -25,7 +25,7 @@ public class HashGuiHitListener implements Listener
      *
      * @param	hitManager  Hit manager
      */
-    public HashGuiHitListener(HashGuiHit hitManager)
+    public HitListener(HitManager hitManager)
     {
         this.hitManager = hitManager;
     }
@@ -45,7 +45,7 @@ public class HashGuiHitListener implements Listener
         Player victim,
         ItemStack item,
         boolean isKill,
-        HashGuiHit hitManager
+        HitManager hitManager
     )
     {
         if (item == null ||
