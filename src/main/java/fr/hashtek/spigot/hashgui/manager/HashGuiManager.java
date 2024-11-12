@@ -5,6 +5,7 @@ import fr.hashtek.spigot.hashgui.handler.hold.HoldManager;
 import fr.hashtek.spigot.hashgui.handler.hit.HitManager;
 import fr.hashtek.spigot.hashgui.listener.*;
 import fr.hashtek.spigot.hashitem.common.DefaultItems;
+import net.kyori.adventure.text.Component;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,8 +27,10 @@ public class HashGuiManager
 	
 	/**
 	 * Creates a new instance of HashGuiManager.
+	 * <p>
 	 * HashGuiManager aims to handle different interactions
-	 * with the items (click, interact, hold, hit...)
+	 * with the items (click, interact, hold, hit...).
+	 * </p>
 	 * 
 	 * @param	plugin			Main instance
 	 * @param	pluginManager	Plugin manager
@@ -59,11 +62,27 @@ public class HashGuiManager
 		this.pluginManager.registerEvents(new HitListener(this.hitManager), this.plugin);
 		this.pluginManager.registerEvents(new DestroyListener(this.destroyManager), this.plugin);
 
+		this.pluginManager.registerEvents(new CloseListener(), this.plugin);
+
 		for (DefaultItems item : DefaultItems.values()) {
 			item.getItem().build(this);
 		}
 
 		return this;
+	}
+
+	/**
+	 * Unregisters an item from the various managers.
+	 *
+	 * @param	itemName	Item's name
+	 */
+	public void unregisterItem(Component itemName)
+	{
+		this.clickManager.removeItemHandlers(itemName);
+		this.interactionManager.removeItemHandlers(itemName);
+		this.holdManager.removeItemHandlers(itemName);
+		this.hitManager.removeItemHandlers(itemName);
+		this.destroyManager.removeItemHandlers(itemName);
 	}
 
 

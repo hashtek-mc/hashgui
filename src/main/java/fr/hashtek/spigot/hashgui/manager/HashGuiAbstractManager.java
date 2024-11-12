@@ -77,6 +77,14 @@ public abstract class HashGuiAbstractManager
      */
     public abstract HashGuiAbstractManager<T> addItemHandlers(HashItem item);
 
+    /**
+     * @param   itemTitle   Item's title
+     */
+    public void removeItemHandlers(Component itemTitle)
+    {
+        this.handlers.remove(itemTitle);
+    }
+
 
     /**
      * @return  Handlers
