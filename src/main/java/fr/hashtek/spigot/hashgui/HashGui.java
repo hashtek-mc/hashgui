@@ -104,7 +104,41 @@ public class HashGui implements InventoryHolder
 	{
 		player.closeInventory();
 	}
-	
+
+	/**
+	 * Function to execute when the GUI is closed by any way.
+	 *
+	 * @param	player	Player
+	 * @param	gui		Closed GUI
+	 * @apiNote By default, this function is empty.</br>
+	 * 			Override it if you want to execute some instructions on GUI close.
+	 */
+	public void onClose(Player player, HashGui gui) {}
+
+	/**
+	 * Adds an item in the GUI to the first free slot.
+	 *
+	 * @param	item	Item to add
+	 * @return	Itself
+	 */
+	public HashGui addItem(ItemStack item)
+	{
+		this.gui.addItem(item);
+		return this;
+	}
+
+	/**
+	 * Adds an item in the GUI to the first free slot
+	 * and registers its handlers (if any exists).
+	 *
+	 * @param	item	Item to add
+	 * @return	Itself
+	 */
+	public HashGui addItem(HashItem item)
+	{
+		return this.addItem(item.getItemStack());
+	}
+
 	/**
 	 * Sets an item in the GUI at a given index.
 	 * 
@@ -123,13 +157,12 @@ public class HashGui implements InventoryHolder
 	 * and registers its handlers (if any exists).
 	 * 
 	 * @param	index	Slot index
-	 * @param	item	Item
+	 * @param	item	Item to add
 	 * @return	Itself
 	 */
 	public HashGui setItem(int index, HashItem item)
 	{
-		this.setItem(index, item.getItemStack());
-		return this;
+		return this.setItem(index, item.getItemStack());
 	}
 	
 	/**
