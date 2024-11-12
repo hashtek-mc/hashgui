@@ -54,7 +54,7 @@ public class Mask
 	 * 
 	 * @param	character	Character index
 	 * @param	item		Item that will be used
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public Mask setItem(Character character, HashItem item)
 	{
@@ -68,7 +68,7 @@ public class Mask
 	 * 
 	 * @param	character	Character index
 	 * @param	item		Item that will be used
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public Mask setItem(Character character, ItemStack item)
 	{
@@ -80,7 +80,7 @@ public class Mask
 	 * 
 	 * @param	index						Line index in the GUI
 	 * @param	pattern						Pattern
-	 * @return	Returns itself.
+	 * @return	Itself
 	 * @throws	IllegalArgumentException	Wrong pattern (not 9 characters long)
 	 * @throws	IndexOutOfBoundsException	Wrong index
 	 */
@@ -90,13 +90,11 @@ public class Mask
 		final int guiSize = this.gui.getSize();
 		
 		if (index < 0) {
-			throw new IndexOutOfBoundsException(
-				"Index must be greater than or equal to 0 (index is " + index + ")");
+			throw new IndexOutOfBoundsException("Index must be greater than or equal to 0 (index is " + index + ")");
 		}
 		
 		if (index > guiSize) {
-			throw new IndexOutOfBoundsException(
-				"Index is too big (index is " + index + ", GUI size is " + guiSize + ").");
+			throw new IndexOutOfBoundsException("Index is too big (index is " + index + ", GUI size is " + guiSize + ").");
 		}
 		
 		if (pattern.length() != 9) {
@@ -121,7 +119,7 @@ public class Mask
 	 * Adds a pattern in the mask.
 	 * 
 	 * @param	pattern		Pattern
-	 * @return	Returns itself.
+	 * @return	Itself
 	 * @throws	IllegalArgumentException	Wrong pattern (not 9 characters long)
 	 */
 	public Mask pattern(String pattern)
@@ -139,7 +137,7 @@ public class Mask
 	 * <br>
 	 *   - At (<code>@</code>) are <u>ignored</u>.
 	 * 
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public Mask apply()
 	{

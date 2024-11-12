@@ -14,14 +14,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractionManager;
 import fr.hashtek.spigot.hashgui.handler.interact.InteractHandler;
 
-public class InteractListener implements Listener
+public class InteractListener
+	implements Listener
 {
 	
 	private final InteractionManager interactManager;
 	
 	
 	/**
-	 * Creates a new instance of HashGuiInteractListener, with
+	 * Creates a new instance of InteractListener, with
 	 * an interact manager for interact handling.
 	 * 
 	 * @param	interactManager	Interact manager
@@ -39,7 +40,11 @@ public class InteractListener implements Listener
 	 * @param	interactType	Interaction type
 	 * @param	item			Item
 	 */
-	private boolean processInteraction(Player player, Action interactType, ItemStack item)
+	private boolean processInteraction(
+		Player player,
+		Action interactType,
+		ItemStack item
+	)
 	{
 		final ItemMeta meta = item.getItemMeta();
 		final Component itemDisplayName = meta.displayName();

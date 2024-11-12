@@ -168,7 +168,7 @@ public class HashItem
 	 * Builds the item and registers its handlers.
 	 *
 	 * @param	guiManager	GUI Manager
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem build(HashGuiManager guiManager)
 	{
@@ -189,7 +189,7 @@ public class HashItem
 	 *
 	 * @param	guiTitle	GUI title
 	 * @param	guiManager	GUI Manager
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem build(Component guiTitle, HashGuiManager guiManager)
 	{
@@ -208,7 +208,7 @@ public class HashItem
 	 *
 	 * @param	gui		GUI
 	 * @param	guiManager	GUI Manager
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem build(HashGui gui, HashGuiManager guiManager)
 	{
@@ -218,7 +218,7 @@ public class HashItem
 	/**
 	 * Builds the item, without registering its handlers.
 	 * 
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem build()
 	{
@@ -232,7 +232,7 @@ public class HashItem
 	 * Mainly used in {@link HashSkull}.
 	 *
 	 * @param	itemMeta	Item meta
-	 * @return	Returns itself.
+	 * @return	Itself
 	 * @apiNote	Must not be used outside of this library.
 	 */
 	public HashItem setItemMeta(ItemMeta itemMeta)
@@ -262,7 +262,7 @@ public class HashItem
 	 * Sets item's type.
 	 * 
 	 * @param	type	Item type.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setType(Material type)
 	{
@@ -274,7 +274,7 @@ public class HashItem
 	 * Sets item's amount.
 	 * 
 	 * @param	amount	Amount of items
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setAmount(int amount)
 	{
@@ -286,7 +286,7 @@ public class HashItem
 	 * Sets item's durability.
 	 * 
 	 * @param	durability	Durability to set
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setDurability(int durability)
 	{
@@ -335,7 +335,7 @@ public class HashItem
 	 * TODO: Finish this function.
 	 *
 	 * @param	data	Item data.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 * @deprecated
 	 */
 	@Deprecated
@@ -348,7 +348,7 @@ public class HashItem
 	 * Sets item's name.
 	 *
 	 * @param	name	Item name.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setName(Component name)
 	{
@@ -360,7 +360,7 @@ public class HashItem
 	 * Sets item's lore.
 	 * 
 	 * @param	lore	Item lore.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setLore(List<Component> lore)
 	{
@@ -372,7 +372,7 @@ public class HashItem
 	 * Adds a line to item's lore.
 	 * 
 	 * @param	line	Lore line.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 * @apiNote Handles line breaks ! (<code>>br/<</code>)
 	 */
 	public HashItem addLore(Component line)
@@ -391,7 +391,7 @@ public class HashItem
 	 * Adds some lines to item's lore.
 	 *
 	 * @param	content		Content to add.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addLore(List<Component> content)
 	{
@@ -404,7 +404,7 @@ public class HashItem
 	/**
 	 * Clears item's lore.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearLore()
 	{
@@ -416,7 +416,7 @@ public class HashItem
 	 * Sets item's flags.
 	 * 
 	 * @param	flags	Item flags.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setFlags(List<ItemFlag> flags)
 	{
@@ -430,7 +430,7 @@ public class HashItem
 	 * Adds a flag to item's flags.
 	 * 
 	 * @param	flag	Item flag.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addFlag(ItemFlag flag)
 	{
@@ -441,7 +441,7 @@ public class HashItem
 	/**
 	 * Clears item flags.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearFlags()
 	{
@@ -455,7 +455,7 @@ public class HashItem
 	 * Makes item unbreakable.
 	 * 
 	 * @param	unbreakable	Unbreakable
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setUnbreakable(boolean unbreakable)
 	{
@@ -476,7 +476,7 @@ public class HashItem
 	 * 
 	 * @param	enchantment	Enchantment type
 	 * @param	level		Enchantment level
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addEnchant(Enchantment enchantment, int level)
 	{
@@ -488,7 +488,7 @@ public class HashItem
 	 * Removes an enchantment from the item.
 	 * 
 	 * @param	enchantment	Enchantment type
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem removeEnchant(Enchantment enchantment)
 	{
@@ -499,7 +499,7 @@ public class HashItem
 	/**
 	 * Clears item enchantments.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearEnchantments()
 	{
@@ -513,7 +513,7 @@ public class HashItem
 	 * Makes the item untakable, or not.
 	 *
 	 * @param 	untakable	Untakable
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem setUntakable(boolean untakable)
 	{
@@ -535,7 +535,7 @@ public class HashItem
 	 * Sets leather armor color.
 	 *
 	 * @param	color				Wanted color
-	 * @return	Returns itself.
+	 * @return	Itself
 	 * @throws	ClassCastException	If item is not a leather armor piece
 	 */
 	public HashItem setLeatherArmorColor(Color color)
@@ -556,7 +556,7 @@ public class HashItem
 	 * both will run on click.
 	 * 
 	 * @param	clickHandler	Click handler.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addClickHandler(ClickHandler clickHandler)
 	{
@@ -570,7 +570,7 @@ public class HashItem
 	/**
 	 * Clears item's click handlers.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearClickHandlers()
 	{
@@ -586,7 +586,7 @@ public class HashItem
 	 * both will run on interact.
 	 * 
 	 * @param	interactHandler	Interact handler.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addInteractHandler(InteractHandler interactHandler)
 	{
@@ -600,7 +600,7 @@ public class HashItem
 	/**
 	 * Clears item's interact handlers.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearInteractHandlers()
 	{
@@ -614,7 +614,7 @@ public class HashItem
 	 * Adds a hold handler to the item.
 	 *
 	 * @param	holdHandler	Hold handler.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addHoldHandler(HoldHandler holdHandler)
 	{
@@ -628,7 +628,7 @@ public class HashItem
 	/**
 	 * Clears item's hold handlers.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearHoldHandlers()
 	{
@@ -642,7 +642,7 @@ public class HashItem
 	 * Adds a hit handler to the item.
 	 *
 	 * @param	hitHandler	Hit handler.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addHitHandler(HitHandler hitHandler)
 	{
@@ -656,7 +656,7 @@ public class HashItem
 	/**
 	 * Clears item's hit handlers.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearHitHandlers()
 	{
@@ -670,7 +670,7 @@ public class HashItem
 	 * Adds a destroy handler to the item.
 	 *
 	 * @param	destroyHandler	Destroy handler.
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem addDestroyHandler(DestroyHandler destroyHandler)
 	{
@@ -684,7 +684,7 @@ public class HashItem
 	/**
 	 * Clears item's destroy handlers.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearDestroyHandlers()
 	{
@@ -697,7 +697,7 @@ public class HashItem
 	/**
 	 * Clears item's handlers.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashItem clearHandlers()
 	{

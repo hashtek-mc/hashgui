@@ -8,16 +8,10 @@ public class HoldHandler
 
 
     /**
-     * Creates an empty instance of HoldHandler.
-     */
-    public HoldHandler() {}
-
-
-    /**
      * Sets handler's hold action. (when held, then do...)
      *
      * @param	holdAction	Hold action
-     * @return	Returns itself.
+     * @return	Itself
      */
     public HoldHandler setHoldAction(HoldAction holdAction)
     {
@@ -29,7 +23,7 @@ public class HoldHandler
      * Sets handler's not hold action. (when not held, then do...)
      *
      * @param	notHoldAction   Hold action
-     * @return	Returns itself.
+     * @return	Itself
      */
     public HoldHandler setNotHoldAction(HoldAction notHoldAction)
     {
@@ -39,7 +33,7 @@ public class HoldHandler
 
     /**
      * @param	handler Handler to compare
-     * @return	Returns true if both handlers contains the same instructions
+     * @return	{@code true} if both handlers contains the same instructions. Otherwise, {@code false}.
      */
     public boolean equals(HoldHandler handler)
     {

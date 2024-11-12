@@ -14,14 +14,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class DestroyListener implements Listener
+public class DestroyListener
+    implements Listener
 {
 
     private final DestroyManager destroyManager;
 
 
     /**
-     * Creates a new instance of HashGuiDestroyListener, with
+     * Creates a new instance of DestroyListener, with
      * a destroy manager for block destroy handling.
      *
      * @param	destroyManager Destroy manager
@@ -39,7 +40,11 @@ public class DestroyListener implements Listener
      * @param   itemUsed        Item used
      * @param   destroyedBlock  Destroyed block
      */
-    private void processBlockDestroy(Player player, ItemStack itemUsed, Block destroyedBlock)
+    private void processBlockDestroy(
+        Player player,
+        ItemStack itemUsed,
+        Block destroyedBlock
+    )
     {
         final ItemMeta meta = itemUsed.getItemMeta();
         final Component itemDisplayName = meta.displayName();

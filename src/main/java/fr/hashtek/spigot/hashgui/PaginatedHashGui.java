@@ -85,7 +85,7 @@ public class PaginatedHashGui extends HashGui
      *        PaginatedHashGui, we may want to throw an error.
      *
      * @param   item        Item
-     * @return  Returns itself.
+     * @return  Itself
      */
     public PaginatedHashGui setPreviousPageItem(HashItem item)
     {
@@ -93,14 +93,15 @@ public class PaginatedHashGui extends HashGui
             new ClickHandler()
                 .addAllClickTypes()
                 .setClickAction((Player player, HashGui gui, ItemStack i, int slot) -> {
-                    if (!(gui instanceof PaginatedHashGui paginatedGui))
+                    if (!(gui instanceof PaginatedHashGui paginatedGui)) {
                         return;
+                    }
 
                     final int pageIndex = paginatedGui.getCurrentPageIndex() - 1;
 
-                    if (pageIndex < 0)
+                    if (pageIndex < 0) {
                         return;
-
+                    }
                     paginatedGui.setCurrentPageIndex(pageIndex);
                     paginatedGui.update(player);
                 })
@@ -116,7 +117,7 @@ public class PaginatedHashGui extends HashGui
      *        PaginatedHashGui, we may want to throw an error.
      *
      * @param   item        Item
-     * @return  Returns itself.
+     * @return  Itself
      */
     public PaginatedHashGui setNextPageItem(HashItem item)
     {
@@ -124,14 +125,15 @@ public class PaginatedHashGui extends HashGui
             new ClickHandler()
                 .addAllClickTypes()
                 .setClickAction((Player player, HashGui gui, ItemStack i, int slot) -> {
-                    if (!(gui instanceof PaginatedHashGui paginatedGui))
+                    if (!(gui instanceof PaginatedHashGui paginatedGui)) {
                         return;
+                    }
 
                     final int pageIndex = paginatedGui.getCurrentPageIndex() + 1;
 
-                    if (pageIndex >= this.pages.size())
+                    if (pageIndex >= this.pages.size()) {
                         return;
-
+                    }
                     paginatedGui.setCurrentPageIndex(pageIndex);
                     paginatedGui.update(player);
                 })
@@ -152,7 +154,7 @@ public class PaginatedHashGui extends HashGui
      * Updates the GUI according to the current page.
      *
      * @param   player  Player
-     * @return  Returns itself.
+     * @return  Itself
      */
     @Override
     public PaginatedHashGui update(Player player)
@@ -165,7 +167,6 @@ public class PaginatedHashGui extends HashGui
             final HashItem item = currentPage.getItem(slot);
             super.setItem(slot, item);
         }
-
         super.update(player);
         return this;
     }
@@ -173,7 +174,7 @@ public class PaginatedHashGui extends HashGui
     /**
      * Visually clears every free slot.
      *
-     * @return  Returns itself.
+     * @return  Itself
      */
     public PaginatedHashGui clearPageContent()
     {
@@ -184,7 +185,6 @@ public class PaginatedHashGui extends HashGui
         for (int k : this.freeSlotIndexes) {
             super.getInventory().setItem(k, null);
         }
-
         return this;
     }
 
@@ -194,7 +194,7 @@ public class PaginatedHashGui extends HashGui
      * Adds a new page to the Gui.
      *
      * @param   page    Page to add
-     * @return  Returns itself.
+     * @return  Itself
      */
     public PaginatedHashGui addPage(Page page)
     {
@@ -218,7 +218,7 @@ public class PaginatedHashGui extends HashGui
     /**
      * Clears all pages.
      *
-     * @return  Returns itself.
+     * @return  Itself
      */
     public PaginatedHashGui clearPages()
     {

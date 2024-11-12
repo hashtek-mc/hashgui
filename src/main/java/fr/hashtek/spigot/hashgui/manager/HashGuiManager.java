@@ -43,7 +43,7 @@ public class HashGuiManager
 	 * Setups the manager to handle different interactions
 	 * for items.
 	 * 
-	 * @return Returns itself.
+	 * @return Itself
 	 */
 	public HashGuiManager setup()
 	{

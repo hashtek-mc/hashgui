@@ -43,12 +43,12 @@ public class Page
      * @param   item                        Item
      * @throws  IllegalArgumentException    Slot already in use
      */
-    public void setItem(int slot, HashItem item) throws IllegalArgumentException
+    public void setItem(int slot, HashItem item)
+        throws IllegalArgumentException
     {
         if (this.isItemInParentGui(slot)) {
             throw new IllegalArgumentException("Item can't be placed at the slot " + slot + ".");
         }
-
         this.items.put(slot, item);
     }
 
@@ -68,7 +68,6 @@ public class Page
             this.items.put(k, item);
             return;
         }
-
         throw new IllegalArgumentException("No slot left.");
     }
 
@@ -78,7 +77,8 @@ public class Page
      * @param   slot                        Slot index
      * @throws  IllegalArgumentException    Unreachable slot (not in the page but in the parent GUI)
      */
-    public void removeItem(int slot) throws IllegalArgumentException
+    public void removeItem(int slot)
+        throws IllegalArgumentException
     {
         if (this.isItemInParentGui(slot)) {
             throw new IllegalArgumentException("Item can't be removed from the slot " + slot + ".");

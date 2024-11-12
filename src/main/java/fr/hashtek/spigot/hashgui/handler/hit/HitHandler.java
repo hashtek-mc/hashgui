@@ -21,7 +21,7 @@ public class HitHandler
 	 * in a kill. Or not.
 	 *
 	 * @param	isOnlyKill	Only kill
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HitHandler setOnlyKill(boolean isOnlyKill)
 	{
@@ -33,7 +33,7 @@ public class HitHandler
 	 * Sets handler's hit action. (on hit, then do...)
 	 * 
 	 * @param	hitAction	Interact action
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HitHandler setHitAction(HitAction hitAction)
 	{
@@ -43,7 +43,7 @@ public class HitHandler
 
 	/**
 	 * @param	handler	Handler to compare
-	 * @return	Returns true if both handlers contains the same instructions
+	 * @return	{@code true} if both handlers contains the same instructions. Otherwise, {@code false}.
 	 */
 	public boolean equals(HitHandler handler)
 	{
@@ -54,7 +54,7 @@ public class HitHandler
 
 
 	/**
-	 * @return	True if the handler fired only when the hit results in a kill
+	 * @return	{@code true} if the handler fired only when the hit results in a kill. Otherwise, {@code false}.
 	 */
 	public boolean isOnlyKill()
 	{

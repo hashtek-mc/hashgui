@@ -19,7 +19,8 @@ import fr.hashtek.spigot.hashgui.HashGui;
 import fr.hashtek.spigot.hashgui.handler.click.ClickHandler;
 import fr.hashtek.spigot.hashgui.handler.click.ClickManager;
 
-public class ClickListener implements Listener
+public class ClickListener
+	implements Listener
 {
 	
 	private final ClickManager clickManager;
@@ -133,7 +134,6 @@ public class ClickListener implements Listener
 			event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) {
 			event.setCancelled(true);
 		}
-
 	}
 
 }

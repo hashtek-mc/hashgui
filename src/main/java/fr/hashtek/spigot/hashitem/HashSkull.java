@@ -63,7 +63,7 @@ public class HashSkull extends HashItem
      * Mojang's API, but it is kinda overkill.
      *
      * @param   playerName  Targeted player's name
-     * @return  Returns itself.
+     * @return  Itself
      */
     public HashSkull setOwner(String playerName)
     {
@@ -77,7 +77,7 @@ public class HashSkull extends HashItem
      * use {@link HashSkull#setOwner(String)}.
      *
      * @param   texture     Skull texture
-     * @return  Returns itself.
+     * @return  Itself
      */
     public HashItem setTexture(String texture)
     {

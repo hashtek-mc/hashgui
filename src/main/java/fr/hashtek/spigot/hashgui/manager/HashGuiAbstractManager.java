@@ -16,6 +16,14 @@ public abstract class HashGuiAbstractManager
     private final Map<Component, List<T>> handlers;
 
 
+    /**
+     * Creates a new manager of a certain type T.
+     * <p>
+     * Basically stores the handlers of a certain type.
+     * </br>
+     * It is used for detections of a certain type on items.
+     * </p>
+     */
     public HashGuiAbstractManager()
     {
         this.handlers = new HashMap<Component, List<T>>();
@@ -70,6 +78,9 @@ public abstract class HashGuiAbstractManager
     public abstract HashGuiAbstractManager<T> addItemHandlers(HashItem item);
 
 
+    /**
+     * @return  Handlers
+     */
     public Map<Component, List<T>> getHandlers()
     {
         return this.handlers;

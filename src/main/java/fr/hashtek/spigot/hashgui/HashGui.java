@@ -46,8 +46,9 @@ public class HashGui implements InventoryHolder
 		boolean areItemsLockedIn
 	)
 	{
-		if (size < 1 || size > 6)
+		if (size < 1 || size > 6) {
 			throw new IllegalArgumentException("Invalid size. A GUI can only have 1 to 6 lines.");
+		}
 		
 		this.title = title;
 		this.size = size;
@@ -109,7 +110,7 @@ public class HashGui implements InventoryHolder
 	 * 
 	 * @param	index	Slot index
 	 * @param	item	Item
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashGui setItem(int index, ItemStack item)
 	{
@@ -123,7 +124,7 @@ public class HashGui implements InventoryHolder
 	 * 
 	 * @param	index	Slot index
 	 * @param	item	Item
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashGui setItem(int index, HashItem item)
 	{
@@ -135,7 +136,7 @@ public class HashGui implements InventoryHolder
 	 * Removes an item from the GUI.
 	 * 
 	 * @param	index	Slot index
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashGui removeItem(int index)
 	{
@@ -149,7 +150,7 @@ public class HashGui implements InventoryHolder
 	 *
 	 * @param	toReplace		Name of the item to replace
 	 * @param	toReplaceWith	Replacing item
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashGui replaceAll(Component toReplace, HashItem toReplaceWith)
 	{
@@ -172,7 +173,7 @@ public class HashGui implements InventoryHolder
 	 * Updates player's current open inventory.
 	 * 
 	 * @param	player	Player
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public HashGui update(Player player)
 	{

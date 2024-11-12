@@ -13,18 +13,12 @@ public class ClickHandler
 	private ArrayList<ClickType> clickTypes;
 	private ClickAction clickAction;
 
-	
-	/**
-	 * Creates an empty instance of ClickHandler.
-	 */
-	public ClickHandler() {}
-	
-	
+
 	/**
 	 * Adds a click type to the handler.
 	 * 
 	 * @param	clickType	Click type
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public ClickHandler addClickType(ClickType clickType)
 	{
@@ -41,7 +35,7 @@ public class ClickHandler
 	 * Adds multiple click types to the handler.
 	 * 
 	 * @param	clickTypes	Click types
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public ClickHandler addClickTypes(ClickType... clickTypes)
 	{
@@ -54,19 +48,24 @@ public class ClickHandler
 	/**
 	 * Adds every click types possible : Left, right and middle click, shifting or not.
 	 *
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public ClickHandler addAllClickTypes()
 	{
 		return this.addClickTypes(
-			ClickType.LEFT, ClickType.RIGHT, ClickType.SHIFT_LEFT, ClickType.SHIFT_RIGHT, ClickType.MIDDLE);
+			ClickType.LEFT,
+			ClickType.RIGHT,
+			ClickType.SHIFT_LEFT,
+			ClickType.SHIFT_RIGHT,
+			ClickType.MIDDLE
+		);
 	}
 
 	/**
 	 * Sets handler's click action. (on click, then do...)
 	 * 
 	 * @param	clickAction	Click action
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public ClickHandler setClickAction(ClickAction clickAction)
 	{
@@ -78,7 +77,7 @@ public class ClickHandler
 	 * Adds a GUI title to the handler's GUI whitelist.
 	 *
 	 * @param   guiTitle    GUI's title
-	 * @return  Returns itself.
+	 * @return  Itself
 	 */
 	public ClickHandler addGuiToWhitelist(Component guiTitle)
 	{
@@ -93,7 +92,7 @@ public class ClickHandler
 	 * Adds multiple GUI titles to the handler's GUI whitelist.
 	 *
 	 * @param   guisTitle   GUIs' title
-	 * @return  Returns itself.
+	 * @return  Itself
 	 */
 	public ClickHandler addGuisToWhitelist(List<Component> guisTitle)
 	{
@@ -106,7 +105,7 @@ public class ClickHandler
 
 	/**
 	 * @param	handler	Handler to compare
-	 * @return	Returns true if both handlers contains the same instructions
+	 * @return	{@code true} if both handlers contains the same instructions. Otherwise, {@code false}.
 	 */
 	public boolean equals(ClickHandler handler)
 	{
@@ -134,7 +133,7 @@ public class ClickHandler
 
 	/**
 	 * @param   guiTitle    GUI's title
-	 * @return  True if given title is in the GUI whitelist.
+	 * @return  {@code true} if given title is in the GUI whitelist. Otherwise, {@code false}.
 	 */
 	public boolean isGuiInWhitelist(Component guiTitle)
 	{

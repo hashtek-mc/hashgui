@@ -13,14 +13,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class HitListener implements Listener
+public class HitListener
+    implements Listener
 {
 
     private final HitManager hitManager;
 
 
     /**
-     * Creates a new instance of HashGuiHitListener, with
+     * Creates a new instance of HitListener, with
      * a hit manager for hit handling.
      *
      * @param	hitManager  Hit manager

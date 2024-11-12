@@ -7,16 +7,10 @@ public class DestroyHandler
 
 
 	/**
-	 * Creates an empty instance of DestroyHandler.
-	 */
-	public DestroyHandler() {}
-
-
-	/**
-	 * Sets handler's destroy action. (on block destroy, then do...)
+	 * Sets handlers destroy action. (on block destroy, then do...)
 	 * 
 	 * @param	destroyAction	Destroy action
-	 * @return	Returns itself.
+	 * @return	Itself
 	 */
 	public DestroyHandler setDestroyAction(DestroyAction destroyAction)
 	{
@@ -26,7 +20,7 @@ public class DestroyHandler
 
 	/**
 	 * @param	handler	Handler to compare
-	 * @return	Returns true if both handlers contains the same instructions
+	 * @return	{@code true} if both handlers contains the same instructions. Otherwise, {@code false}.
 	 */
 	public boolean equals(DestroyHandler handler)
 	{

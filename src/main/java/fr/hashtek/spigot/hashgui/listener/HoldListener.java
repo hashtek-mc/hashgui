@@ -16,7 +16,7 @@ public class HoldListener implements Listener
 
 
     /**
-     * Creates a new instance of HashGuiHoldListener, with
+     * Creates a new instance of HoldListener, with
      * a hold manager for hold handling.
      *
      * @param   holdManager Hold manager
@@ -37,10 +37,13 @@ public class HoldListener implements Listener
         final ItemStack item = player.getInventory().getItem(event.getNewSlot());
         final ItemStack previousItem = player.getInventory().getItem(event.getPreviousSlot());
 
-        if (item != null && item.getType() != Material.AIR)
+        if (item != null && item.getType() != Material.AIR) {
             this.holdManager.processHold(player, item, true);
-        if (previousItem != null && previousItem.getType() != Material.AIR)
+        }
+
+        if (previousItem != null && previousItem.getType() != Material.AIR) {
             this.holdManager.processHold(player, previousItem, false);
+        }
     }
 
     /**
@@ -52,8 +55,9 @@ public class HoldListener implements Listener
         final Player player = event.getPlayer();
         final ItemStack item = event.getItemDrop().getItemStack();
 
-        if (item.getType() == Material.AIR)
+        if (item.getType() == Material.AIR) {
             return;
+        }
 
         this.holdManager.processHold(player, item, false);
     }
