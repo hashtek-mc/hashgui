@@ -12,7 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class HashGuiDestroyListener implements Listener
 {
@@ -43,7 +43,7 @@ public class HashGuiDestroyListener implements Listener
     {
         final ItemMeta meta = itemUsed.getItemMeta();
         final Component itemDisplayName = meta.displayName();
-        final ArrayList<DestroyHandler> destroyHandlers = this.destroyManager.getDestroyHandlers().get(itemDisplayName);
+        final List<DestroyHandler> destroyHandlers = this.destroyManager.getHandlers().get(itemDisplayName);
 
         if (destroyHandlers == null || destroyHandlers.isEmpty()) {
             return;

@@ -1,5 +1,6 @@
 package fr.hashtek.spigot.hashgui.handler.hold;
 
+import fr.hashtek.spigot.hashgui.manager.HashGuiAbstractManager;
 import fr.hashtek.spigot.hashitem.HashItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -8,66 +9,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class HashGuiHold
+    extends HashGuiAbstractManager<HoldHandler>
 {
-
-    private final HashMap<Component, ArrayList<HoldHandler>> holdHandlers;
-
-
-    /**
-     * Creates a new instance of HashGuiHold.
-     */
-    public HashGuiHold()
-    {
-        this.holdHandlers = new HashMap<Component, ArrayList<HoldHandler>>();
-    }
-
-
-    /**
-     * Adds a hold handler for a certain title.
-     *
-     * @param	title	Title
-     * @param	handler	Hold handler
-     * @return	Returns itself.
-     */
-    private HashGuiHold addHoldHandler(Component title, HoldHandler handler)
-    {
-        this.holdHandlers.computeIfAbsent(title, k -> new ArrayList<HoldHandler>());
-
-        for (HoldHandler h : this.holdHandlers.get(title)) {
-            if (handler.equals(h)) {
-                return this;
-            }
-        }
-        this.holdHandlers.get(title).add(handler);
-        return this;
-    }
-
-    /**
-     * Adds every hold handler from an item.
-     *
-     * @param	item	Item
-     * @return	Returns itself.
-     */
-    public HashGuiHold addHoldHandler(HashItem item)
-    {
-        List<HoldHandler> holdHandlers = item.getHoldHandlers();
-
-        if (holdHandlers == null || holdHandlers.isEmpty())
-            return this;
-
-        final ItemMeta meta = item.getItemStack().getItemMeta();
-        final Component itemName = meta.displayName();
-
-        for (HoldHandler handler : holdHandlers) {
-            this.addHoldHandler(itemName, handler);
-        }
-        return this;
-    }
 
     /**
      * Executes the interaction actions linked to the held item.
@@ -80,7 +26,7 @@ public class HashGuiHold
         final ItemMeta meta = item.getItemMeta();
         final Component itemDisplayName = meta.displayName();
         final int slot = player.getInventory().getHeldItemSlot();
-        final ArrayList<HoldHandler> holdHandlers = this.getHoldHandlers().get(itemDisplayName);
+        final List<HoldHandler> holdHandlers = super.getHandlers().get(itemDisplayName);
 
         if (holdHandlers == null || holdHandlers.isEmpty()) {
             return;
@@ -114,18 +60,15 @@ public class HashGuiHold
             this.processHold(
                 player,
                 armorPiece,
-                this.holdHandlers.containsKey(armorPiece.getItemMeta().displayName())
+                super.getHandlers().containsKey(armorPiece.getItemMeta().displayName())
             );
         }
     }
 
-
-    /**
-     * @return	Every registered hold handler
-     */
-    public HashMap<Component, ArrayList<HoldHandler>> getHoldHandlers()
+    @Override
+    public HashGuiAbstractManager<HoldHandler> addItemHandlers(HashItem item)
     {
-        return this.holdHandlers;
+        return super.addItemHandlers(item, item.getHoldHandlers());
     }
 
 }

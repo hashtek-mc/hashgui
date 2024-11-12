@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class HashGuiHitListener implements Listener
 {
@@ -55,7 +55,7 @@ public class HashGuiHitListener implements Listener
 
         final ItemMeta meta = item.getItemMeta();
         final Component itemDisplayName = meta.displayName();
-        final ArrayList<HitHandler> hitHandlers = hitManager.getHitHandlers().get(itemDisplayName);
+        final List<HitHandler> hitHandlers = hitManager.getHandlers().get(itemDisplayName);
 
         if (hitHandlers == null || hitHandlers.isEmpty()) {
             return;

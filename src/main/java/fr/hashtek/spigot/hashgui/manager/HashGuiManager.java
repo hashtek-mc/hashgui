@@ -62,6 +62,7 @@ public class HashGuiManager
 		for (DefaultItems item : DefaultItems.values()) {
 			item.getItem().build(this);
 		}
+
 		return this;
 	}
 

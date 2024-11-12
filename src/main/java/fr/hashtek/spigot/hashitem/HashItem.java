@@ -175,11 +175,11 @@ public class HashItem
 		this.formatLore();
 		this.itemStack.setItemMeta(this.itemMeta);
 		
-		guiManager.getClickManager().addClickHandler(this);
-		guiManager.getInteractionManager().addInteractHandler(this);
-		guiManager.getHoldManager().addHoldHandler(this);
-		guiManager.getHitManager().addHitHandler(this);
-		guiManager.getDestroyManager().addDestroyHandler(this);
+		guiManager.getClickManager().addItemHandlers(this);
+		guiManager.getInteractionManager().addItemHandlers(this);
+		guiManager.getHoldManager().addItemHandlers(this);
+		guiManager.getHitManager().addItemHandlers(this);
+		guiManager.getDestroyManager().addItemHandlers(this);
 		return this;
 	}
 
@@ -338,6 +338,7 @@ public class HashItem
 	 * @return	Returns itself.
 	 * @deprecated
 	 */
+	@Deprecated
 	public HashItem setData(Byte data)
 	{
 		return this;

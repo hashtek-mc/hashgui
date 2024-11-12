@@ -1,6 +1,6 @@
 package fr.hashtek.spigot.hashgui.listener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -44,7 +44,7 @@ public class HashGuiInteractListener implements Listener
 		final ItemMeta meta = item.getItemMeta();
 		final Component itemDisplayName = meta.displayName();
 		final int slot = player.getInventory().getHeldItemSlot();
-		final ArrayList<InteractHandler> interactHandlers = this.interactManager.getInteractHandlers().get(itemDisplayName);
+		final List<InteractHandler> interactHandlers = this.interactManager.getHandlers().get(itemDisplayName);
 
 		if (interactHandlers == null || interactHandlers.isEmpty()) {
 			return false;
