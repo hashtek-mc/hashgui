@@ -1,5 +1,6 @@
 package fr.hashtek.spigot.hashgui.manager;
 
+import fr.hashtek.spigot.hashgui.handler.click.ClickManager;
 import fr.hashtek.spigot.hashitem.HashItem;
 import net.kyori.adventure.text.Component;
 
@@ -64,7 +65,7 @@ public abstract class HashGuiAbstractManager
      *
      * @param   item    Item whose handlers will be added
      * @return  Itself
-     * @see     {@link fr.hashtek.spigot.hashgui.handler.click.HashGuiClick#addItemHandlers(HashItem)}
+     * @see     {@link ClickManager#addItemHandlers(HashItem)}
      */
     public abstract HashGuiAbstractManager<T> addItemHandlers(HashItem item);
 

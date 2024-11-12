@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class HashGuiHold
+public class HoldManager
     extends HashGuiAbstractManager<HoldHandler>
 {
 

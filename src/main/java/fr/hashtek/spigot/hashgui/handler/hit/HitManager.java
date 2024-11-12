@@ -3,7 +3,7 @@ package fr.hashtek.spigot.hashgui.handler.hit;
 import fr.hashtek.spigot.hashgui.manager.HashGuiAbstractManager;
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class HashGuiHit
+public class HitManager
 	extends HashGuiAbstractManager<HitHandler>
 {
 

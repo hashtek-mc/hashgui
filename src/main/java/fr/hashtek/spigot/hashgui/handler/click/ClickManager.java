@@ -3,7 +3,7 @@ package fr.hashtek.spigot.hashgui.handler.click;
 import fr.hashtek.spigot.hashgui.manager.HashGuiAbstractManager;
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class HashGuiClick
+public class ClickManager
 	extends HashGuiAbstractManager<ClickHandler>
 {
 

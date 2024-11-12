@@ -1,15 +1,15 @@
 package fr.hashtek.spigot.hashgui.manager;
 
-import fr.hashtek.spigot.hashgui.handler.destroy.HashGuiDestroy;
-import fr.hashtek.spigot.hashgui.handler.hold.HashGuiHold;
-import fr.hashtek.spigot.hashgui.handler.hit.HashGuiHit;
+import fr.hashtek.spigot.hashgui.handler.destroy.DestroyManager;
+import fr.hashtek.spigot.hashgui.handler.hold.HoldManager;
+import fr.hashtek.spigot.hashgui.handler.hit.HitManager;
 import fr.hashtek.spigot.hashgui.listener.*;
 import fr.hashtek.spigot.hashitem.common.DefaultItems;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.hashtek.spigot.hashgui.handler.click.HashGuiClick;
-import fr.hashtek.spigot.hashgui.handler.interact.HashGuiInteraction;
+import fr.hashtek.spigot.hashgui.handler.click.ClickManager;
+import fr.hashtek.spigot.hashgui.handler.interact.InteractionManager;
 
 public class HashGuiManager
 {
@@ -17,11 +17,11 @@ public class HashGuiManager
 	private final JavaPlugin plugin;
 	private final PluginManager pluginManager;
 	
-	private HashGuiClick clickManager;
-	private HashGuiInteraction interactionManager;
-	private HashGuiHold holdManager;
-	private HashGuiHit hitManager;
-	private HashGuiDestroy destroyManager;
+	private ClickManager clickManager;
+	private InteractionManager interactionManager;
+	private HoldManager holdManager;
+	private HitManager hitManager;
+	private DestroyManager destroyManager;
 
 	
 	/**
@@ -47,17 +47,17 @@ public class HashGuiManager
 	 */
 	public HashGuiManager setup()
 	{
-		this.clickManager = new HashGuiClick();
-		this.interactionManager = new HashGuiInteraction();
-		this.holdManager = new HashGuiHold();
-		this.hitManager = new HashGuiHit();
-		this.destroyManager = new HashGuiDestroy();
+		this.clickManager = new ClickManager();
+		this.interactionManager = new InteractionManager();
+		this.holdManager = new HoldManager();
+		this.hitManager = new HitManager();
+		this.destroyManager = new DestroyManager();
 
-		this.pluginManager.registerEvents(new HashGuiClickListener(this.clickManager), this.plugin);
-		this.pluginManager.registerEvents(new HashGuiInteractListener(this.interactionManager), this.plugin);
-		this.pluginManager.registerEvents(new HashGuiHoldListener(this.holdManager), this.plugin);
-		this.pluginManager.registerEvents(new HashGuiHitListener(this.hitManager), this.plugin);
-		this.pluginManager.registerEvents(new HashGuiDestroyListener(this.destroyManager), this.plugin);
+		this.pluginManager.registerEvents(new ClickListener(this.clickManager), this.plugin);
+		this.pluginManager.registerEvents(new InteractListener(this.interactionManager), this.plugin);
+		this.pluginManager.registerEvents(new HoldListener(this.holdManager), this.plugin);
+		this.pluginManager.registerEvents(new HitListener(this.hitManager), this.plugin);
+		this.pluginManager.registerEvents(new DestroyListener(this.destroyManager), this.plugin);
 
 		for (DefaultItems item : DefaultItems.values()) {
 			item.getItem().build(this);
@@ -70,7 +70,7 @@ public class HashGuiManager
 	/**
 	 * @return	Click manager
 	 */
-	public HashGuiClick getClickManager()
+	public ClickManager getClickManager()
 	{
 		return this.clickManager;
 	}
@@ -78,7 +78,7 @@ public class HashGuiManager
 	/**
 	 * @return	Interaction manager
 	 */
-	public HashGuiInteraction getInteractionManager()
+	public InteractionManager getInteractionManager()
 	{
 		return this.interactionManager;
 	}
@@ -86,7 +86,7 @@ public class HashGuiManager
 	/**
 	 * @return	Hold manager
 	 */
-	public HashGuiHold getHoldManager()
+	public HoldManager getHoldManager()
 	{
 		return this.holdManager;
 	}
@@ -94,7 +94,7 @@ public class HashGuiManager
 	/**
 	 * @return	Hit manager
 	 */
-	public HashGuiHit getHitManager()
+	public HitManager getHitManager()
 	{
 		return this.hitManager;
 	}
@@ -102,7 +102,7 @@ public class HashGuiManager
 	/**
 	 * @return	Destroy manager
 	 */
-	public HashGuiDestroy getDestroyManager()
+	public DestroyManager getDestroyManager()
 	{
 		return this.destroyManager;
 	}

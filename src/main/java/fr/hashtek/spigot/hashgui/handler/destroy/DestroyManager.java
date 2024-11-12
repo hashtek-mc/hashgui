@@ -3,7 +3,7 @@ package fr.hashtek.spigot.hashgui.handler.destroy;
 import fr.hashtek.spigot.hashgui.manager.HashGuiAbstractManager;
 import fr.hashtek.spigot.hashitem.HashItem;
 
-public class HashGuiDestroy
+public class DestroyManager
 	extends HashGuiAbstractManager<DestroyHandler>
 {
 
