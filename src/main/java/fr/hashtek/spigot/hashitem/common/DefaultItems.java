@@ -19,7 +19,7 @@ public enum DefaultItems
 
     ITEM_BUILD_FAIL(
         new HashItem(Material.BARRIER)
-            .setName(Component.text(ChatColor.RED + "Item not found."))
+            .setName(Component.text(ChatColor.RED + "Item failed to build."))
             .addLore(Component.text("" + ChatColor.GRAY + ChatColor.ITALIC + "I am a poor dev that can't do his work properly."))
     );
 
